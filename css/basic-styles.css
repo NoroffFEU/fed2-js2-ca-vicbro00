@@ -1,0 +1,23 @@
+@import url(_reset.css);
+/*Header styling*/
+
+/*Main styling*/
+html {
+    font-family: "homenaje";
+}
+
+
+/*Footer styling*/
+/*Button*/
+footer button {
+    background-color: rgb(170, 236, 227);
+    border-radius: 25px;
+    border-style: none;
+    padding: 1em 2em;
+}
+
+.border {
+    height: 2px;
+    background-color: black;
+    width: 100%;
+}
