@@ -1,11 +1,16 @@
 @import url(_reset.css);
 /*Header styling*/
 
+
 /*Main styling*/
 html {
     font-family: "homenaje";
 }
 
+body {
+    background-color: rgb(227, 170, 236);
+    text-align: center;
+}
 
 /*Footer styling*/
 /*Button*/
