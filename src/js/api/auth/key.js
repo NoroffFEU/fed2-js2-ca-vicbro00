@@ -1,4 +1,4 @@
-import { API_AUTH, JWT_TOKEN, API_KEY } from "../constants.js";
+import { API_AUTH, JWT_TOKEN } from "../constants.js";
 
 export async function getKey() {
   try {

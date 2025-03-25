@@ -8,7 +8,7 @@ export const API_PROFILES = `${API_BASE}/social/profiles`;
 
 export const API_AUTH = `${API_BASE}/auth`;
 
-export const API_AUTH_LOGIN = `${API_AUTH}/login`;
+export const API_AUTH_LOGIN = `${API_BASE}/auth/login`;
 
 export const API_AUTH_REGISTER = `${API_AUTH}/register`;
 

@@ -9,9 +9,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100..900&family=Homenaje&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Oswald:wght@200..700&family=Quicksand:wght@300..700&family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/7d33f7d3ef.js" crossorigin="anonymous"></script>
-    <script type="module" src="/src/app.js"></script>
+    <script type="module" src="/src/js/api/constants.js" defer></script>
+    <script type="module" src="/src/js/api/headers.js" defer></script>
+    <script type="module" src="/src/js/api/auth/login.js" defer></script>
     <link rel="stylesheet" href="/css/basic-styles.css">
     <link rel="stylesheet" href="/css/login.css">
+    <base href="/">
 </head>
 <body>
     <header>
@@ -19,7 +22,7 @@
             <a href="/">Home</a>
             <a href="posts/feed.html">Feed</a>
             <a href="profile.html">Profile</a>
-            <a href="register.html">Register new user</a>
+            <a href="/register.html">Register new user</a>
             <a href="posts/create.html">Create post</a>
             <p>Signed in as: Username</p>
         </div>
@@ -38,17 +41,18 @@
     </header>
     <main>
         <h2>Sign in here!</h2>
-        <div class="login-form">
+        <form id="loginForm">
             <fieldset>
-                <label for="username">Username:</label>
-                <input type="text" name="username" id="username" required>
                 <label for="email">Email:</label>
-                <input type="text" name="email" id="email" required>
+                <input type="text" name="email" id="email" autocomplete="email" required>
+
                 <label for="password">Password: (minimum 8 characters)</label>
-                <input type="password" name="password" id="password" minlength="8" required>
-                <input type="submit" value="Sign in">
+                <input type="password" name="password" id="password" minlength="8" autocomplete="current-password" required>
+
+                <button type="submit">Sign in</button>
             </fieldset>
-        </div>
+        </form>
+        <div id="loginMessage" class="message-hidden"></div>
     </main>
     <footer>
         <div>
