@@ -1,23 +1,31 @@
-import { API_AUTH_KEY } from "../constants.js";
-import { JWT_TOKEN } from "../constants.js";
-import { API_KEY } from "../constants.js";
+import { API_AUTH, JWT_TOKEN, API_KEY } from "../constants.js";
 
-export async function getKey(name) {
-    const response = await fetch(`${API_AUTH_KEY}`, {
-      method: "GET",
+export async function getKey() {
+  try {
+    const response = await fetch(`${API_AUTH}/create-api-key`, {
+      method: "POST",
       headers: {
-              "Authorization": `Bearer ${JWT_TOKEN}`,
-              "X-Noroff-API-Key": `${API_KEY}`,
-              "Content-Type": "application/json"
-          }
+        "Authorization": `Bearer ${JWT_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name: "LinkUpAPIKey" }),
     });
-    
+
     if (!response.ok) {
-      throw new Error("Failed to fetch API key");
+      const errorData = await response.json();
+      throw new Error(`API Error: ${errorData.message || response.statusText}`);
     }
-  
-    const data = await response.json();
-    return data;
+
+    const { data } = await response.json();
+    return data; 
+  } catch (error) {
+    console.error("Error creating API key:", error);
+    throw error; 
+  }
 }
 
-getKey();
+getKey()
+  .then((apiKeyData) => {
+    console.log("API Key Generated:", apiKeyData.key);
+  })
+  .catch(console.error);
