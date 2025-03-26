@@ -12,27 +12,16 @@
     <script type="module" src="/src/js/api/constants.js" defer></script>
     <script type="module" src="/src/js/api/headers.js" defer></script>
     <script type="module" src="/src/js/api/auth/key.js" defer></script>
-    <script type="module" src="src/js/api/post/create.js" defer></script>
+    <script type="module" src="/src/js/api/post/create.js" defer></script>
+    <script type="module" src="/src/js/ui/auth/login.js" defer></script>
+    <script type="module" src="/src/js/ui/auth/logout.js" defer></script>
     <link rel="stylesheet" href="/css/basic-styles.css">
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
     <header>
-        <div class="menu-signed-in">
-            <a href="/">Home</a>
-            <a href="posts/feed.html">Feed</a>
-            <a href="profile.html">Profile</a>
-            <a href="register.html">Register new user</a>
-            <a href="posts/create.html">Create post</a>
-            <p>Signed in as: Username</p>
-        </div>
-        <div class="menu-signed-out">
-            <a href="/">Home</a>
-            <a href="posts/feed.html">Feed</a>
-            <a href="profile.html">Profile</a>
-            <a href="register.html">Register new user</a>
-            <p>Signed in as: User not signed in</p>
-        </div>
+        <div id="menuLoggedIn"></div>
+        <div id="menuLoggedOut"></div>
         <nav>
             <i class="fa-solid fa-bars"></i>
             <h1>LinkUp</h1>

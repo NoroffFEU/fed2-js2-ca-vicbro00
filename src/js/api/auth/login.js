@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       localStorage.setItem('jwt', result.data.accessToken);
       localStorage.setItem('email', email.toLowerCase());
+      localStorage.setItem('username', result.data.name);
 
       alert('You are now signed in!');
       window.location.href = '/index.html';
