@@ -16,18 +16,21 @@
     <script type="module" src="/src/js/api/post/create.js" defer></script>
     <script type="module" src="/src/js/ui/auth/login.js" defer></script>
     <script type="module" src="/src/js/ui/auth/logout.js" defer></script>
+    <link rel="stylesheet" href="/css/_reset.css">
+    <link rel="stylesheet" href="/css/basic-styles.css">
+    <link rel="stylesheet" href="/css/index.css">
 </head>
-<body class="bg-red-500">
+<body>
     <header>
         <div id="menuLoggedIn"></div>
         <div id="menuLoggedOut"></div>
         <nav>
-            <i class="fa-solid fa-bars"></i>
+            <i class="fa-solid fa-bars" id="hamburgerIcon"></i>
             <h1>LinkUp</h1>
             <i class="fa-solid fa-user"></i>
         </nav>
     </header>
-    <main class="bg-amber-600">
+    <main>
         <h2>Home</h2>
         <h3>Welcome to our new social media application LinkUp!</h3>
         <h3>Quick access:</h3>
@@ -37,10 +40,10 @@
             <p>Feed</p>
         </div>
     </main>
-    <footer class="bg-amber-600">
+    <footer>
         <div>
             <div class="border"></div>
-            <button>Sign up here!</button>
+            <button class="secondary-button">Sign up here!</button>
             <p>Contact us here: linkup@gmail.com</p>
         </div>
     </footer>

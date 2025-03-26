@@ -1,6 +1,44 @@
 @import url(_reset.css);
 /*Header styling*/
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: auto;
+    height: auto;
+    background-color: rgb(227, 170, 236);
+    color: black;
+    transition: left 0.5s ease-in-out;
+    padding: 2em;
+    z-index: 1000;
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+    border-left: none;
+    border-top: none;
+}
 
+.side-menu a {
+    display: block;
+    color: black;
+    padding: 1em;
+    text-decoration: none;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+nav:hover {
+    cursor: pointer;
+}
+
+nav i {
+    font-size: 2em;
+}
 
 /*Main styling*/
 html {
@@ -14,11 +52,21 @@ body {
 
 /*Footer styling*/
 /*Button*/
-footer button {
-    background-color: rgb(170, 236, 227);
+.primary-button,
+.secondary-button {
+    background-color: rgb(227, 170, 236);
     border-radius: 25px;
     border-style: none;
     padding: 1em 2em;
+}
+
+.secondary-button {
+    background-color: rgb(170, 236, 227);
+}
+
+.primary-button:hover,
+.secondary-button:hover {
+    cursor: pointer;
 }
 
 .border {
