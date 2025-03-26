@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <a href="/auth/profile.html">Profile</a>
                 <a href="/auth/register/index.html">Register new user</a>
                 <p>User not logged in</p>
-                <a href="/auth/login/index.html"><button id="logoutButton">Sign in</button></a>
+                <a href="/auth/login/index.html"><button id="loginButton" class="secondary-button">Sign in</button></a>
             `;
         }
         sideMenu.innerHTML = menuContent;

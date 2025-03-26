@@ -32,12 +32,12 @@ nav {
     align-items: center;
 }
 
-nav:hover {
-    cursor: pointer;
-}
-
 nav i {
     font-size: 2em;
+}
+
+#hamburgerIcon:hover {
+    cursor: pointer;
 }
 
 /*Main styling*/

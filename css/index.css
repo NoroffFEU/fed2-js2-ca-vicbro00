@@ -1,0 +1,11 @@
+.quick-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.quick-container a {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
