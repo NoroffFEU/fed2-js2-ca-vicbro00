@@ -5,16 +5,17 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "build-css": "tailwindcss build tailwind/tailwindcss/styles.css -o public/styles.css"
+    "build:css": "postcss css/styles.css -o output.css"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.3",
+    "postcss-cli": "^11.0.1",
     "tailwindcss": "^4.0.17",
     "vite": "^5.4.1"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.0.16"
+    "@tailwindcss/vite": "^4.0.17"
   },
   "main": "vite.config.js",
   "keywords": [],

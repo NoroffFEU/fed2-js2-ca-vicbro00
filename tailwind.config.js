@@ -1,6 +1,6 @@
 export default {
   content: [
-    "../index.html",
+    "/index.html",
     "../auth/**/*.html",
     "../profile/**/*.html",
     "../post/**/*.html",

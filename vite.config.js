@@ -1,18 +1,16 @@
 import { resolve } from "path";
 import { defineConfig } from "vite";
-import tailwindcss from 'tailwindcss'
+import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  appType: "mpa",
-  base: "",
-  plugins: [
-    tailwindcss(),
-  ],
+  plugins: [],
   css: {
     postcss: {
       plugins: [tailwindcss()],
     },
   },
+  appType: "mpa",
+  base: "",
   build: {
     target: "esnext",
     rollupOptions: {
