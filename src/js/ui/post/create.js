@@ -1,4 +1,4 @@
-import { API_SOCIAL_POSTS, JWT_TOKEN } from "../constants.js";
+import { API_SOCIAL_POSTS, JWT_TOKEN } from "./constants.js";
 
 /**
  * Creates a post
