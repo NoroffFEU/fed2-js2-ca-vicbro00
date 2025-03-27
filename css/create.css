@@ -1,0 +1,42 @@
+.form-container {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 60%;
+    justify-self: center;
+    border-radius: 25px;
+    padding: 1em;
+    gap: 1em;
+}
+
+.form-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.form-group label {
+    flex: 0 0 30%; /* Fixed width for labels */
+    text-align: left;
+}
+
+.form-group input,
+.form-group textarea {
+    flex: 1;
+    background-color: rgb(227, 170, 236);
+    border: none;
+    border-radius: 25px;
+    padding: 1em;
+    min-width: 0;
+}
+
+.form-container input,
+textarea {
+    background-color: rgb(227, 170, 236);
+    border: none;
+    border-radius: 25px;
+    padding: 1em 2em;
+    resize: none;
+}

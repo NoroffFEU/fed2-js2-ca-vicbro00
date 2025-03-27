@@ -2,12 +2,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const logoutButton = document.getElementById('logoutButton');
   const signInButton = document.getElementById('signInButton');
 
-  const isLoggedIn = localStorage.getItem('jwt');
+  const isLoggedIn = localStorage.getItem('JWT_TOKEN');
 
   if (isLoggedIn) {
     if (logoutButton) {
       logoutButton.addEventListener('click', () => {
-        localStorage.removeItem('jwt');
+        localStorage.removeItem('JWT_TOKEN');
         localStorage.removeItem('email');
         localStorage.removeItem('username');
 

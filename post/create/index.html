@@ -15,7 +15,7 @@
     <script type="module" src="/src/js/api/auth/key.js" defer></script>
     <script type="module" src="/src/js/ui/auth/login.js" defer></script>
     <script type="module" src="/src/js/ui/auth/logout.js" defer></script>
-    <script type="module" src="/src/js/api/post/create.js" defer></script>
+    <script type="module" src="/src/js/ui/post/create.js" defer></script>
     <link rel="stylesheet" href="/css/basic-styles.css">
     <link rel="stylesheet" href="/css/create.css">
 </head>
@@ -29,7 +29,38 @@
             <i class="fa-solid fa-user"></i>
         </nav>
     </header>
-    <main></main>
+    <main>
+        <!--User image-->
+        <!--User name-->
+        <form id="formContainer" class="form-container">
+            <div class="form-group">
+                <label for="postTitle">Title</label>
+                <input type="text" id="postTitle" placeholder="Title" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="postBody">Content</label>
+                <textarea id="postBody" placeholder="Content" required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="postTags">Tags (comma separated)</label>
+                <input type="text" id="postTags" placeholder="Tags">
+            </div>
+            
+            <div class="form-group">
+                <label for="postMediaUrl">Image URL (optional)</label>
+                <input type="url" id="postMediaUrl" placeholder="Choose an image">
+            </div>
+            
+            <div class="form-group">
+                <label for="postMediaAlt">Image Description (optional)</label>
+                <input type="text" id="postMediaAlt" placeholder="Description">
+            </div>
+            
+            <button type="submit" class="primary-button">Create Post</button>
+        </form>
+    </main>
     <footer>
         <div>
             <div class="border"></div>

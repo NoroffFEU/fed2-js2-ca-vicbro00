@@ -1,4 +1,4 @@
-import { API_AUTH_LOGIN } from '../constants.js';
+import { API_AUTH_LOGIN, JWT_TOKEN } from '../constants.js';
 
 /**
  * Handles user login by sending authentication credentials to the API.
@@ -40,9 +40,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         console.log('Login successful:', result);
 
-        localStorage.setItem('jwt', result.data.accessToken);
+        localStorage.setItem(JWT_TOKEN, result.data.accessToken);
         localStorage.setItem('email', email.toLowerCase());
         localStorage.setItem('username', result.data.name);
+        console.log('Token stored:', localStorage.getItem(JWT_TOKEN)); 
 
         alert('You are now signed in!');
         window.location.href = '/index.html';
@@ -53,3 +54,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
