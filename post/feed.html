@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A website that displays feeds that are created by the users of the app.">
     <title>LinkUp website home page</title>
-    <link rel="icon" href="images/favicon-32x32.png">
+    <link rel="icon" href="/images/favicon-32x32.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100..900&family=Homenaje&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Oswald:wght@200..700&family=Quicksand:wght@300..700&family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -15,8 +15,8 @@
     <script type="module" src="/src/js/api/auth/key.js" defer></script>
     <script type="module" src="/src/js/ui/auth/login.js" defer></script>
     <script type="module" src="/src/js/ui/auth/logout.js" defer></script>
-    <script type="module" src="/src/js/api/post/create.js" defer></script>
-    <script type="module" src="/src/js/api/post/display.js" defer></script>
+    <script type="module" src="/src/js/ui/post/create.js" defer></script>
+    <script type="module" src="/src/js/ui/post/display.js" defer></script>
     <link rel="stylesheet" href="/css/basic-styles.css">
     <link rel="stylesheet" href="/css/feed.css">
 </head>
@@ -31,6 +31,8 @@
         </nav>
     </header>
     <main>
+        <h2>Feed</h2>
+        <input type="search" placeholder="Search..." class="secondary-button">
         <div class="feed-container" id="feedContainer"></div>
     </main>
     <footer>

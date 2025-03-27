@@ -52,3 +52,17 @@ function displayPosts(posts) {
 }
 
 document.addEventListener("DOMContentLoaded", fetchPosts);
+
+function displayPost(post) {
+    const feedContainer = document.getElementById("feedContainer");
+    
+    const postElement = document.createElement("div");
+    postElement.classList.add("post");
+    postElement.innerHTML = `
+        <p><strong>${post.author.name}</strong></p>
+        <p>${post.content}</p>
+        <p><small>${new Date(post.created).toLocaleString()}</small></p>
+    `;
+
+    feedContainer.prepend(postElement);
+}
