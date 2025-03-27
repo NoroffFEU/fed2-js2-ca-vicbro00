@@ -1,3 +1,11 @@
+/**
+ * Handles user registration by sending the form data to the API.
+ * Validates input fields and displays appropriate messages for errors.
+ *
+ * @param {Event} e - The form submission event.
+ * @returns {Promise<void>} - Does not return a value but updates the UI and redirects on success.
+ * @throws {Error} - Displays an error message if registration fails.
+ */
 document.getElementById('registerForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     
