@@ -2,7 +2,8 @@ import { initLoginForm } from './src/js/ui/auth/login.js';
 import { initSideMenu } from './src/js/ui/components/sideMenu.js';
 import { initRegisterForm } from './src/js/ui/auth/register.js';
 import { JWT_TOKEN } from './src/js/api/constants.js';
-import { fetchPostsWithAuthors, displayPosts } from './src/js/ui/post/display.js';
+import { fetchPostsWithAuthors } from './src/js/api/post/display.js';
+import { displayPosts } from './src/js/ui/post/display.js';
 import { initPostCreateView } from './src/js/router/views/postCreate.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
