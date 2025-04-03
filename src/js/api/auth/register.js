@@ -1,78 +1,29 @@
+const API_KEY = '9a919101-04d7-4ce4-ab4a-41d4e0211e7f';
+const BASE_URL = 'https://v2.api.noroff.dev';
+
 /**
- * Handles user registration by sending the form data to the API.
- * Validates input fields and displays appropriate messages for errors.
- *
- * @param {Event} e - The form submission event.
- * @returns {Promise<void>} - Does not return a value but updates the UI and redirects on success.
- * @throws {Error} - Displays an error message if registration fails.
+ * Registers a new user
+ * @param {Object} userData - { name, email, password }
+ * @returns {Promise<Object>} - Response data
+ * @throws {Error} - If registration fails
  */
-document.getElementById('registerForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    // Get form values
-    const username = document.getElementById('username').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value;
-    const confirmPassword = document.getElementById('confirmPassword')?.value;
+export async function registerUser(userData) {
+  const response = await fetch(`${BASE_URL}/auth/register`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Noroff-API-Key': API_KEY
+    },
+    body: JSON.stringify(userData)
+  });
 
-    // Validation
-    if (!username || !email || !password) {
-        showMessage('All fields are required', 'error');
-        return;
-    }
+  const data = await response.json();
 
-    if (!email.includes('@stud.noroff.no')) {
-        showMessage('Email must end with @stud.noroff.no', 'error');
-        return;
-    }
+  if (!response.ok) {
+    const error = data.errors?.[0]?.message || 
+                (response.status === 409 ? 'Email already registered' : 'Registration failed');
+    throw new Error(error);
+  }
 
-    if (password.length < 8) {
-        showMessage('Password must be at least 8 characters', 'error');
-        return;
-    }
-
-    if (confirmPassword && password !== confirmPassword) {
-        showMessage('Passwords do not match', 'error');
-        return;
-    }
-
-    try {
-        // Attempts registration
-        const response = await fetch('https://v2.api.noroff.dev/auth/register', {
-            method: 'POST',
-            headers: { 
-                'Content-Type': 'application/json',
-                'X-Noroff-API-Key': '9a919101-04d7-4ce4-ab4a-41d4e0211e7f'
-            },
-            body: JSON.stringify({
-                name: username,
-                email: email,
-                password: password
-            })
-        });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-            const errorMsg = data.errors?.[0]?.message || 
-                           (data.statusCode === 409 ? 'Email already registered' : 'Registration failed');
-            throw new Error(errorMsg);
-        }
-
-        showMessage('Registration successful! Redirecting to login...', 'success');
-        
-        setTimeout(() => {
-            window.location.href = '/auth/login/index.html';
-        }, 2000);
-
-    } catch (error) {
-        console.error('Registration error:', error);
-        showMessage(error.message, 'error');
-    }
-});
-
-function showMessage(message, type) {
-    const messageDiv = document.getElementById('message');
-    messageDiv.textContent = message;
-    messageDiv.className = type;
+  return data;
 }

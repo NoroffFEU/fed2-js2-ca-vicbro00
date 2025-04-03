@@ -20,13 +20,13 @@ export function createSideMenu() {
     sideMenu.innerHTML = `
         <a href="/index.html">Home</a>
         <a href="/post/feed.html">Feed</a>
-        <a href="/auth/register/index.html">Register new user</a>
         ${isLoggedIn ? `
             <a href="/auth/profile.html">Profile</a>
             <a href="/post/create/index.html">Create post</a>
             <p>Logged in as: <strong>${username}</strong></p>
             <button id="logoutButton" class="secondary-button">Sign out</button>
         ` : `
+            <a href="/auth/register/index.html">Register new user</a>
             <p>User not logged in</p>
             <a href="/auth/login/index.html"><button id="loginButton" class="secondary-button">Sign in</button></a>
         `}
