@@ -12,7 +12,7 @@ export const API_KEY = "b3c2f687-f212-4a96-a8bd-06309ffbc1bb";
  * Base URL for the Noroff API.
  * @constant {string}
  */
-export const API_BASE = `https://v2.api.noroff.dev`;
+export const API_BASE = "https://v2.api.noroff.dev";
 
 
 /**

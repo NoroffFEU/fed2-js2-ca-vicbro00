@@ -2,7 +2,7 @@ import { API_KEY, JWT_TOKEN, API_BASE } from '../../api/constants.js';
 
 const feedContainer = document.getElementById("feedContainer");
 
-async function fetchPostsWithAuthors() {
+export async function fetchPostsWithAuthors() {
     try {
         const postsResponse = await fetch(`${API_BASE}/social/posts?_author=true&limit=20`, {
             headers: {
@@ -23,7 +23,7 @@ async function fetchPostsWithAuthors() {
     }
 }
 
-function displayPosts(posts) {
+export function displayPosts(posts) {
     if (!posts.length) {
         feedContainer.innerHTML = "<p>No posts available.</p>";
         return;
@@ -63,7 +63,6 @@ function displayPosts(posts) {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-    // Show loading state
     feedContainer.innerHTML = "<p>Loading posts...</p>";
     
     const posts = await fetchPostsWithAuthors();

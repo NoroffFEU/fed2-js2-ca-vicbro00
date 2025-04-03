@@ -60,7 +60,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     .filter(tag => tag.length > 0)
             };
 
-            // Adds media field if valid URL is entered
             const mediaUrl = document.getElementById("postMediaUrl").value.trim();
             if (mediaUrl) {
                 postData.media = {

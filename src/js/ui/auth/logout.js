@@ -1,26 +1,18 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const logoutButton = document.getElementById('logoutButton');
-  const signInButton = document.getElementById('signInButton');
+import { refreshSideMenu } from '../../ui/components/sideMenu.js';
 
-  const isLoggedIn = localStorage.getItem('JWT_TOKEN');
+/**
+ * Handles user logout by clearing session data and resetting application state
+ * @returns {Promise<void>} Resolves after completing logout process
+ */
+export function initLogout() {
+    // Log user info
+    const { JWT_TOKEN, userName, userEmail } = Object.fromEntries(
+        ['JWT_TOKEN', 'userName', 'userEmail'].map(key => [key, localStorage.getItem(key)])
+    );
 
-  if (isLoggedIn) {
-    if (logoutButton) {
-      logoutButton.addEventListener('click', () => {
-        localStorage.removeItem('JWT_TOKEN');
-        localStorage.removeItem('email');
-        localStorage.removeItem('username');
+    ['JWT_TOKEN', 'userName', 'userEmail'].forEach(key => localStorage.removeItem(key));
 
-        alert('You are now signed out!');
-
-        window.location.href = '/index.html';
-      });
-    }
-  } else {
-    if (signInButton) {
-      signInButton.addEventListener('click', () => {
-        window.location.href = '/index.html';
-      });
-    }
-  }
-});
+    // Update UI and redirect
+    refreshSideMenu();
+    window.location.href = '/index.html';
+}

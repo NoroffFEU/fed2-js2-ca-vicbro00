@@ -1,57 +1,34 @@
-import { API_AUTH_LOGIN, JWT_TOKEN } from '../constants.js';
+import { API_AUTH_LOGIN, JWT_TOKEN, API_KEY } from '../constants.js';
 
 /**
- * Handles user login by sending authentication credentials to the API.
- * If successful, stores user details in local storage and redirects to the homepage.
- * @param {Event} e - The form submission event.
- * @returns {Promise<void>} - Does not return a value but updates local storage and redirects the user.
- * @throws {Error} - Alerts the user if login fails.
+ * Authenticates user credentials with the API and stores the session token
+ * @param {string} email - User's @stud.noroff.no email address
+ * @param {string} password - User's password (min 8 characters)
+ * @returns {Promise<Object>} Resolves with user data on successful login
+ * @throws {Error} Throws with descriptive message for invalid domain, credentials, or API errors
  */
-document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('loginForm').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        console.log('Form submitted');
+export async function loginUser(email, password) {
+    if (!email.endsWith('@stud.noroff.no')) throw new Error('Invalid email domain');
 
-        const email = document.getElementById('email').value.trim();
-        const password = document.getElementById('password').value;
-
-        if (!email || !password) {
-        console.error('Email and password are required');
-        return;
-        }
-
-        try {
-        const response = await fetch(API_AUTH_LOGIN, {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ 
-            email: email,
-            password: password
-            })
-        });
-        
-        const result = await response.json();
-        
-        if (!response.ok) {
-            throw new Error(result.errors?.[0]?.message || result.message || 'Login failed');
-        }
-
-        console.log('Login successful:', result);
-
-        localStorage.setItem(JWT_TOKEN, result.data.accessToken);
-        localStorage.setItem('email', email.toLowerCase());
-        localStorage.setItem('username', result.data.name);
-        console.log('Token stored:', localStorage.getItem(JWT_TOKEN)); 
-
-        alert('You are now signed in!');
-        window.location.href = '/index.html';
-
-        } catch (error) {
-        console.error('Login error:', error);
-        alert(error.message || 'An error occurred. Please try again.');
-        }
+    const response = await fetch(API_AUTH_LOGIN, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Noroff-API-Key': API_KEY
+        },
+        body: JSON.stringify({ email, password })
     });
-});
 
+    const { data, errors } = await response.json();
+
+    if (!response.ok) {
+        throw new Error(errors?.[0]?.message || 'Login failed');
+    }
+
+    // Store token and user data
+    localStorage.setItem(JWT_TOKEN, data.accessToken);
+    localStorage.setItem('userEmail', data.email);
+    localStorage.setItem('userName', data.name);
+    
+    return data;
+}
