@@ -1,5 +1,4 @@
 import { loginUser } from '../../api/auth/login.js';
-import { JWT_TOKEN } from '../../api/constants.js';
 
 export function initLoginForm() {
     const form = document.getElementById('loginForm');
@@ -25,7 +24,7 @@ async function handleLoginSubmit(e) {
         const userData = await loginUser(email.value.trim(), password.value);
         await new Promise(resolve => setTimeout(resolve, 100));
         
-        if (!localStorage.getItem(JWT_TOKEN)) {
+        if (!localStorage.getItem('JWT_TOKEN')) {
             throw new Error('Login session could not be established');
         }
         

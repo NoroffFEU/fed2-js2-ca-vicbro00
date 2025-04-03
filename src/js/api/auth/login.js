@@ -1,4 +1,4 @@
-import { API_AUTH_LOGIN, JWT_TOKEN, API_KEY } from '../constants.js';
+import { API_AUTH_LOGIN, API_KEY } from '../constants.js';
 
 /**
  * Authenticates user credentials with the API and stores the session token
@@ -26,7 +26,7 @@ export async function loginUser(email, password) {
     }
 
     // Store token and user data
-    localStorage.setItem(JWT_TOKEN, data.accessToken);
+    localStorage.setItem('JWT_TOKEN', data.accessToken);
     localStorage.setItem('userEmail', data.email);
     localStorage.setItem('userName', data.name);
     

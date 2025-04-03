@@ -1,5 +1,12 @@
 import { API_KEY, JWT_TOKEN, API_BASE } from '../../api/constants.js';
+import { authGuard } from '../../utilities/authGuard.js';
 
+document.addEventListener("DOMContentLoaded", () => {
+    // Authguard on create page
+    if (window.location.pathname.includes('/post/create/index.html')) {
+        authGuard();
+    }
+});
 /**
  * Creates a new post
  * @param {Object} postData - Post data to create

@@ -1,7 +1,5 @@
 import { API_KEY, JWT_TOKEN, API_BASE } from '../../api/constants.js';
 
-const feedContainer = document.getElementById("feedContainer");
-
 export async function fetchPostsWithAuthors() {
     const url = `${API_BASE}/social/posts?_author=true&limit=20`;
     const headers = {
