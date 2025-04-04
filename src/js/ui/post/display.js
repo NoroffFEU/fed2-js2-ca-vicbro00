@@ -1,3 +1,5 @@
+import { createPostHeader, createPostFooter, createPostComments, createPostReactions } from '../../ui/components/posts.js'; // Import the helper functions
+
 export function displayPosts(posts) {
     const feedContainer = document.getElementById("feedContainer");
     
@@ -8,8 +10,11 @@ export function displayPosts(posts) {
         : "<p>No posts available.</p>";
 }
 
+// Feed page link to individual post
 function createPostHTML(post) {
-    const { media, author, created, title, body, tags } = post;
+    const { id, media, author, created, title, body, tags, reactions, comments } = post;
+    const postUrl = `/post/individual-post.html?id=${id}`;
+
     const imageUrl = media?.url;
     const imageAlt = media?.alt || 'Post Image';
     const authorAvatar = author?.avatar?.url || 'default-avatar.jpg';
@@ -18,21 +23,16 @@ function createPostHTML(post) {
 
     return `
     <div class="post">
-        <div class="post-header">
-            <img src="${authorAvatar}" alt="Author avatar" class="author-avatar">
-            <div class="author-info">
-                <span class="author-name">${authorName}</span>
-                <span class="post-time">${dateString}</span>
+        <a href="${postUrl}" class="post-link">
+            ${createPostHeader(authorAvatar, authorName, dateString)}
+            <div class="post-content">
+                <h2>${title}</h2>
+                <p>${body}</p>
+                ${imageUrl ? `<img src="${imageUrl}" alt="${imageAlt}" class="post-image">` : ''}  
             </div>
-        </div>
-        <div class="post-content">
-            <h2>${title}</h2>
-            <p>${body}</p>
-            ${imageUrl ? `<img src="${imageUrl}" alt="${imageAlt}" class="post-image">` : ''}
-        </div>
-        ${tags?.length ? `
-        <div class="post-footer">
-            <div class="post-tags">Tags: ${tags.join(", ")}</div>
-        </div>` : ''}
+        </a>
+        ${createPostFooter(tags)}
+        ${createPostComments(comments)}
+        ${createPostReactions(reactions)}
     </div>`;
 }

@@ -1,7 +1,7 @@
 import { API_KEY, JWT_TOKEN, API_BASE } from '../constants.js';
 
 export async function fetchPostsWithAuthors() {
-    const url = `${API_BASE}/social/posts?_author=true&limit=20`;
+    const url = `${API_BASE}/social/posts?_author=true&_reactions=true&_comments=true`;
     const headers = {
         "X-Noroff-API-Key": API_KEY,
         "Authorization": `Bearer ${JWT_TOKEN}`

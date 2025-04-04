@@ -50,6 +50,38 @@ body {
     text-align: center;
 }
 
+#feedContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.post {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 4em 0;
+    background-color: white;
+    border-radius: 25px;
+    padding: 2em;
+}
+
+.post img {
+    width: 20em;
+}
+
+#feedContainer .author-avatar {
+    width: 4em;
+    border-radius: 50px;
+}
+
+#feedContainer a {
+    text-decoration: none;
+    color: black;
+}
+
 /*Footer styling*/
 /*Button*/
 .primary-button,
