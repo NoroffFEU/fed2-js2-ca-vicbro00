@@ -35,15 +35,21 @@ export function createPostComments(comments) {
 }
 
 // Reactions
-export function createPostReactions(reactions) {
+export function createPostReactions(reactions, postId) {
     if (!reactions?.length) return '';
+    
     return `
-    <div class="post-reactions">
+    <div class="post-reactions-container">
         <h3>Reactions:</h3>
-        ${reactions.map(reaction => `
-            <div class="reaction">
-                <span>${reaction.symbol}: ${reaction.count}</span>
-            </div>
-        `).join('')}
+        <div class="reaction-buttons">
+            ${reactions.map(reaction => `
+                <button class="reaction-button" 
+                        data-post-id="${postId}" 
+                        data-symbol="${reaction.symbol}"
+                        aria-label="React with ${reaction.symbol}">
+                    ${reaction.symbol} ${reaction.count}
+                </button>
+            `).join('')}
+        </div>
     </div>`;
 }

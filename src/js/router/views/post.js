@@ -42,7 +42,7 @@ export function displayPost(post) {
 
 // Individual post HTML
 function createPostHTML(post) {
-    const { media, author, created, title, body, tags, reactions, comments } = post;
+    const { id, media, author, created, title, body, tags, reactions, comments } = post;
 
     const imageUrl = media?.url || 'default-image.jpg';
     const imageAlt = media?.alt || 'Post Image';
@@ -61,6 +61,7 @@ function createPostHTML(post) {
         </div>
         ${createPostFooter(tags)}
         ${createPostComments(comments)}
-        ${createPostReactions(reactions)}
+        ${createPostReactions(reactions, id)}
     </div>`;
 }
+    

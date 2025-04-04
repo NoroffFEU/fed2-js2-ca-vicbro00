@@ -8,7 +8,7 @@ export function displayPosts(posts) {
     feedContainer.innerHTML = posts.length
         ? posts.map(createPostHTML).join("")
         : "<p>No posts available.</p>";
-}
+}   
 
 // Feed page link to individual post
 function createPostHTML(post) {
@@ -33,6 +33,6 @@ function createPostHTML(post) {
         </a>
         ${createPostFooter(tags)}
         ${createPostComments(comments)}
-        ${createPostReactions(reactions)}
+        ${createPostReactions(reactions, id)}
     </div>`;
 }
