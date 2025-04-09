@@ -21,17 +21,22 @@ export function createPostFooter(tags) {
 
 // Comments
 export function createPostComments(comments) {
-    if (!comments?.length) return '';
-    return `
-    <div class="post-comments">
-        <h3>Comments:</h3>
-        ${comments.map(comment => `
-            <div class="comment">
-                <p><strong>${comment.author.name}:</strong> ${comment.body}</p>
-                <span class="comment-time">${new Date(comment.created).toLocaleString()}</span>
-            </div>
-        `).join('')}
-    </div>`;
+    if (!comments || comments.length === 0) {
+        return `<p>No comments yet.</p>`;
+    }
+
+    return comments.map(comment => {
+        const { author, body, created } = comment;
+        const authorName = author?.name || "Anonymous";
+        const commentDate = new Date(created).toLocaleString();
+        
+        return `
+        <div class="comment">
+            <div class="comment-author">${authorName}</div>
+            <div class="comment-body">${body}</div>
+            <div class="comment-date">${commentDate}</div>
+        </div>`;
+    }).join("");
 }
 
 // Reactions

@@ -15,7 +15,11 @@
     "vite": "^5.4.1"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.0.17"
+    "@tailwindcss/vite": "^4.0.17",
+    "path-browserify": "^1.0.1",
+    "rollup-plugin-node-polyfills": "^0.2.1",
+    "source-map-js": "^1.2.1",
+    "url-polyfill": "^1.1.13"
   },
   "main": "vite.config.js",
   "keywords": [],

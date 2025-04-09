@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+import path from 'path';
 
 export default defineConfig({
   base: '/',
@@ -18,5 +19,14 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
+  },
+
+  resolve: {
+    alias: {
+      path: 'rollup-plugin-node-polyfills/polyfills/path',
+      fs: 'rollup-plugin-node-polyfills/polyfills/empty',
+      url: 'rollup-plugin-node-polyfills/polyfills/url',
+      'source-map-js': 'rollup-plugin-node-polyfills/polyfills/empty',
+    },
   },
 });
