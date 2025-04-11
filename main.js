@@ -7,6 +7,8 @@ import { initPostCreateView } from './src/js/router/views/postCreate.js';
 import { fetchPostsWithAuthors } from './src/js/api/post/display.js';
 import { fetchPostById, displayPost } from './src/js/router/views/post.js';
 import { fetchProfileByName } from './src/js/ui/profile/profile.js';
+import { displayUserPosts } from './src/js/router/views/profile.js';
+import { fetchUserPostsByName } from './src/js/ui/profile/profile.js';
 
 initSideMenu();
 initLoginForm();
@@ -47,9 +49,24 @@ if (username) {
         // Assuming you want to display profile data somewhere on the page
         console.log(profile);
         // Display the profile data - For example, update some elements with profile details
-        document.getElementById("profileName").innerText = profile.name || "Unknown User";
-        document.getElementById("profileBio").innerText = profile.bio || "No bio available";
-        // You can add other profile info as needed, like avatar or email
+        const profileNameElement = document.getElementById("profileName");
+        const profileBioElement = document.getElementById("profileBio");
+
+        if (profileNameElement) {
+            profileNameElement.innerText = profile.name || "Unknown User";
+        } else {
+            console.error("Element with ID 'profileName' not found.");
+        }
+
+        if (profileBioElement) {
+            profileBioElement.innerText = profile.bio || "No bio available";
+        } else {
+            console.error("Element with ID 'profileBio' not found.");
+        }
+
+        // Fetch and display user posts
+        const userPosts = await fetchUserPostsByName(username);
+        displayUserPosts(userPosts);
     } else {
         console.error("Profile not found or failed to fetch.");
     }
