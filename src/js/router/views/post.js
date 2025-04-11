@@ -1,11 +1,11 @@
 import { API_KEY, JWT_TOKEN, API_BASE } from '../../api/constants.js';
-import { createPostHeader, createPostFooter, createPostComments, createPostReactions } from '../../ui/components/posts.js';
+import { createPostHeader, createPostFooter } from '../../ui/components/posts.js';
 
 // Fetch individual post by ID
 export async function fetchPostById(id) {
-    const url = `${API_BASE}/social/posts/${id}?_author=true&_reactions=true&_comments=true`;
+    const url = `${API_BASE}/social/posts/${id}?_author=true`;
     const headers = {
-        "X-Noroff-API-Key": API_KEY,
+        "X-Noroff-API-Key": API_KEY,    
         "Authorization": `Bearer ${JWT_TOKEN}`
     };
 
@@ -42,7 +42,7 @@ export function displayPost(post) {
 
 // Individual post HTML
 function createPostHTML(post) {
-    const { id, media, author, created, title, body, tags, reactions, comments } = post;
+    const { id, media, author, created, title, body, tags } = post;
 
     const imageUrl = media?.url || 'default-image.jpg';
     const imageAlt = media?.alt || 'Post Image';
@@ -60,8 +60,6 @@ function createPostHTML(post) {
             ${imageUrl !== "string" ? `<img src="${imageUrl}" alt="${imageAlt}" class="post-image">` : ''}
         </div>
         ${createPostFooter(tags)}
-        ${createPostComments(comments)}
-        ${createPostReactions(reactions, id)}
     </div>`;
 }
     
