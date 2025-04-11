@@ -1,5 +1,3 @@
-import { createPostHeader, createPostFooter } from '../../ui/components/posts.js';
-
 export function displayPosts(posts) {
     const feedContainer = document.getElementById("feedContainer");
     
@@ -8,10 +6,15 @@ export function displayPosts(posts) {
     feedContainer.innerHTML = posts.length
         ? posts.map(createPostHTML).join("")
         : "<p>No posts available.</p>";
-}   
+}
 
 // Feed page link to individual post
-function createPostHTML(post) {
+export function createPostHTML(post) {
+    // Only run this on feed.html
+    if (!window.location.pathname.endsWith('/feed.html')) {
+        return ''; // Return empty string if not on feed.html
+    }
+    
     const { id, media, author, created, title, body, tags } = post;
     const postUrl = `/post/individual-post.html?id=${id}`;
 
@@ -21,14 +24,16 @@ function createPostHTML(post) {
     const authorName = author?.name || "Unknown";
     const dateString = new Date(created).toLocaleString();
 
-    // Construct the profile URL using the author's name
-    const profileUrl = `/auth/profile.html?username=${authorName}`;
+    // Just use the username in the profile URL (simpler and avoids extra API calls)
+    const profileUrl = `/auth/profile.html?username=${encodeURIComponent(authorName)}`;
 
     return `
     <div class="post">
         <a href="${profileUrl}" class="profile-link">
             <div class="post-header">
-                ${createPostHeader(authorAvatar, authorName, dateString)}
+                <img src="${authorAvatar}" alt="Author Avatar" class="author-avatar">
+                <p class="author-name">${authorName}</p>
+                <span class="post-time">${dateString}</span>
             </div>
         </a>
         <div class="post-content">
@@ -38,6 +43,8 @@ function createPostHTML(post) {
             </a>
             <p>${body}</p>
         </div>
-        ${createPostFooter(tags)}
+        <div class="post-footer">
+            <div class="post-tags">Tags: ${tags?.join(", ") || 'No tags'}</div>
+        </div>
     </div>`;
 }

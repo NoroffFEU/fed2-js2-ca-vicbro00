@@ -1,4 +1,5 @@
 import { API_BASE, API_KEY, JWT_TOKEN } from '../../api/constants.js';
+import { createPostHTML } from '../../ui/post/display.js';
 
 export async function fetchUserPostsByName(name) {
     const url = `${API_BASE}/social/profiles/${name}/posts`;
@@ -18,46 +19,35 @@ export async function fetchUserPostsByName(name) {
     }
 }
 
-import { createPostHeader, createPostFooter } from '../../ui/components/posts.js';
-
+// Displays user profile and posts
 export function displayUserPosts(posts) {
-    const feedContainer = document.getElementById("userPostsContainer");
+    const container = document.getElementById('userPostsContainer');
+    if (!container) return;
 
-    if (!feedContainer) return;
-
-    feedContainer.innerHTML = posts.length
-        ? posts.map(createPostHTML).join("")
-        : "<p>No posts available.</p>";
+    container.innerHTML = posts.length > 0 
+        ? posts.map(post => createUserPostHTML(post)).join('')
+        : '<p>This user has no posts yet.</p>';
 }
 
-// Feed page link to individual post
-function createPostHTML(post) {
-    const { id, media, author, created, title, body, tags } = post;
+function createUserPostHTML(post) {
+    const { id, media, title, body, tags } = post;
     const postUrl = `/post/individual-post.html?id=${id}`;
 
     const imageUrl = media?.url;
     const imageAlt = media?.alt || 'Post Image';
-    const authorAvatar = author?.avatar?.url || 'default-avatar.jpg';
-    const authorName = author?.name || "Unknown";
-    const dateString = new Date(created).toLocaleString();
 
-    // Construct the profile URL using the author's name
-    const profileUrl = `/profile/individual-profile.html?username=${encodeURIComponent(authorName)}`;
+    // Get username from URL for consistent profile linking
+    const urlParams = new URLSearchParams(window.location.search);
 
     return `
     <div class="post">
-        <a href="${profileUrl}" class="profile-link">
-            <div class="post-header">
-                ${createPostHeader(authorAvatar, authorName, dateString)}
-            </div>
-        </a>
         <div class="post-content">
-            <a href="${postUrl}" class="post-link">
-                <h2>${title}</h2>
-                ${imageUrl ? `<img src="${imageUrl}" alt="${imageAlt}" class="post-image">` : ''}
-            </a>
-            <p>${body}</p>
+            <h2>${title}</h2>
+            ${imageUrl ? `<img src="${imageUrl}" alt="${imageAlt}" class="post-image">` : ''}
+        <p>${body}</p>
         </div>
-        ${createPostFooter(tags)}
+        <div class="post-footer">
+            <div class="post-tags">Tags: ${tags?.join(", ") || 'No tags'}</div>
+        </div>
     </div>`;
 }

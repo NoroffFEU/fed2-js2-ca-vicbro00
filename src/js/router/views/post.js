@@ -42,7 +42,7 @@ export function displayPost(post) {
 
 // Individual post HTML
 function createPostHTML(post) {
-    const { id, media, author, created, title, body, tags } = post;
+    const { media, author, created, title, body, tags } = post;
 
     const imageUrl = media?.url || 'default-image.jpg';
     const imageAlt = media?.alt || 'Post Image';

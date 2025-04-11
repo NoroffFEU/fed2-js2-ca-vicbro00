@@ -46,9 +46,8 @@ if (username) {
     const profile = await fetchProfileByName(username);
 
     if (profile) {
-        // Assuming you want to display profile data somewhere on the page
-        console.log(profile);
-        // Display the profile data - For example, update some elements with profile details
+        console.log(profile);  // Log the profile data to ensure it's correct
+
         const profileNameElement = document.getElementById("profileName");
         const profileBioElement = document.getElementById("profileBio");
 
