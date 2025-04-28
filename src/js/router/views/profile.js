@@ -1,4 +1,5 @@
 import { API_BASE, API_KEY, JWT_TOKEN } from '../../api/constants.js';
+import { deletePost, setupDeleteButtons } from '../../api/post/delete.js';
 
 export async function fetchUserPostsByName(name) {
     const url = `${API_BASE}/social/profiles/${name}/posts`;
@@ -28,6 +29,7 @@ export function displayUserPosts(posts) {
         : '<p>This user has no posts yet.</p>';
 
     setupEditButtons();
+    setupDeleteButtons();
 }
 
 
