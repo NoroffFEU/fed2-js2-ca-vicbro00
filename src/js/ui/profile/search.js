@@ -10,9 +10,10 @@ export function displaySearchResults(profiles, containerId = 'searchResultsConta
 function createProfileCard(profile) {
     return `
     <div class="profile-card" data-username="${profile.name}">
-        <img src="${profile.avatar?.url || 'default-avatar.jpg'}" 
+        <img src="${profile.avatar?.url || 'default-avatar.jpg'}"
              alt="${profile.avatar?.alt || profile.name}'s avatar"
-             class="profile-avatar">
+             class="profile-avatar"
+             data-username="${profile.name}">
         <div class="profile-info">
             <h3>${profile.name}</h3>
             <p class="profile-bio">${profile.bio || 'No bio available'}</p>

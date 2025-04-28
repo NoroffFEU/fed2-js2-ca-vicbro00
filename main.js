@@ -72,11 +72,11 @@ if (username) {
             try {
                 const isFollowing = await checkIfFollowing(username);
                 updateFollowButton(followButton, isFollowing);
-                
+
                 followButton.addEventListener('click', async () => {
                     try {
                         followButton.disabled = true;
-                        
+
                         if (followButton.classList.contains('following')) {
                             await unfollowUser(username);
                             updateFollowButton(followButton, false);
@@ -110,7 +110,6 @@ if (username) {
         displayUserPosts(userPosts);
     }
 }
-
 
 function updateFollowButton(button, isFollowing) {
     button.disabled = false;
