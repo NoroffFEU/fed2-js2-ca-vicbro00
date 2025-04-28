@@ -9,7 +9,9 @@ import { fetchPostById, displayPost } from './src/js/router/views/post.js';
 import { fetchProfileByName } from './src/js/ui/profile/profile.js';
 import { displayUserPosts } from './src/js/router/views/profile.js';
 import { fetchUserPostsByName } from './src/js/ui/profile/profile.js';
+import { followUser, checkIfFollowing, unfollowUser } from './src/js/api/profile/follow.js';
 
+// Initialize side menu and forms
 initSideMenu();
 initLoginForm();
 initRegisterForm();
@@ -42,33 +44,59 @@ if (logoutButton) {
 }
 
 if (username) {
-    // Fetch the profile by username
     const profile = await fetchProfileByName(username);
 
     if (profile) {
-        console.log(profile);  // Log the profile data to ensure it's correct
-
         const profileNameElement = document.getElementById("profileName");
         const profileBioElement = document.getElementById("profileBio");
 
-        if (profileNameElement) {
-            profileNameElement.innerText = profile.name || "Unknown User";
-        } else {
-            console.error("Element with ID 'profileName' not found.");
+        if (profileNameElement) profileNameElement.innerText = profile.name || "Unknown User";
+        if (profileBioElement) profileBioElement.innerText = profile.bio || "No bio available";
+
+        const followButton = document.getElementById('followButton');
+        if (followButton) {
+            try {
+                const isFollowing = await checkIfFollowing(username);
+                updateFollowButton(followButton, isFollowing);
+                
+                followButton.addEventListener('click', async () => {
+                    try {
+                        followButton.disabled = true;
+                        
+                        if (followButton.classList.contains('following')) {
+                            await unfollowUser(username);
+                            updateFollowButton(followButton, false);
+                            alert(`You have unfollowed ${username}`);
+                        } else {
+                            await followUser(username);
+                            updateFollowButton(followButton, true);
+                            alert(`You are now following ${username}`);
+                        }
+                    } catch (error) {
+                        console.error("Error:", error);
+                        alert(error.message);
+                        const currentStatus = await checkIfFollowing(username);
+                        updateFollowButton(followButton, currentStatus);
+                    }
+                });
+            } catch (error) {
+                console.error("Error checking follow status:", error);
+                followButton.style.display = 'none';
+            }
         }
 
-        if (profileBioElement) {
-            profileBioElement.innerText = profile.bio || "No bio available";
-        } else {
-            console.error("Element with ID 'profileBio' not found.");
-        }
-
-        // Fetch and display user posts
         const userPosts = await fetchUserPostsByName(username);
         displayUserPosts(userPosts);
-    } else {
-        console.error("Profile not found or failed to fetch.");
     }
-} else {
-    console.error("No username found in URL.");
+}
+
+function updateFollowButton(button, isFollowing) {
+    button.disabled = false;
+    if (isFollowing) {
+        button.textContent = "Following";
+        button.classList.add('following');
+    } else {
+        button.textContent = "Follow";
+        button.classList.remove('following');
+    }
 }

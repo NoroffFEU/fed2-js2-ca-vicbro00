@@ -1,5 +1,4 @@
 import { API_BASE, API_KEY, JWT_TOKEN } from '../../api/constants.js';
-import { createPostHTML } from '../../ui/post/display.js';
 
 export async function fetchUserPostsByName(name) {
     const url = `${API_BASE}/social/profiles/${name}/posts`;
@@ -30,14 +29,10 @@ export function displayUserPosts(posts) {
 }
 
 function createUserPostHTML(post) {
-    const { id, media, title, body, tags } = post;
-    const postUrl = `/post/individual-post.html?id=${id}`;
+    const { media, title, body, tags } = post;
 
     const imageUrl = media?.url;
     const imageAlt = media?.alt || 'Post Image';
-
-    // Get username from URL for consistent profile linking
-    const urlParams = new URLSearchParams(window.location.search);
 
     return `
     <div class="post">
