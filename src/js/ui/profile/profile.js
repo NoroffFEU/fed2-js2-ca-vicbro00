@@ -19,7 +19,7 @@ export async function fetchAllProfiles() {
 }
 
 export async function fetchProfileByName(name) {
-    const url = `${API_BASE}/social/profiles/${name}`;
+    const url = `${API_BASE}/social/profiles/${name}?_count=true&_followers=true`;
     const headers = {
         "X-Noroff-API-Key": API_KEY,
         "Authorization": `Bearer ${JWT_TOKEN}`
@@ -83,9 +83,52 @@ import { initializeFollowButton } from "../../router/views/follow.js";
  * @param {string} username - The username to display.
  */
 export async function displayUserProfile(username) {
-    const userData = await fetchUserData(username);
-    document.getElementById('profileUsername').textContent = userData.username;
-    document.getElementById('profileImage').src = userData.profileImage;
+    try {
+        const userData = await getUserData(username);
+        const followersCount = userData._count.followers;
 
-    initializeFollowButton(username);
+        document.getElementById('profileUsername').textContent = userData.username;
+        document.getElementById('profileImage').src = userData.profileImage;
+        document.getElementById('profileFollowersCount').textContent = `${followersCount} Followers`;
+
+        initializeFollowButton(username);
+    } catch (error) {
+        console.error("Error displaying user profile:", error);
+    }
+}
+
+/**
+ * Displays the followers list for a profile
+ * @param {Array} followers - Array of follower objects
+ */
+export function displayFollowers(followers) {
+    const followersContainer = document.getElementById('followersContainer');
+    if (!followersContainer) return;
+
+    followersContainer.innerHTML = '';
+
+    if (!followers || followers.length === 0) {
+        followersContainer.innerHTML = '<p>No followers yet</p>';
+        return;
+    }
+
+    const followersList = document.createElement('div');
+    followersList.className = 'followers-list';
+
+    followers.forEach(follower => {
+        const followerElement = document.createElement('div');
+        followerElement.className = 'follower-item';
+        followerElement.innerHTML = `
+            <img src="${follower.avatar?.url || 'default-avatar.jpg'}" 
+                 alt="${follower.avatar?.alt || follower.name}" 
+                 class="follower-avatar">
+            <div class="follower-info">
+                <h4>${follower.name}</h4>
+                <p>${follower.bio || 'No bio available'}</p>
+            </div>
+        `;
+        followersList.appendChild(followerElement);
+    });
+
+    followersContainer.appendChild(followersList);
 }

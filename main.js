@@ -53,6 +53,18 @@ if (username) {
         if (profileNameElement) profileNameElement.innerText = profile.name || "Unknown User";
         if (profileBioElement) profileBioElement.innerText = profile.bio || "No bio available";
 
+        const profileImageElement = document.getElementById("profileImage");
+        if (profileImageElement && profile.avatar) {
+            profileImageElement.src = profile.avatar.url || '';
+            profileImageElement.alt = profile.avatar.alt || 'Profile Image';
+        }
+
+        const profileFollowerCountElement = document.getElementById("profileFollowerCount");
+        if (profileFollowerCountElement) {
+            let followerCount = profile._count.followers;
+            profileFollowerCountElement.innerText = `${followerCount} Followers`;
+        }
+
         const followButton = document.getElementById('followButton');
         if (followButton) {
             try {
@@ -72,6 +84,13 @@ if (username) {
                             updateFollowButton(followButton, true);
                             alert(`You are now following ${username}`);
                         }
+
+                        const updatedProfile = await fetchProfileByName(username);
+                        if (updatedProfile && profileFollowerCountElement) {
+                            const updatedFollowerCount = updatedProfile._count.followers;
+                            profileFollowerCountElement.innerText = `${updatedFollowerCount} Followers`;
+                        }
+
                     } catch (error) {
                         console.error("Error:", error);
                         alert(error.message);
@@ -89,6 +108,7 @@ if (username) {
         displayUserPosts(userPosts);
     }
 }
+
 
 function updateFollowButton(button, isFollowing) {
     button.disabled = false;

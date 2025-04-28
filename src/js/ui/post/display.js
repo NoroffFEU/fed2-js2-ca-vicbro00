@@ -10,9 +10,8 @@ export function displayPosts(posts) {
 
 // Feed page link to individual post
 export function createPostHTML(post) {
-    // Only run this on feed.html
     if (!window.location.pathname.endsWith('/feed.html')) {
-        return ''; // Return empty string if not on feed.html
+        return '';
     }
     
     const { id, media, author, created, title, body, tags } = post;
@@ -24,7 +23,6 @@ export function createPostHTML(post) {
     const authorName = author?.name || "Unknown";
     const dateString = new Date(created).toLocaleString();
 
-    // Just use the username in the profile URL (simpler and avoids extra API calls)
     const profileUrl = `/auth/profile.html?username=${encodeURIComponent(authorName)}`;
 
     return `
