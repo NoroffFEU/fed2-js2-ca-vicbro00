@@ -26,7 +26,18 @@
     </header>
     <main>
         <h2>Feed</h2>
-        <input type="search" placeholder="Search..." class="secondary-button">
+        <form id="profileSearchForm" class="search-form">
+            <input 
+                type="search" 
+                id="profileSearchInput" 
+                placeholder="Search profiles..." 
+                class="secondary-button"
+                aria-label="Search for profiles"
+            >
+        </form>
+        <section class="profile-search-section">
+            <div id="searchResultsContainer" class="search-results"></div>
+        </section>
         <div class="feed-container" id="feedContainer"></div>
     </main>
     <footer>

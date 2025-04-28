@@ -10,11 +10,13 @@ import { fetchProfileByName } from './src/js/ui/profile/profile.js';
 import { displayUserPosts } from './src/js/router/views/profile.js';
 import { fetchUserPostsByName } from './src/js/ui/profile/profile.js';
 import { followUser, checkIfFollowing, unfollowUser } from './src/js/api/profile/follow.js';
+import { setupProfileSearch } from './src/js/router/views/profileSearch.js';
 
 // Initialize side menu and forms
 initSideMenu();
 initLoginForm();
 initRegisterForm();
+setupProfileSearch();
 
 // Fetch and display posts
 const posts = await fetchPostsWithAuthors();
