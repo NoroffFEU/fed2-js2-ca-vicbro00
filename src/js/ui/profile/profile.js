@@ -75,3 +75,17 @@ export async function fetchUserPostsByName(name) {
         return [];
     }
 }
+
+import { initializeFollowButton } from "../../router/views/follow.js";
+
+/**
+ * Renders the user profile and initializes the follow button.
+ * @param {string} username - The username to display.
+ */
+export async function displayUserProfile(username) {
+    const userData = await fetchUserData(username);
+    document.getElementById('profileUsername').textContent = userData.username;
+    document.getElementById('profileImage').src = userData.profileImage;
+
+    initializeFollowButton(username);
+}

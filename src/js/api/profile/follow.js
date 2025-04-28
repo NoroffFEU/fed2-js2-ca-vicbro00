@@ -1,34 +1,5 @@
 import { API_BASE } from "../constants";
 
-export async function checkIfFollowing(username) {
-    const token = localStorage.getItem('JWT_TOKEN');
-    if (!token) return false;
-
-    const followingList = JSON.parse(localStorage.getItem('followingList')) || [];
-    if (followingList.includes(username)) {
-        return true;
-    }
-
-    try {
-        const response = await fetch(`${API_BASE}/social/profiles/${username}`, {
-            headers: {
-                "X-Noroff-API-Key": import.meta.env.VITE_API_KEY || "b3c2f687-f212-4a96-a8bd-06309ffbc1bb",
-                "Authorization": `Bearer ${token}`,
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error("Failed to check follow status");
-        }
-
-        const profile = await response.json();
-        return profile.following || false;
-    } catch (error) {
-        console.error("Error checking follow status:", error);
-        throw error;
-    }
-}
-
 /**
  * Follows a user by sending a PUT request to the follow endpoint.
  * @param {string} username - The username of the user to follow.
@@ -67,6 +38,10 @@ export async function followUser(username) {
     }
 }
 
+/**
+ * Unfollows a user by sending a PUT request to the unfollow endpoint.
+ * @param {string} username - The username of the user to unfollow.
+ */
 export async function unfollowUser(username) {
     const token = localStorage.getItem('JWT_TOKEN');
     if (!token) throw new Error("You need to be logged in to unfollow users");
@@ -95,6 +70,40 @@ export async function unfollowUser(username) {
         return result;
     } catch (error) {
         console.error("Unfollow error:", error);
+        throw error;
+    }
+}
+
+/**
+ * Checks if the user is following a specific profile.
+ * @param {string} username - The username of the user to check.
+ * @returns {boolean} - True if following, false otherwise.
+ */
+export async function checkIfFollowing(username) {
+    const token = localStorage.getItem('JWT_TOKEN');
+    if (!token) return false;
+
+    const followingList = JSON.parse(localStorage.getItem('followingList')) || [];
+    if (followingList.includes(username)) {
+        return true;
+    }
+
+    try {
+        const response = await fetch(`${API_BASE}/social/profiles/${username}`, {
+            headers: {
+                "X-Noroff-API-Key": import.meta.env.VITE_API_KEY || "b3c2f687-f212-4a96-a8bd-06309ffbc1bb",
+                "Authorization": `Bearer ${token}`,
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error("Failed to check follow status");
+        }
+
+        const profile = await response.json();
+        return profile.following || false;
+    } catch (error) {
+        console.error("Error checking follow status:", error);
         throw error;
     }
 }
