@@ -1,3 +1,5 @@
+import { profileLink } from '../../ui/profile/loggedInProfile.js';
+
 let currentSideMenu = null;
 
 export function createSideMenu() {
@@ -9,7 +11,7 @@ export function createSideMenu() {
     const token = localStorage.getItem('JWT_TOKEN');
     const isLoggedIn = !!username;
 
-    console.log('Is Logged In:', isLoggedIn ? 'Yes' : 'No');  // Debug log
+    console.log('Is Logged In:', isLoggedIn ? 'Yes' : 'No');
 
     // Create menu element
     const sideMenu = document.createElement('div');
@@ -21,9 +23,7 @@ export function createSideMenu() {
         <a href="/index.html">Home</a>
         <a href="/post/feed.html">Feed</a>
         ${isLoggedIn ? `
-            <a href="/auth/profile.html">Profile</a>
             <a href="/post/create/index.html">Create post</a>
-            <p>Logged in as: <strong>${username}</strong></p>
             <button id="logoutButton" class="secondary-button">Sign out</button>
         ` : `
             <a href="/auth/register/index.html">Register new user</a>
@@ -32,9 +32,17 @@ export function createSideMenu() {
         `}
     `;
 
+    // Append the profile link if the user is logged in
+    if (isLoggedIn) {
+        const profileLinkElement = profileLink(username);
+        profileLinkElement.textContent = `Logged in as: ${username}`;
+        profileLinkElement.style.display = 'block';
+        sideMenu.insertBefore(profileLinkElement, document.getElementById('logoutButton'));
+    }
+
     document.body.appendChild(sideMenu);
     currentSideMenu = sideMenu;
-    
+
     setupMenuInteractions();
     return sideMenu;
 }
@@ -42,7 +50,7 @@ export function createSideMenu() {
 function setupMenuInteractions() {
     const hamburgerIcon = document.getElementById('hamburgerIcon');
     const sideMenu = document.getElementById('sideMenu');
-    
+
     if (!hamburgerIcon || !sideMenu) return;
 
     // Toggle menu visibility
@@ -67,13 +75,13 @@ function handleLogout() {
     localStorage.removeItem('JWT_TOKEN');
     localStorage.removeItem('userName');
     localStorage.removeItem('userEmail');
-    
+
     // Refresh side menu (this will reset the UI state)
     createSideMenu();
-    
+
     // Ensure that the side menu closes
     document.getElementById('sideMenu').style.left = '-250px';
-    
+
     // Redirect to the home page
     window.location.href = '/index.html';
 }
