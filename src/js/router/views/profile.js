@@ -26,6 +26,22 @@ export function displayUserPosts(posts) {
     container.innerHTML = posts.length > 0 
         ? posts.map(post => createUserPostHTML(post)).join('')
         : '<p>This user has no posts yet.</p>';
+
+    setupEditButtons();
+}
+
+
+function setupEditButtons() {
+    const editButtons = document.querySelectorAll('.edit-button');
+
+    editButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            const postId = event.target.dataset.id;
+            if (postId) {
+                window.location.href = `/post/edit/index.html?id=${postId}`;
+            }
+        });
+    });
 }
 
 function createUserPostHTML(post) {
@@ -41,6 +57,10 @@ function createUserPostHTML(post) {
             ${imageUrl ? `<img src="${imageUrl}" alt="${imageAlt}" class="post-image">` : ''}
         <p>${body}</p>
         </div>
+        <div class="post-buttons">
+                <button class="edit-button" data-id="${post.id}">Edit</button>
+                <button class="delete-button" data-id="${post.id}">Delete</button>
+            </div>
         <div class="post-footer">
             <div class="post-tags">Tags: ${tags?.join(", ") || 'No tags'}</div>
         </div>

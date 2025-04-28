@@ -24,7 +24,28 @@
             <i class="fa-solid fa-user"></i>
         </nav>
     </header>
-    <main></main>
+    <main>
+        <form id="editPostForm">
+            <label>
+                Title:
+                <input type="text" id="title" name="title" required />
+            </label>
+            <label>
+                Body:
+                <textarea id="body" name="body" required></textarea>
+            </label>
+            <label>
+                Tags (comma separated):
+                <input type="text" id="tags" name="tags" />
+            </label>
+            <label>
+                Media URL:
+                <input type="text" id="media" name="media" />
+            </label>
+            <button type="submit">Update Post</button>
+        </form>
+        
+    </main>
     <footer>
         <div>
             <div class="border"></div>

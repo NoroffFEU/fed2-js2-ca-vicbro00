@@ -11,12 +11,17 @@ import { displayUserPosts } from './src/js/router/views/profile.js';
 import { fetchUserPostsByName } from './src/js/ui/profile/profile.js';
 import { followUser, checkIfFollowing, unfollowUser } from './src/js/api/profile/follow.js';
 import { setupProfileSearch } from './src/js/router/views/profileSearch.js';
+import { initEditPostPage } from './src/js/ui/profile/update.js';
 
 // Initialize side menu and forms
 initSideMenu();
 initLoginForm();
 initRegisterForm();
 setupProfileSearch();
+
+if (window.location.pathname.includes('/post/edit/')) {
+    initEditPostPage();
+}
 
 // Fetch and display posts
 const posts = await fetchPostsWithAuthors();
