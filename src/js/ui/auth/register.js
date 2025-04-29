@@ -23,7 +23,7 @@ export function initRegisterForm() {
 
         showMessage('Registration successful! Redirecting to login...', 'success');
         setTimeout(() => {
-          window.location.href = '/auth/login/index.html';
+          window.location.href = '/fed2-js2-ca-vicbro00/auth/login/index.html';
         }, 2000);
       } catch (error) {
         showMessage(error.message, 'error');

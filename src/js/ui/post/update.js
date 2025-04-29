@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     if (!postId) {
         alert('No post specified for editing');
-        window.location.href = '/index.html';
+        window.location.href = '/fed2-js2-ca-vicbro00/index.html';
         return;
     }
 
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch (error) {
         console.error('Error loading post for editing:', error);
         alert('Error: ' + error.message);
-        window.location.href = '/index.html';
+        window.location.href = '/fed2-js2-ca-vicbro00/index.html';
     }
 });
 

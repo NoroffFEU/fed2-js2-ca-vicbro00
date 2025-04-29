@@ -14,5 +14,5 @@ export function initLogout() {
 
     // Update UI and redirect
     refreshSideMenu();
-    window.location.href = '/index.html';
+    window.location.href = '/fed2-js2-ca-vicbro00/index.html';
 }

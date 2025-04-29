@@ -55,7 +55,7 @@ const logoutButton = document.getElementById('logoutButton');
 if (logoutButton) {
     logoutButton.addEventListener('click', () => {
         [JWT_TOKEN, 'userName', 'userEmail'].forEach(key => localStorage.removeItem(key));
-        window.location.href = 'index.html';
+        window.location.href = '/fed2-js2-ca-vicbro00/index.html';
     });
 }
 

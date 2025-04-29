@@ -29,7 +29,7 @@ async function handleLoginSubmit(e) {
         }
         
         showSuccess(messageDiv, userData.name);
-        setTimeout(() => window.location.href = '/index.html', 2000);
+        setTimeout(() => window.location.href = '/fed2-js2-ca-vicbro00/index.html', 2000);
         
     } catch (error) {
         handleLoginError(error, messageDiv, email);

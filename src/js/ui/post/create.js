@@ -3,7 +3,7 @@ import { authGuard } from '../../utilities/authGuard.js';
 
 document.addEventListener("DOMContentLoaded", () => {
     // Authguard on create page
-    if (window.location.pathname.includes('/post/create/index.html')) {
+    if (window.location.pathname.includes('/fed2-js2-ca-vicbro00/post/create/index.html')) {
         authGuard();
     }
 });

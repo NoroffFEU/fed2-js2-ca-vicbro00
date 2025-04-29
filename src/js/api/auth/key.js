@@ -17,7 +17,7 @@ export function authGuard() {
     const isLoggedIn = checkLoginState();
 
     if (!isLoggedIn) {
-        window.location.href = '/auth/login/index.html';
+        window.location.href = '/fed2-js2-ca-vicbro00/auth/login/index.html';
     }
 }
 

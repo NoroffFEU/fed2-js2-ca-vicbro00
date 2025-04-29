@@ -40,7 +40,7 @@ function setupEditButtons() {
         button.addEventListener('click', (event) => {
             const postId = event.target.dataset.id;
             if (postId) {
-                window.location.href = `/post/edit/index.html?id=${postId}`;
+                window.location.href = `/fed2-js2-ca-vicbro00/post/edit/index.html?id=${postId}`;
             }
         });
     });
