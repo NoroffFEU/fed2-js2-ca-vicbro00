@@ -14,6 +14,11 @@ import { setupProfileSearch } from './src/js/router/views/profileSearch.js';
 import { initEditPostPage } from './src/js/ui/profile/update.js';
 import { initPostSearch } from './src/js/ui/post/search.js';
 import { filterPosts } from './src/js/ui/post/filter.js';
+import { fetchAndDisplayPosts } from './src/js/ui/post/display.js';
+
+if (window.location.pathname.endsWith('/feed.html')) {
+    fetchAndDisplayPosts();
+}
 
 // Initialize side menu and forms
 initSideMenu();

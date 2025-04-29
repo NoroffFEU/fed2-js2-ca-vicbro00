@@ -1,11 +1,39 @@
+import { fetchPostsWithAuthors } from "../../api/post/display";
+
+let displayedPostsCount = 20;
+let allPosts = [];
+
 export function displayPosts(posts) {
     const feedContainer = document.getElementById("feedContainer");
     
     if (!feedContainer) return;
+
+    const postsToDisplay = posts.slice(0, displayedPostsCount);
     
-    feedContainer.innerHTML = posts.length
-        ? posts.map(createPostHTML).join("")
+    feedContainer.innerHTML = postsToDisplay.length
+        ? postsToDisplay.map(createPostHTML).join("")
         : "<p>No posts available.</p>";
+
+    if (posts.length > displayedPostsCount) {
+        const loadMoreButton = document.getElementById("loadMoreButton");
+        if (!loadMoreButton) {
+            const button = document.createElement("button");
+            button.id = "loadMoreButton";
+            button.textContent = "Load More";
+            button.addEventListener("click", loadMorePosts);
+            feedContainer.appendChild(button);
+        }
+    }
+}
+
+function loadMorePosts() {
+    displayedPostsCount += 20;
+    displayPosts(allPosts);
+}
+
+export async function fetchAndDisplayPosts() {
+    allPosts = await fetchPostsWithAuthors();
+    displayPosts(allPosts);
 }
 
 // Feed page link to individual post
