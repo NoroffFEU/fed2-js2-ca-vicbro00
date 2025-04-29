@@ -1,20 +1,20 @@
-import { initLoginForm } from './src/js/ui/auth/login.js';
-import { initSideMenu } from './src/js/ui/components/sideMenu.js';
-import { initRegisterForm } from './src/js/ui/auth/register.js';
-import { JWT_TOKEN } from './src/js/api/constants.js';
-import { displayPosts } from './src/js/ui/post/display.js';
-import { initPostCreateView } from './src/js/router/views/postCreate.js';
-import { fetchPostsWithAuthors } from './src/js/api/post/display.js';
-import { fetchPostById, displayPost } from './src/js/router/views/post.js';
-import { fetchProfileByName } from './src/js/ui/profile/profile.js';
-import { displayUserPosts } from './src/js/router/views/profile.js';
-import { fetchUserPostsByName } from './src/js/ui/profile/profile.js';
-import { followUser, checkIfFollowing, unfollowUser } from './src/js/api/profile/follow.js';
-import { setupProfileSearch } from './src/js/router/views/profileSearch.js';
-import { initEditPostPage } from './src/js/ui/profile/update.js';
-import { initPostSearch } from './src/js/ui/post/search.js';
-import { filterPosts } from './src/js/ui/post/filter.js';
-import { fetchAndDisplayPosts } from './src/js/ui/post/display.js';
+import { initLoginForm } from '/src/js/ui/auth/login.js';
+import { initSideMenu } from '/src/js/ui/components/sideMenu.js';
+import { initRegisterForm } from '/src/js/ui/auth/register.js';
+import { JWT_TOKEN } from '/src/js/api/constants.js';
+import { displayPosts } from '/src/js/ui/post/display.js';
+import { initPostCreateView } from '/src/js/router/views/postCreate.js';
+import { fetchPostsWithAuthors } from '/src/js/api/post/display.js';
+import { fetchPostById, displayPost } from '/src/js/router/views/post.js';
+import { fetchProfileByName } from '/src/js/ui/profile/profile.js';
+import { displayUserPosts } from '/src/js/router/views/profile.js';
+import { fetchUserPostsByName } from '/src/js/ui/profile/profile.js';
+import { followUser, checkIfFollowing, unfollowUser } from '/src/js/api/profile/follow.js';
+import { setupProfileSearch } from '/src/js/router/views/profileSearch.js';
+import { initEditPostPage } from '/src/js/ui/profile/update.js';
+import { initPostSearch } from '/src/js/ui/post/search.js';
+import { filterPosts } from '/src/js/ui/post/filter.js';
+import { fetchAndDisplayPosts } from '/src/js/ui/post/display.js';
 
 if (window.location.pathname.endsWith('/feed.html')) {
     fetchAndDisplayPosts();
@@ -55,7 +55,7 @@ const logoutButton = document.getElementById('logoutButton');
 if (logoutButton) {
     logoutButton.addEventListener('click', () => {
         [JWT_TOKEN, 'userName', 'userEmail'].forEach(key => localStorage.removeItem(key));
-        window.location.href = '/fed2-js2-ca-vicbro00/index.html';
+        window.location.href = 'index.html';
     });
 }
 
