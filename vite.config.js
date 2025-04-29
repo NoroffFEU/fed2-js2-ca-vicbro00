@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import path from 'path';
 
 export default defineConfig({
-  base: '/',
+  base: '/fed2-js2-ca-vicbro00/',
 
   server: {
     port: 3000,
