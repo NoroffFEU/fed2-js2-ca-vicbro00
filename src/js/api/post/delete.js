@@ -26,7 +26,6 @@ export async function deletePost(postId) {
     }
 }
 
-
 export function setupDeleteButtons() {
     const deleteButtons = document.querySelectorAll('.delete-button');
 

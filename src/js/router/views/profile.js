@@ -1,5 +1,5 @@
 import { API_BASE, API_KEY, JWT_TOKEN } from '../../api/constants.js';
-import { deletePost, setupDeleteButtons } from '../../api/post/delete.js';
+import { setupDeleteButtons } from '../../api/post/delete.js';
 
 export async function fetchUserPostsByName(name) {
     const url = `${API_BASE}/social/profiles/${name}/posts`;
@@ -25,7 +25,7 @@ export function displayUserPosts(posts) {
     if (!container) return;
 
     container.innerHTML = posts.length > 0 
-        ? posts.map(post => createUserPostHTML(post)).join('')
+        ? posts.map(post => createUserPostHTML(post, true)).join('')
         : '<p>This user has no posts yet.</p>';
 
     setupEditButtons();
@@ -46,7 +46,7 @@ function setupEditButtons() {
     });
 }
 
-function createUserPostHTML(post) {
+function createUserPostHTML(post, showButtons = false) {
     const { media, title, body, tags } = post;
 
     const imageUrl = media?.url;
@@ -57,12 +57,13 @@ function createUserPostHTML(post) {
         <div class="post-content">
             <h2>${title}</h2>
             ${imageUrl ? `<img src="${imageUrl}" alt="${imageAlt}" class="post-image">` : ''}
-        <p>${body}</p>
+            <p>${body}</p>
         </div>
+        ${showButtons ? `
         <div class="post-buttons">
-                <button class="edit-button" data-id="${post.id}">Edit</button>
-                <button class="delete-button" data-id="${post.id}">Delete</button>
-            </div>
+            <button class="edit-button" data-id="${post.id}">Edit</button>
+            <button class="delete-button" data-id="${post.id}">Delete</button>
+        </div>` : ''}
         <div class="post-footer">
             <div class="post-tags">Tags: ${tags?.join(", ") || 'No tags'}</div>
         </div>
