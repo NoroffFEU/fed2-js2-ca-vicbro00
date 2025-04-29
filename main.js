@@ -4,7 +4,7 @@ import { initRegisterForm } from './src/js/ui/auth/register.js';
 import { JWT_TOKEN } from './src/js/api/constants.js';
 import { displayPosts } from './src/js/ui/post/display.js';
 import { initPostCreateView } from './src/js/router/views/postCreate.js';
-import { fetchPostsWithAuthors } from './src/js/api/post/display.js';
+import { fetchPostsWithAuthors } from '/fed2-js2-ca-vicbro00/src/js/api/post/display.js';
 import { fetchPostById, displayPost } from './src/js/router/views/post.js';
 import { fetchProfileByName } from './src/js/ui/profile/profile.js';
 import { displayUserPosts } from './src/js/router/views/profile.js';
