@@ -1,4 +1,4 @@
-import { API_BASE, API_KEY, JWT_TOKEN } from "../../api/constants";
+import { API_BASE, API_KEY, JWT_TOKEN } from "../../api/constants.js";
 
 export async function searchProfilesAPI(query) {
     if (!JWT_TOKEN) {

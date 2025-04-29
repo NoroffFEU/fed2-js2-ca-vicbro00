@@ -1,4 +1,4 @@
-import { API_BASE } from "../constants";
+import { API_BASE } from "../constants.js";
 
 /**
  * Follows a user by sending a PUT request to the follow endpoint.

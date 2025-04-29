@@ -1,4 +1,4 @@
-import { API_BASE, API_KEY } from "../constants";
+import { API_BASE, API_KEY } from "../constants.js";
 
 export async function deletePost(postId) {
     const token = localStorage.getItem('JWT_TOKEN');
