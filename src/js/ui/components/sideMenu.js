@@ -20,15 +20,15 @@ export function createSideMenu() {
 
     // Menu content
     sideMenu.innerHTML = `
-        <a href="/index.html">Home</a>
-        <a href="/post/feed.html">Feed</a>
+        <a href="/fed2-js2-ca-vicbro00/index.html">Home</a>
+        <a href="/fed2-js2-ca-vicbro00/post/feed.html">Feed</a>
         ${isLoggedIn ? `
-            <a href="/post/create/index.html">Create post</a>
+            <a href="/fed2-js2-ca-vicbro00/post/create/index.html">Create post</a>
             <button id="logoutButton" class="secondary-button">Sign out</button>
         ` : `
-            <a href="/auth/register/index.html">Register new user</a>
+            <a href="/fed2-js2-ca-vicbro00/auth/register/index.html">Register new user</a>
             <p>User not logged in</p>
-            <a href="/auth/login/index.html"><button id="loginButton" class="secondary-button">Sign in</button></a>
+            <a href="/fed2-js2-ca-vicbro00/auth/login/index.html"><button id="loginButton" class="secondary-button">Sign in</button></a>
         `}
     `;
 
@@ -83,7 +83,7 @@ function handleLogout() {
     document.getElementById('sideMenu').style.left = '-250px';
 
     // Redirect to the home page
-    window.location.href = '/index.html';
+    window.location.href = '/fed2-js2-ca-vicbro00/index.html';
 }
 
 export const initSideMenu = createSideMenu;
