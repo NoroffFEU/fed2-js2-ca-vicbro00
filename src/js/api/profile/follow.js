@@ -91,7 +91,7 @@ export async function checkIfFollowing(username) {
     try {
         const response = await fetch(`${API_BASE}/social/profiles/${username}`, {
             headers: {
-                "X-Noroff-API-Key": import.meta.env.VITE_API_KEY || "b3c2f687-f212-4a96-a8bd-06309ffbc1bb",
+                "X-Noroff-API-Key": "b3c2f687-f212-4a96-a8bd-06309ffbc1bb",
                 "Authorization": `Bearer ${token}`,
             }
         });
