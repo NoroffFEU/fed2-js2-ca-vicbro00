@@ -17,9 +17,10 @@ import { filterPosts } from '/fed2-js2-ca-vicbro00/src/js/ui/post/filter.js';
 import { fetchAndDisplayPosts } from '/fed2-js2-ca-vicbro00/src/js/ui/post/display.js';
 import router from '/fed2-js2-ca-vicbro00/src/js/router/index.js';
 
-document.addEventListener('DOMContentLoaded', () => {
-  router();
-});
+document.addEventListener('DOMContentLoaded', () => {    
+    // Handle routing
+    router();
+  });
 
 if (window.location.pathname.endsWith('/feed.html')) {
     fetchAndDisplayPosts();
