@@ -16,13 +16,17 @@ export default async function router() {
       break;
 
     case 'feed.html':
-      const { fetchPostsWithAuthors, displayPosts, initPostSearch, filterPosts } = 
-        await import('/fed2-js2-ca-vicbro00/src/js/ui/post/display.js');
+      try {
+        const { fetchPostsWithAuthors, displayPosts, initPostSearch, filterPosts } =
+          await import('/fed2-js2-ca-vicbro00/src/js/ui/post/display.js');
       
-      const posts = await fetchPostsWithAuthors();
-      displayPosts(posts);
-      initPostSearch(posts);
-      filterPosts(posts);
+        const posts = await fetchPostsWithAuthors();
+        displayPosts(posts);
+        initPostSearch(posts);
+        filterPosts(posts);
+      } catch (error) {
+        console.error('Error loading or executing feed page logic:', error);
+      }
       break;
 
     case 'create.html':
