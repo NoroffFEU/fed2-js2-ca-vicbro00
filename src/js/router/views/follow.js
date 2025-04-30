@@ -1,4 +1,4 @@
-import { followUser, unfollowUser, checkIfFollowing } from "../../api/profile/follow.js";
+import { followUser, unfollowUser, checkIfFollowing } from '../../api/profile/follow.js';
 
 /**
  * Initializes the follow/unfollow button on the profile page.

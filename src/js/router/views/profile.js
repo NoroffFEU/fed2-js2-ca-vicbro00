@@ -4,17 +4,17 @@ import { setupDeleteButtons } from '../../api/post/delete.js';
 export async function fetchUserPostsByName(name) {
     const url = `${API_BASE}/social/profiles/${name}/posts`;
     const headers = {
-        "X-Noroff-API-Key": API_KEY,
-        "Authorization": `Bearer ${JWT_TOKEN}`
+        'X-Noroff-API-Key': API_KEY,
+        'Authorization': `Bearer ${JWT_TOKEN}`
     };
 
     try {
         const response = await fetch(url, { headers });
-        if (!response.ok) throw new Error("Failed to fetch user posts");
+        if (!response.ok) throw new Error('Failed to fetch user posts');
         const result = await response.json();
         return result.data;
     } catch (error) {
-        console.error("Error fetching user posts:", error);
+        console.error('Error fetching user posts:', error);
         return [];
     }
 }
@@ -31,7 +31,6 @@ export function displayUserPosts(posts) {
     setupEditButtons();
     setupDeleteButtons();
 }
-
 
 function setupEditButtons() {
     const editButtons = document.querySelectorAll('.edit-button');
@@ -53,19 +52,19 @@ function createUserPostHTML(post, showButtons = false) {
     const imageAlt = media?.alt || 'Post Image';
 
     return `
-    <div class="post">
-        <div class="post-content">
+    <div class='post'>
+        <div class='post-content'>
             <h2>${title}</h2>
-            ${imageUrl ? `<img src="${imageUrl}" alt="${imageAlt}" class="post-image">` : ''}
+            ${imageUrl ? `<img src='${imageUrl}' alt='${imageAlt}' class='post-image'>` : ''}
             <p>${body}</p>
         </div>
         ${showButtons ? `
-        <div class="post-buttons">
-            <button class="edit-button" data-id="${post.id}">Edit</button>
-            <button class="delete-button" data-id="${post.id}">Delete</button>
+        <div class='post-buttons'>
+            <button class='edit-button' data-id='${post.id}'>Edit</button>
+            <button class='delete-button' data-id='${post.id}'>Delete</button>
         </div>` : ''}
-        <div class="post-footer">
-            <div class="post-tags">Tags: ${tags?.join(", ") || 'No tags'}</div>
+        <div class='post-footer'>
+            <div class='post-tags'>Tags: ${tags?.join(', ') || 'No tags'}</div>
         </div>
     </div>`;
 }

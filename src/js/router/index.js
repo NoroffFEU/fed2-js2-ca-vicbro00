@@ -3,46 +3,41 @@
 // You may change the behaviour or approach of this file if you choose
 export default async function router(pathname = window.location.pathname) {
   switch (pathname) {
-    case "/":
-      await import("./views/home.js");
+    case '/':
+    case '/index.html':
+      await import('../views/home.js');
       break;
-    case "/auth/":
-      await import("./views/auth.js");
+
+    case '/auth/login/index.html':
+      await import('../views/login.js');
       break;
-    case "/auth/login/":
-      await import("./views/login.js");
+
+    case '/auth/register/index.html':
+      await import('../views/register.js');
       break;
-    case "/auth/register/":
-      await import("./views/register.js");
+
+    case '/auth/profile.html':
+      await import('../views/profilePage.js');
       break;
-    case "/post/":
-      await import("./views/post.js");
+
+    case '/post/create/index.html':
+      await import('../views/postCreate.js');
       break;
-    case "/post/edit/":
-      await import("./views/postEdit.js");
+
+    case '/post/edit/index.html':
+      await import('../views/postEdit.js');
       break;
-    case "/post/create/":
-      await import("./views/postCreate.js");
+
+    case '/post/feed.html':
+      await import('../views/feed.js');
       break;
-    case "/profile/":
-      await import("./views/profile.js");
+
+    case '/post/individual-post.html':
+      await import('../views/individualPost.js');
       break;
-    case "/profile/settings/":
-      await import("./views/profileSettings.js");
-      break;
-    case "/feed/":
-      await import("./views/feed.js");
-      break;
-    case "/post/individual-post.html":
-      await import("./views/individualPost.js");
-      break;
-    case "/auth/profile.html":
-      await import("./views/profilePage.js");
-      break;
-    case "/auth/post.html":
-      await import("./views/userPosts.js");
-      break;
+
     default:
-      await import("./views/notFound.js");
+      console.warn('No route match found for', pathname);
+      break;
   }
 }

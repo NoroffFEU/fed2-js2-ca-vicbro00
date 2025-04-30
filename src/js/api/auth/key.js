@@ -1,4 +1,4 @@
-import { API_AUTH, JWT_TOKEN } from "../constants.js";
+import { API_AUTH, JWT_TOKEN } from '../constants.js';
 import { checkLoginState } from '../auth/auth.js';
 import { authGuard } from '../../utilities/authGuard.js';
 
@@ -8,7 +8,7 @@ export function initProtectedPage() {
     // Example API request for generating an API key
     getKey()
         .then((apiKeyData) => {
-            console.log("API Key Generated:", apiKeyData.key);
+            console.log('API Key Generated:', apiKeyData.key);
         })
         .catch(console.error);
 }
@@ -29,12 +29,12 @@ export function authGuard() {
 export async function getKey() {
   try {
     const response = await fetch(`${API_AUTH}/create-api-key`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-            "Authorization": `Bearer ${JWT_TOKEN}`,
-            "Content-Type": "application/json",
+            'Authorization': `Bearer ${JWT_TOKEN}`,
+            'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name: "LinkUpAPIKey" }),
+        body: JSON.stringify({ name: 'LinkUpAPIKey' }),
         });
 
         if (!response.ok) {
@@ -45,13 +45,13 @@ export async function getKey() {
         const { data } = await response.json();
         return data; 
     } catch (error) {
-        console.error("Error creating API key:", error);
+        console.error('Error creating API key:', error);
         throw error; 
     }
 }
 
 getKey()
     .then((apiKeyData) => {
-        console.log("API Key Generated:", apiKeyData.key);
+        console.log('API Key Generated:', apiKeyData.key);
     })
     .catch(console.error);

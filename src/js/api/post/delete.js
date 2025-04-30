@@ -1,4 +1,4 @@
-import { API_BASE, API_KEY } from "../constants.js";
+import { API_BASE, API_KEY } from '../constants.js';
 
 export async function deletePost(postId) {
     const token = localStorage.getItem('JWT_TOKEN');
@@ -8,14 +8,14 @@ export async function deletePost(postId) {
         const response = await fetch(url, {
             method: 'DELETE',
             headers: {
-                "X-Noroff-API-Key": API_KEY,
-                "Authorization": `Bearer ${token}`
+                'X-Noroff-API-Key': API_KEY,
+                'Authorization': `Bearer ${token}`
             }
         });
 
         if (!response.ok) {
             const error = await response.json();
-            throw new Error(error.message || "Failed to delete post");
+            throw new Error(error.message || 'Failed to delete post');
         }
 
         return true;

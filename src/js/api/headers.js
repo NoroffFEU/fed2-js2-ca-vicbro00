@@ -1,4 +1,4 @@
-import { API_KEY } from "./constants.js";
+import { API_KEY } from './constants.js';
 
 /**
  * Generates headers for API requests.
@@ -10,7 +10,7 @@ export function headers() {
     const headers = new Headers();
 
     if (API_KEY) {
-        headers.append("Authorization", `Bearer ${API_KEY}`);
+        headers.append('Authorization', `Bearer ${API_KEY}`);
     }
 
     return headers;

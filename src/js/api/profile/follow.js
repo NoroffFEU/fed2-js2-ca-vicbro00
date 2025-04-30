@@ -1,4 +1,4 @@
-import { API_BASE } from "../constants.js";
+import { API_BASE } from '../constants.js';
 
 /**
  * Follows a user by sending a PUT request to the follow endpoint.
@@ -6,21 +6,21 @@ import { API_BASE } from "../constants.js";
  */
 export async function followUser(username) {
     const token = localStorage.getItem('JWT_TOKEN');
-    if (!token) throw new Error("You need to be logged in to follow users");
+    if (!token) throw new Error('You need to be logged in to follow users');
 
     try {
         const response = await fetch(`${API_BASE}/social/profiles/${username}/follow`, {
             method: 'PUT',
             headers: {
-                "X-Noroff-API-Key": import.meta.env.VITE_API_KEY || "b3c2f687-f212-4a96-a8bd-06309ffbc1bb",
-                "Authorization": `Bearer ${token}`,
-                "Content-Type": "application/json"
+                'X-Noroff-API-Key': 'b3c2f687-f212-4a96-a8bd-06309ffbc1bb',
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
             }
         });
 
         if (!response.ok) {
             const error = await response.json();
-            throw new Error(error.message || "Failed to follow user");
+            throw new Error(error.message || 'Failed to follow user');
         }
 
         const result = await response.json();
@@ -33,7 +33,7 @@ export async function followUser(username) {
 
         return result;
     } catch (error) {
-        console.error("Follow error:", error);
+        console.error('Follow error:', error);
         throw error;
     }
 }
@@ -44,21 +44,21 @@ export async function followUser(username) {
  */
 export async function unfollowUser(username) {
     const token = localStorage.getItem('JWT_TOKEN');
-    if (!token) throw new Error("You need to be logged in to unfollow users");
+    if (!token) throw new Error('You need to be logged in to unfollow users');
 
     try {
         const response = await fetch(`${API_BASE}/social/profiles/${username}/unfollow`, {
             method: 'PUT',
             headers: {
-                "X-Noroff-API-Key": import.meta.env.VITE_API_KEY || "b3c2f687-f212-4a96-a8bd-06309ffbc1bb",
-                "Authorization": `Bearer ${token}`,
-                "Content-Type": "application/json"
+                'X-Noroff-API-Key': 'b3c2f687-f212-4a96-a8bd-06309ffbc1bb',
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
             }
         });
 
         if (!response.ok) {
             const error = await response.json();
-            throw new Error(error.message || "Failed to unfollow user");
+            throw new Error(error.message || 'Failed to unfollow user');
         }
 
         const result = await response.json();
@@ -69,7 +69,7 @@ export async function unfollowUser(username) {
 
         return result;
     } catch (error) {
-        console.error("Unfollow error:", error);
+        console.error('Unfollow error:', error);
         throw error;
     }
 }
@@ -91,19 +91,19 @@ export async function checkIfFollowing(username) {
     try {
         const response = await fetch(`${API_BASE}/social/profiles/${username}`, {
             headers: {
-                "X-Noroff-API-Key": "b3c2f687-f212-4a96-a8bd-06309ffbc1bb",
-                "Authorization": `Bearer ${token}`,
+                'X-Noroff-API-Key': 'b3c2f687-f212-4a96-a8bd-06309ffbc1bb',
+                'Authorization': `Bearer ${token}`,
             }
         });
 
         if (!response.ok) {
-            throw new Error("Failed to check follow status");
+            throw new Error('Failed to check follow status');
         }
 
         const profile = await response.json();
         return profile.following || false;
     } catch (error) {
-        console.error("Error checking follow status:", error);
+        console.error('Error checking follow status:', error);
         throw error;
     }
 }

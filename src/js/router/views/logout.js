@@ -6,5 +6,5 @@ import { initLogout } from '../../ui/auth/logout.js';
  */
 export async function logoutView() {
     await initLogout();
-    window.location.href = '/login.html';
+    window.location.href = '/fed2-js2-ca-vicbro00/login.html';
 }
