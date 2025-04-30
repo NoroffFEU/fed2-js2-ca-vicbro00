@@ -15,7 +15,7 @@ import { initEditPostPage } from '/fed2-js2-ca-vicbro00/src/js/ui/profile/update
 import { initPostSearch } from '/fed2-js2-ca-vicbro00/src/js/ui/post/search.js';
 import { filterPosts } from '/fed2-js2-ca-vicbro00/src/js/ui/post/filter.js';
 import { fetchAndDisplayPosts } from '/fed2-js2-ca-vicbro00/src/js/ui/post/display.js';
-import router from './src/js/router/index.js';
+import router from '/fed2-js2-ca-vicbro00/src/js/router/index.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   router();
