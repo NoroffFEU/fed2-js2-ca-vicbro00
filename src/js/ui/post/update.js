@@ -23,28 +23,30 @@ export async function initEditPostPage() {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-    const postId = new URLSearchParams(window.location.search).get('id');
+    if (window.location.pathname.includes('/post/edit/')) {
+        const postId = new URLSearchParams(window.location.search).get('id');
 
-    if (!postId) {
-        alert('No post specified for editing');
-        window.location.href = '/fed2-js2-ca-vicbro00/index.html';
-        return;
-    }
-
-    try {
-        const post = await fetchPostById(postId);
-
-        if (!post) {
-            throw new Error('Post not found');
+        if (!postId) {
+            alert('No post specified for editing');
+            window.location.href = '/fed2-js2-ca-vicbro00/index.html';
+            return;
         }
 
-        populateEditForm(post);
-        setupFormSubmission(postId);
+        try {
+            const post = await fetchPostById(postId);
 
-    } catch (error) {
-        console.error('Error loading post for editing:', error);
-        alert('Error: ' + error.message);
-        window.location.href = '/fed2-js2-ca-vicbro00/index.html';
+            if (!post) {
+                throw new Error('Post not found');
+            }
+
+            populateEditForm(post);
+            setupFormSubmission(postId);
+
+        } catch (error) {
+            console.error('Error loading post for editing:', error);
+            alert('Error: ' + error.message);
+            window.location.href = '/fed2-js2-ca-vicbro00/index.html';
+        }
     }
 });
 
