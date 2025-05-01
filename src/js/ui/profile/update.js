@@ -3,7 +3,7 @@ import { API_BASE, API_KEY } from '../../api/constants.js';
 export async function initEditPostPage() {
     const urlParams = new URLSearchParams(window.location.search);
     const postId = urlParams.get('id');
-    
+
     if (!postId) {
         console.error('No post ID found in URL');
         return;
@@ -16,11 +16,13 @@ export async function initEditPostPage() {
         }
 
         const currentUser = localStorage.getItem('userName');
-        if (post.author !== currentUser) {
-            const editButton = document.querySelectorAll('.edit-button');
-            if (editButton) {
-                editButton.style.display = 'none';
-            }
+        const isProfilePage = window.location.pathname.includes('profile.html');
+
+        if (post.author !== currentUser || isProfilePage) {
+            const editButtons = document.querySelectorAll('.edit-button');
+            editButtons.forEach(button => {
+                button.style.display = 'none';
+            });
         }
 
         populateEditForm(post);
