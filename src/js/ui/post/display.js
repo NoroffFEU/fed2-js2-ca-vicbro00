@@ -3,23 +3,34 @@ let allPosts = [];
 
 export function displayPosts(posts) {
     const feedContainer = document.getElementById("feedContainer");
-    
     if (!feedContainer) return;
 
-    const postsToDisplay = posts.slice(0, displayedPostsCount);
-    
-    feedContainer.innerHTML = postsToDisplay.length
-        ? postsToDisplay.map(createPostHTML).join("")
-        : "<p>No posts available.</p>";
+    // Filter out invalid posts
+    const validPosts = Array.isArray(posts) 
+        ? posts.filter(post => post && post.id)
+        : [];
 
-    if (posts.length > displayedPostsCount) {
-        const loadMoreButton = document.getElementById("loadMoreButton");
-        if (!loadMoreButton) {
-            const button = document.createElement("button");
-            button.id = "loadMoreButton";
-            button.textContent = "Load More";
-            button.addEventListener("click", loadMorePosts);
-            feedContainer.appendChild(button);
+    if (!validPosts.length) {
+        feedContainer.innerHTML = "<p>No posts available.</p>";
+        return;
+    }
+
+    feedContainer.innerHTML = validPosts
+        .slice(0, displayedPostsCount)
+        .map(createPostHTML)
+        .join("");
+
+    // Add load more button if needed
+    if (validPosts.length > displayedPostsCount) {
+        const loadMoreButton = document.getElementById("loadMoreButton") || 
+            document.createElement("button");
+        
+        loadMoreButton.id = "loadMoreButton";
+        loadMoreButton.textContent = "Load More";
+        loadMoreButton.onclick = loadMorePosts;
+        
+        if (!document.getElementById("loadMoreButton")) {
+            feedContainer.appendChild(loadMoreButton);
         }
     }
 }
@@ -31,20 +42,28 @@ function loadMorePosts() {
 
 // Feed page link to individual post
 export function createPostHTML(post) {
-
-    if (!window.location.pathname.endsWith('/feed.html')) {
-        return '';
+    if (!post || typeof post !== 'object') {
+        console.error('Invalid post data:', post);
+        return '<div class="post-error">Invalid post data</div>';
     }
-    
-    const { id, media, author, created, title, body, tags } = post;
-    const postUrl = `/fed2-js2-ca-vicbro00/post/individual-post.html?id=${id}`;
 
+    // Safely destructure with defaults
+    const {
+        id = '',
+        media = {},
+        author = {},
+        created = new Date().toISOString(),
+        title = 'Untitled Post',
+        body = 'No content available',
+        tags = []
+    } = post;
+
+    const postUrl = `/fed2-js2-ca-vicbro00/post/individual-post.html?id=${id}`;
     const imageUrl = media?.url;
     const imageAlt = media?.alt || 'Post Image';
     const authorAvatar = author?.avatar?.url || 'default-avatar.jpg';
-    const authorName = author?.name || "Unknown";
+    const authorName = author?.name || "Unknown Author";
     const dateString = new Date(created).toLocaleString();
-
     const profileUrl = `/fed2-js2-ca-vicbro00/auth/profile.html?username=${encodeURIComponent(authorName)}`;
 
     return `
@@ -64,7 +83,7 @@ export function createPostHTML(post) {
             <p>${body}</p>
         </div>
         <div class="post-footer">
-            <div class="post-tags">Tags: ${tags?.join(", ") || 'No tags'}</div>
+            <div class="post-tags">${tags.length ? `Tags: ${tags.join(", ")}` : 'No tags'}</div>
         </div>
     </div>`;
 }

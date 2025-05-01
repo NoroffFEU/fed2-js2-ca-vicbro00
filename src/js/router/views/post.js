@@ -1,28 +1,23 @@
-import { API_KEY, JWT_TOKEN, API_BASE } from '../../api/constants.js';
+import { API_KEY, API_BASE } from '../../api/constants.js';
 import { createPostHeader, createPostFooter } from '../../ui/components/posts.js';
 
 // Fetch individual post by ID
 export async function fetchPostById(id) {
-    const url = `${API_BASE}/social/posts/${id}?_author=true`;
-    const headers = {
-        'X-Noroff-API-Key': API_KEY,    
-        'Authorization': `Bearer ${JWT_TOKEN}`
-    };
-
     try {
-        const response = await fetch(url, { headers });
+        const response = await fetch(`${API_BASE}/social/posts/${id}?_author=true&_comments=true`, {
+            headers: {
+                'X-Noroff-API-Key': API_KEY,
+                'Authorization': `Bearer ${localStorage.getItem('JWT_TOKEN')}`
+            }
+        });
+        
         if (!response.ok) throw new Error('Failed to fetch post');
-        const result = await response.json();
         
-        // Check if the data contains placeholder values
-        if (result.data && result.data.title === 'string') {
-            throw new Error('Received placeholder data from API');
-        }
-        
-        return result.data;
+        const { data } = await response.json();
+        return data || null;
     } catch (error) {
         console.error('Error fetching post:', error);
-        return [];
+        return null;
     }
 }
 

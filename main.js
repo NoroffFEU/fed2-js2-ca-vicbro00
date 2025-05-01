@@ -12,10 +12,38 @@ import { filterPosts } from '/fed2-js2-ca-vicbro00/src/js/ui/post/filter.js';
 import { displayPosts } from '/fed2-js2-ca-vicbro00/src/js/ui/post/display.js';
 import { initPostCreateView } from '/fed2-js2-ca-vicbro00/src/js/router/views/postCreate.js';
 import { fetchPostsWithAuthors } from '/fed2-js2-ca-vicbro00/src/js/api/post/display.js';
-import { fetchPostById, displayPost } from '/fed2-js2-ca-vicbro00/src/js/router/views/post.js';
+import { fetchPostById } from '/fed2-js2-ca-vicbro00/src/js/router/views/post.js';
 import { initAuthLoginForm } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/login.js';
 import { initRegisterForm } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/register.js';
 import { createPostHTML } from '/fed2-js2-ca-vicbro00/src/js/ui/post/display.js';
+
+document.addEventListener('DOMContentLoaded', async () => {
+    // Feed page
+    if (window.location.pathname.endsWith('/feed.html')) {
+        try {
+            const posts = await fetchPostsWithAuthors();
+            displayPosts(posts);
+        } catch (error) {
+            console.error('Error initializing feed:', error);
+        }
+    }
+    
+    // Individual post page
+    if (window.location.pathname.endsWith('individual-post.html')) {
+        const postId = new URLSearchParams(window.location.search).get('id');
+        if (postId) {
+            try {
+                const post = await fetchPostById(postId);
+                const feedContainer = document.getElementById('feedContainer');
+                if (feedContainer) {
+                    feedContainer.innerHTML = post ? createPostHTML(post) : '<p>Post not found</p>';
+                }
+            } catch (error) {
+                console.error('Error loading post:', error);
+            }
+        }
+    }
+});
 
 // Fetches individual post
 createPostHTML();
@@ -42,17 +70,6 @@ initPostCreateView();
 
 const urlParams = new URLSearchParams(window.location.search);
 const username = urlParams.get('username');
-
-if (window.location.pathname.includes('/individual-post/')) {
-    const postId = urlParams.get('id');
-    
-    if (postId) {
-        const post = await fetchPostById(postId);
-        displayPost(post);
-    } else {
-        console.error('No post ID found in URL.');
-    }
-}
 
 // Logs out the user
 const logoutButton = document.getElementById('logoutButton');
