@@ -8,8 +8,10 @@ export function initAuthLoginForm() {
     const form = document.getElementById('loginForm');
     if (!form) return;
 
+    form.removeEventListener('submit', handleLoginSubmit); 
     form.addEventListener('submit', handleLoginSubmit);
-    form.email.addEventListener('input', () => form.email.classList.remove('input-error'));
+    
+    console.log('Login form handler attached');
 }
 
 async function handleLoginSubmit(e) {
