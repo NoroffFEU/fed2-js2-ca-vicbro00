@@ -38,7 +38,7 @@ export async function fetchUserPosts(username, options = {}) {
 
         const data = await response.json();
         console.log('Posts data:', data);
-        return data.data || [];  // Ensure an empty array is returned if no posts are available
+        return data.data || [];
     } catch (error) {
         console.error('Error in fetchUserPosts:', error);
         throw error;

@@ -43,7 +43,7 @@ export function createPostHTML(post) {
     }
     
     const { id, media, author, created, title, body, tags } = post;
-    const postUrl = `/post/individual-post.html?id=${id}`;
+    const postUrl = `/fed2-js2-ca-vicbro00/post/individual-post.html?id=${id}`;
 
     const imageUrl = media?.url;
     const imageAlt = media?.alt || 'Post Image';
