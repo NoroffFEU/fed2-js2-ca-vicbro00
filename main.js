@@ -48,11 +48,6 @@ initAuthLoginForm();
 initRegisterForm();
 setupProfileSearch();
 
-if (window.location.pathname.includes('/feed')) {
-    const posts = await fetchPostsWithAuthors();
-    displayPosts(posts);
-}
-
 if (window.location.pathname.includes('/post/edit/')) {
     initEditPostPage();
 }
