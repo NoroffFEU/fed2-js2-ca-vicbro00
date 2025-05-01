@@ -1,4 +1,4 @@
-
+console.log('Script loaded'); // Top of file
 import { JWT_TOKEN } from '/fed2-js2-ca-vicbro00/src/js/api/constants.js';
 import { fetchProfileByName } from '/fed2-js2-ca-vicbro00/src/js/ui/profile/profile.js';
 import { displayUserPosts } from '/fed2-js2-ca-vicbro00/src/js/router/views/profile.js';
@@ -18,6 +18,7 @@ import { initRegisterForm } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/register.
 import { createPostHTML } from '/fed2-js2-ca-vicbro00/src/js/ui/post/display.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
+    console.log('DOM fully loaded');
     try {
         // Feed page
         if (window.location.pathname.endsWith('/feed/index.html')) {
@@ -58,7 +59,7 @@ if (window.location.pathname.includes('/post/edit/')) {
 initPostCreateView();
 
 const urlParams = new URLSearchParams(window.location.search);
-const username = urlParams.get('username');
+const username = urlParams.get('userName');
 
 // Logs out the user
 const logoutButton = document.getElementById('logoutButton');
@@ -70,7 +71,8 @@ if (logoutButton) {
 }
 
 if (username) {
-    const profile = await fetchProfileByName(username);
+    const profile = fetchProfileByName(username);
+    console.log('Fetched profile:', profile);
 
     if (profile) {
         const profileNameElement = document.getElementById('profileName');
