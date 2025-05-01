@@ -25,42 +25,10 @@ export async function loadFeedPage() {
     filterPosts(posts);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    if (window.location.pathname.endsWith('/post/feed.html')) {
-        loadFeedPage();
-    }
-});
-
 // Only execute the function if on the feed page
-if (window.location.pathname.includes('post/feed.html')) {
+if (window.location.pathname.includes('post/feed')) {
     loadFeedPage();
 }
-
-/*
-document.addEventListener('DOMContentLoaded', async () => {
-    try {
-        // Feed page
-        if (window.location.pathname.endsWith('/feed/index.html')) {
-            initPostSearch(posts);
-            filterPosts(posts);
-        }
-        
-        // Individual post page
-        if (window.location.pathname.endsWith('individual-post.html')) {
-            const postId = new URLSearchParams(window.location.search).get('id');
-            if (postId) {
-                const post = await fetchPostById(postId);
-                const feedContainer = document.getElementById('feedContainer');
-                if (feedContainer) {
-                    feedContainer.innerHTML = post ? createPostHTML(post) : '<p>Post not found</p>';
-                }
-            }
-        }
-    } catch (error) {
-        console.error('Error initializing page:', error);
-    }
-});
-*/
 
 initSideMenu();
 
