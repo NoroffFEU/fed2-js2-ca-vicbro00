@@ -4,53 +4,113 @@
 export default async function router(pathname = window.location.pathname) {
   switch (pathname) {
     case '/':
-
     case '/index.html':
-    case '/index':
-      const home = await import('../views/home.js');
-      home.init();
+      await import('/fed2-js2-ca-vicbro00/src/js/ui/components/sideMenu.js');
+      await import('/fed2-js2-ca-vicbro00/src/js/router/views/logout.js');
+      await import('/fed2-js2-ca-vicbro00/src/js/ui/auth/logout.js');
       break;
 
     case '/auth/login/index.html':
       // Load the login page script
-      const { initLoginPage } = await import('../ui/login/index.js');
-      initLoginPage();
+      await import('/fed2-js2-ca-vicbro00/src/js/ui/components/sideMenu.js');
+      await import('/fed2-js2-ca-vicbro00/src/api/auth/index.js');
+      await import('/fed2-js2-ca-vicbro00/src/api/auth/register.js');
+      await import('/fed2-js2-ca-vicbro00/src/router/views/login.js');
+      await import('/fed2-js2-ca-vicbro00/src/js/router/views/logout.js');
+      await import('/fed2-js2-ca-vicbro00/src/js/ui/auth/login.js');
+      await import('/fed2-js2-ca-vicbro00/src/js/ui/auth/logout.js');
+
       break;
-    
+
     case '/auth/register/index.html':
       // Load the register page script
-      const { initRegisterPage } = await import('../ui/register/index.js');
-      initRegisterPage();
+      await import('/fed2-js2-ca-vicbro00/src/js/ui/components/sideMenu.js');
+      await import('/fed2-js2-ca-vicbro00/src/api/auth/register.js');
+      await import('/fed2-js2-ca-vicbro00/src/js/router/views/logout.js');
+      await import('/fed2-js2-ca-vicbro00/src/js/router/views/register.js');
+      await import('/fed2-js2-ca-vicbro00/src/js/ui/auth/logout.js');
+      await import('/fed2-js2-ca-vicbro00/src/js/ui/auth/register.js');
+
       break;
 
     case '/auth/profile.html':
       // Load the profile page script
-      const { initProfilePage } = await import('../ui/profile/index.js');
-      initProfilePage();
+      await import('/fed2-js2-ca-vicbro00/src/js/ui/components/sideMenu.js');
+      await import('/fed2-js2-ca-vicbro00/src/api/auth/index.js');
+      await import('/fed2-js2-ca-vicbro00/src/api/auth/register.js');
+      await import('/fed2-js2-ca-vicbro00/src/api/post/create.js');
+      await import('/fed2-js2-ca-vicbro00/src/api/post/delete.js');
+      await import('/fed2-js2-ca-vicbro00/src/api/post/display.js');
+      await import('/fed2-js2-ca-vicbro00/src/api/profile/follow.js');
+      await import('/fed2-js2-ca-vicbro00/src/api/profile/posts.js');
+      await import('/fed2-js2-ca-vicbro00/src/js/router/views/logout.js');
+      await import('/fed2-js2-ca-vicbro00/src/js/router/views/profile.js');
+      await import('/fed2-js2-ca-vicbro00/src/js/ui/auth/logout.js');
+
       break;
 
     case '/post/create/index.html':
       // Load the post creation page script
-      const { initPostCreatePage } = await import('../ui/post/create.js');
-      initPostCreatePage();
+      await import('/fed2-js2-ca-vicbro00/src/js/ui/components/sideMenu.js');
+      await import('/fed2-js2-ca-vicbro00/src/api/auth/index.js');
+      await import('/fed2-js2-ca-vicbro00/src/api/post/create.js');
+      await import('/fed2-js2-ca-vicbro00/src/api/post/validate.js');
+      await import('/fed2-js2-ca-vicbro00/src/router/views/auth.js');
+      await import('/fed2-js2-ca-vicbro00/src/js/router/views/logout.js');
+      await import('/fed2-js2-ca-vicbro00/src/js/router/views/postCreate.js');
+      await import('/fed2-js2-ca-vicbro00/src/js/ui/auth/logout.js');
+      await import('/fed2-js2-ca-vicbro00/src/js/ui/post/create.js');
+      await import('/fed2-js2-ca-vicbro00/src/js/utilities/authGuard.js');
+
       break;
 
     case '/post/edit/index.html':
       // Load the post edit page script
-      const { initPostEditPage } = await import('../ui/post/edit.js');
-      initPostEditPage();
+      await import('/fed2-js2-ca-vicbro00/src/js/ui/components/sideMenu.js');
+      await import('/fed2-js2-ca-vicbro00/src/api/auth/index.js');
+      await import('/fed2-js2-ca-vicbro00/src/api/post/validate.js');
+      await import('/fed2-js2-ca-vicbro00/src/router/views/auth.js');
+      await import('/fed2-js2-ca-vicbro00/src/js/router/views/logout.js');
+      await import('/fed2-js2-ca-vicbro00/src/js/ui/auth/logout.js');
+      await import('/fed2-js2-ca-vicbro00/src/js/ui/post/update.js');
+
+
       break;
 
     case '/post/feed.html':
       // Load the feed page script
-      const { initFeedPage } = await import('../ui/post/feed.js');
-      initFeedPage();
+      await import('/fed2-js2-ca-vicbro00/src/js/ui/components/sideMenu.js');
+      await import('/fed2-js2-ca-vicbro00/src/api/auth/index.js');
+      await import('/fed2-js2-ca-vicbro00/src/api/post/delete.js');
+      await import('/fed2-js2-ca-vicbro00/src/api/post/display.js');
+      await import('/fed2-js2-ca-vicbro00/src/api/profile/follow.js');
+      await import('/fed2-js2-ca-vicbro00/src/api/profile/followers.js');
+      await import('/fed2-js2-ca-vicbro00/src/api/profile/posts.js');
+      await import('/fed2-js2-ca-vicbro00/src/api/profile/search.js');
+      await import('/fed2-js2-ca-vicbro00/src/js/router/views/follow.js');
+      await import('/fed2-js2-ca-vicbro00/src/js/router/views/logout.js');
+      await import('/fed2-js2-ca-vicbro00/src/js/router/views/post.js');
+      await import('/fed2-js2-ca-vicbro00/src/js/router/views/profileSearch.js');
+      await import('/fed2-js2-ca-vicbro00/src/js/ui/auth/logout.js');
+      await import('/fed2-js2-ca-vicbro00/src/js/ui/components/posts.js');
+      await import('/fed2-js2-ca-vicbro00/src/js/ui/post/display.js');
+      await import('/fed2-js2-ca-vicbro00/src/js/ui/post/filter.js');
+      await import('/fed2-js2-ca-vicbro00/src/js/ui/post/search.js');
+
       break;
 
     case '/post/individual-post.html':
       // Load the individual post page script
-      const { initIndividualPostPage } = await import('../ui/post/individualPost.js');
-      initIndividualPostPage();
+      await import('/fed2-js2-ca-vicbro00/src/js/ui/components/sideMenu.js');
+      await import('/fed2-js2-ca-vicbro00/src/api/post/delete.js');
+      await import('/fed2-js2-ca-vicbro00/src/api/profile/follow.js');
+      await import('/fed2-js2-ca-vicbro00/src/api/profile/followers.js');
+      await import('/fed2-js2-ca-vicbro00/src/js/router/views/logout.js');
+      await import('/fed2-js2-ca-vicbro00/src/js/router/views/post.js');
+      await import('/fed2-js2-ca-vicbro00/src/js/ui/auth/logout.js');
+      await import('/fed2-js2-ca-vicbro00/src/js/ui/components/posts.js');
+
+
       break;
 
     default:
