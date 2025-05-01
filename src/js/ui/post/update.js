@@ -98,8 +98,7 @@ function setupFormSubmission(postId) {
         try {
             await updatePost(postId, updatedPost);
             alert('Post updated successfully!');
-            const username = localStorage.getItem('userName');
-            window.location.href = `/fed2-js2-ca-vicbro00/profile.html?username=${username}`;
+            window.location.href = '/fed2-js2-ca-vicbro00/post/feed.html';
         } catch (error) {
             console.error('Error updating post:', error);
             alert('Failed to update post: ' + error.message);
