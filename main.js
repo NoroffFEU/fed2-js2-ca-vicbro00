@@ -22,12 +22,13 @@ import { initSideMenu } from '/fed2-js2-ca-vicbro00/src/js/ui/components/sideMen
 import { initRegisterForm } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/register.js';
 */
 
+initSideMenu();
+
 if (window.location.pathname.endsWith('/feed.html')) {
     fetchAndDisplayPosts();
 }
 /*
 // Initialize side menu and forms
-initSideMenu();
 initLoginForm();
 initRegisterForm();
 setupProfileSearch();
