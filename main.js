@@ -21,8 +21,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
         // Feed page
         if (window.location.pathname.endsWith('/feed/index.html')) {
-            const posts = await fetchPostsWithAuthors();
-            displayPosts(posts);
             initPostSearch(posts);
             filterPosts(posts);
         }
@@ -42,6 +40,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('Error initializing page:', error);
     }
 });
+
+const posts = await fetchPostsWithAuthors();
+displayPosts(posts);
 
 initSideMenu();
 
