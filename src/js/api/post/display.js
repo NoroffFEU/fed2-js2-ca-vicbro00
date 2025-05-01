@@ -1,5 +1,3 @@
-import { API_KEY, API_BASE } from '../constants.js';
-
 export async function fetchPostsWithAuthors() {
     const token = localStorage.getItem(JWT_TOKEN);
     const headers = {
