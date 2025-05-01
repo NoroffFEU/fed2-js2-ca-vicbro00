@@ -10,6 +10,8 @@ export async function fetchPostsWithAuthors() {
     // Add Authorization header ONLY if token exists
     if (token) {
         headers['Authorization'] = `Bearer ${token}`;
+    } else {
+        console.error('JWT token not found in localStorage');
     }
 
     const url = `${API_BASE}/social/posts?_author=true&_reactions=true`;
