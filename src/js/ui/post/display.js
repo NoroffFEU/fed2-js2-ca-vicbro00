@@ -3,34 +3,23 @@ let allPosts = [];
 
 export function displayPosts(posts) {
     const feedContainer = document.getElementById("feedContainer");
+    
     if (!feedContainer) return;
 
-    // Filter out invalid posts
-    const validPosts = Array.isArray(posts) 
-        ? posts.filter(post => post && post.id)
-        : [];
+    const postsToDisplay = posts.slice(0, displayedPostsCount);
+    
+    feedContainer.innerHTML = postsToDisplay.length
+        ? postsToDisplay.map(createPostHTML).join("")
+        : "<p>No posts available.</p>";
 
-    if (!validPosts.length) {
-        feedContainer.innerHTML = "<p>No posts available.</p>";
-        return;
-    }
-
-    feedContainer.innerHTML = validPosts
-        .slice(0, displayedPostsCount)
-        .map(createPostHTML)
-        .join("");
-
-    // Add load more button if needed
-    if (validPosts.length > displayedPostsCount) {
-        const loadMoreButton = document.getElementById("loadMoreButton") || 
-            document.createElement("button");
-        
-        loadMoreButton.id = "loadMoreButton";
-        loadMoreButton.textContent = "Load More";
-        loadMoreButton.onclick = loadMorePosts;
-        
-        if (!document.getElementById("loadMoreButton")) {
-            feedContainer.appendChild(loadMoreButton);
+    if (posts.length > displayedPostsCount) {
+        const loadMoreButton = document.getElementById("loadMoreButton");
+        if (!loadMoreButton) {
+            const button = document.createElement("button");
+            button.id = "loadMoreButton";
+            button.textContent = "Load More";
+            button.addEventListener("click", loadMorePosts);
+            feedContainer.appendChild(button);
         }
     }
 }
@@ -42,6 +31,10 @@ function loadMorePosts() {
 
 // Feed page link to individual post
 export function createPostHTML(post) {
+    if (!post || typeof post !== 'object') {
+        console.error('Invalid post data:', post);
+        return '<div class="post-error">Invalid post data</div>';
+    }
 
     // Safely destructure with defaults
     const {
@@ -60,7 +53,7 @@ export function createPostHTML(post) {
     const authorAvatar = author?.avatar?.url || 'default-avatar.jpg';
     const authorName = author?.name || "Unknown Author";
     const dateString = new Date(created).toLocaleString();
-    const profileUrl = `/fed2-js2-ca-vicbro00/post/profile.html?username=${encodeURIComponent(authorName)}`;
+    const profileUrl = `/fed2-js2-ca-vicbro00/auth/profile.html?username=${encodeURIComponent(authorName)}`;
 
     return `
     <div class="post">
