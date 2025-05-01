@@ -2,7 +2,6 @@ import { API_BASE, API_KEY } from '../../api/constants.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
     const postId = new URLSearchParams(window.location.search).get('id');
-    const loggedInUser = localStorage.getItem('userName');
 
     if (!postId) {
         alert('No post specified for editing');
@@ -15,14 +14,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         if (!post) {
             throw new Error('Post not found');
-        }
-
-        const isProfilePage = window.location.pathname.includes('/auth/profile.html');
-        if (post.author !== loggedInUser || !isProfilePage) {
-            const editButtons = document.querySelectorAll('.edit-button');
-            editButtons.forEach(button => {
-                button.style.display = 'none';
-            });
         }
 
         populateEditForm(post);
@@ -82,7 +73,7 @@ function setupFormSubmission(postId) {
             // Call API to update post
             await updatePost(postId, updatedPost);
             alert('Post updated successfully!');
-            window.location.href = `/profile.html?username=${localStorage.getItem('userName')}`;
+            window.location.href = `/fed2-js2-ca-vicbro00/profile.html?username=${localStorage.getItem('userName')}`;
         } catch (error) {
             console.error('Error updating post:', error);
             alert('Update failed: ' + error.message);
