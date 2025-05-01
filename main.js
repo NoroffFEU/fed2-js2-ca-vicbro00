@@ -5,7 +5,6 @@ import { displayUserPosts } from '/fed2-js2-ca-vicbro00/src/js/router/views/prof
 import { fetchUserPostsByName } from '/fed2-js2-ca-vicbro00/src/js/ui/profile/profile.js';
 import { followUser, checkIfFollowing, unfollowUser } from '/fed2-js2-ca-vicbro00/src/js/api/profile/follow.js';
 import { initSideMenu } from '/fed2-js2-ca-vicbro00/src/js/ui/components/sideMenu.js';
-import { fetchAndDisplayPosts } from '/fed2-js2-ca-vicbro00/src/js/ui/post/display.js';
 import { setupProfileSearch } from '/fed2-js2-ca-vicbro00/src/js/router/views/profileSearch.js';
 import { initEditPostPage } from '/fed2-js2-ca-vicbro00/src/js/ui/profile/update.js';
 import { initPostSearch } from '/fed2-js2-ca-vicbro00/src/js/ui/post/search.js';
@@ -22,10 +21,6 @@ import { createPostHTML } from '/fed2-js2-ca-vicbro00/src/js/ui/post/display.js'
 createPostHTML();
 
 initSideMenu();
-
-if (window.location.pathname.endsWith('/feed.html')) {
-    fetchAndDisplayPosts();
-}
 
 // Initialize side menu and forms
 initAuthLoginForm();

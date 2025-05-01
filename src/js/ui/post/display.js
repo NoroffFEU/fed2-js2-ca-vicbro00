@@ -1,5 +1,3 @@
-import { fetchPostsWithAuthors } from "../../api/post/display.js";
-
 let displayedPostsCount = 20;
 let allPosts = [];
 
