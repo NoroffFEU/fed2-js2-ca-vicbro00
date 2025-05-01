@@ -16,9 +16,9 @@ export async function initEditPostPage() {
         }
 
         const currentUser = localStorage.getItem('userName');
-        const isProfilePage = window.location.pathname.includes('profile.html');
+        const isProfilePage = window.location.pathname.includes('/auth/profile.html');
 
-        if (post.author !== currentUser || isProfilePage) {
+        if (post.author !== currentUser || !isProfilePage) {
             const editButtons = document.querySelectorAll('.edit-button');
             editButtons.forEach(button => {
                 button.style.display = 'none';
