@@ -41,7 +41,6 @@ filterPosts(posts);
 // Initialize post creation view
 initPostCreateView();
 
-const urlParams = new URLSearchParams(window.location.search);
 const username = urlParams.get('username');
 
 if (window.location.pathname.includes('/individual-post/')) {
