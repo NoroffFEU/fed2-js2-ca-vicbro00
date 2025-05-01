@@ -16,20 +16,29 @@ import { initAuthLoginForm } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/login.js
 import { initRegisterForm } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/register.js';
 import { createPostHTML } from '/fed2-js2-ca-vicbro00/src/js/ui/post/display.js';
 
-/*
 // Main function to link everything together
 export async function loadFeedPage() {
     const posts = await fetchPostsWithAuthors();
 
     displayPosts(posts);
+
+    // Initialize search and filter AFTER posts are displayed
+    initPostSearch(posts);
+    filterPosts(posts);
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (window.location.pathname.endsWith('/post/feed.html')) {
+        loadFeedPage();
+    }
+});
 
 // Only execute the function if on the feed page
 if (window.location.pathname.includes('post/feed.html')) {
     loadFeedPage();
 }
-*/
 
+/*
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         // Feed page
@@ -53,6 +62,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('Error initializing page:', error);
     }
 });
+*/
 
 initSideMenu();
 
