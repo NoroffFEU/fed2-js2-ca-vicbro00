@@ -4,7 +4,7 @@ export function initRegisterPage() {
   initRegisterForm();
 }
 
-function initRegisterForm() {
+export function initRegisterForm() {
   const registerForm = document.getElementById('registerForm');
 
   if (registerForm) {
