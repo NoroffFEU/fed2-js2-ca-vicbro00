@@ -51,6 +51,8 @@ function createUserPostHTML(post, showButtons = false) {
     const imageUrl = media?.url;
     const imageAlt = media?.alt || 'Post Image';
 
+    const isAuthPage = window.location.pathname.includes('/auth/');
+
     return `
     <div class='post'>
         <div class='post-content'>
@@ -58,7 +60,7 @@ function createUserPostHTML(post, showButtons = false) {
             ${imageUrl ? `<img src='${imageUrl}' alt='${imageAlt}' class='post-image'>` : ''}
             <p>${body}</p>
         </div>
-        ${showButtons ? `  <!-- Always show edit button for all posts now -->
+        ${showButtons && isAuthPage ? `
         <div class='post-buttons'>
             <button class='edit-button' data-id='${post.id}'>Edit</button>
             <button class='delete-button' data-id='${post.id}'>Delete</button>
