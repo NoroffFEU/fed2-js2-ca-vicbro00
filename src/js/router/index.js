@@ -1,8 +1,5 @@
 // This function controls which JavaScript file is loaded on which page
 // In order to add additional pages, you will need to implement them below
-
-import { initLoginForm } from './views/login';
-
 // You may change the behaviour or approach of this file if you choose
 export default async function router(pathname = window.location.pathname) {
   switch (pathname) {
@@ -53,8 +50,7 @@ export default async function router(pathname = window.location.pathname) {
 
     case '/post/individual-post.html':
       // Load the individual post page script
-      const { initIndividualPostPage } = await import('/fed2-js2-ca-vicbro00/ui/post/individualPost.js');
-      initIndividualPostPage();
+      
       break;
 
     default:
