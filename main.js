@@ -18,7 +18,6 @@ import { initRegisterForm } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/register.
 import { createPostHTML } from '/fed2-js2-ca-vicbro00/src/js/ui/post/display.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
-    console.log('DOM fully loaded');
     try {
         // Feed page
         if (window.location.pathname.endsWith('/feed/index.html')) {
@@ -59,7 +58,7 @@ if (window.location.pathname.includes('/post/edit/')) {
 initPostCreateView();
 
 const urlParams = new URLSearchParams(window.location.search);
-const username = urlParams.get('userName');
+const username = urlParams.get('username');
 
 // Logs out the user
 const logoutButton = document.getElementById('logoutButton');
@@ -70,82 +69,79 @@ if (logoutButton) {
     });
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
-    if (username) {
-        const profile = await fetchProfileByName(username);
-        console.log('Fetched profile:', profile);
+if (username) {
+    const profile = await fetchProfileByName(username);
 
-        if (profile) {
-            const profileNameElement = document.getElementById('profileName');
-            const profileBioElement = document.getElementById('profileBio');
+    if (profile) {
+        const profileNameElement = document.getElementById('profileName');
+        const profileBioElement = document.getElementById('profileBio');
 
-            if (profileNameElement) profileNameElement.innerText = profile.name || 'Unknown User';
-            if (profileBioElement) profileBioElement.innerText = profile.bio || 'No bio available';
+        if (profileNameElement) profileNameElement.innerText = profile.name || 'Unknown User';
+        if (profileBioElement) profileBioElement.innerText = profile.bio || 'No bio available';
 
-            const profileImageElement = document.getElementById('profileImage');
-            if (profileImageElement && profile.avatar) {
-                profileImageElement.src = profile.avatar.url || '';
-                profileImageElement.alt = profile.avatar.alt || 'Profile Image';
-            }
+        const profileImageElement = document.getElementById('profileImage');
+        if (profileImageElement && profile.avatar) {
+            profileImageElement.src = profile.avatar.url || '';
+            profileImageElement.alt = profile.avatar.alt || 'Profile Image';
+        }
 
-            const profileFollowerCountElement = document.getElementById('profileFollowerCount');
-            if (profileFollowerCountElement) {
-                let followerCount = profile._count.followers;
-                profileFollowerCountElement.innerText = `${followerCount} Followers`;
-            }
+        const profileFollowerCountElement = document.getElementById('profileFollowerCount');
+        if (profileFollowerCountElement) {
+            let followerCount = profile._count.followers;
+            profileFollowerCountElement.innerText = `${followerCount} Followers`;
+        }
 
-            const followButton = document.getElementById('followButton');
-            if (followButton) {
-                try {
-                    const isFollowing = await checkIfFollowing(username);
-                    updateFollowButton(followButton, isFollowing);
+        const followButton = document.getElementById('followButton');
+        if (followButton) {
+            try {
+                const isFollowing = await checkIfFollowing(username);
+                updateFollowButton(followButton, isFollowing);
 
-                    followButton.addEventListener('click', async () => {
-                        try {
-                            followButton.disabled = true;
+                followButton.addEventListener('click', async () => {
+                    try {
+                        followButton.disabled = true;
 
-                            if (followButton.classList.contains('following')) {
-                                await unfollowUser(username);
-                                updateFollowButton(followButton, false);
-                                alert(`You have unfollowed ${username}`);
-                            } else {
-                                await followUser(username);
-                                updateFollowButton(followButton, true);
-                                alert(`You are now following ${username}`);
-                            }
-
-                            const updatedProfile = await fetchProfileByName(username);
-                            if (updatedProfile && profileFollowerCountElement) {
-                                const updatedFollowerCount = updatedProfile._count.followers;
-                                profileFollowerCountElement.innerText = `${updatedFollowerCount} Followers`;
-                            }
-
-                        } catch (error) {
-                            console.error('Error:', error);
-                            alert(error.message);
-                            const currentStatus = await checkIfFollowing(username);
-                            updateFollowButton(followButton, currentStatus);
+                        if (followButton.classList.contains('following')) {
+                            await unfollowUser(username);
+                            updateFollowButton(followButton, false);
+                            alert(`You have unfollowed ${username}`);
+                        } else {
+                            await followUser(username);
+                            updateFollowButton(followButton, true);
+                            alert(`You are now following ${username}`);
                         }
-                    });
-                } catch (error) {
-                    console.error('Error checking follow status:', error);
-                    followButton.style.display = 'none';
-                }
+
+                        const updatedProfile = await fetchProfileByName(username);
+                        if (updatedProfile && profileFollowerCountElement) {
+                            const updatedFollowerCount = updatedProfile._count.followers;
+                            profileFollowerCountElement.innerText = `${updatedFollowerCount} Followers`;
+                        }
+
+                    } catch (error) {
+                        console.error('Error:', error);
+                        alert(error.message);
+                        const currentStatus = await checkIfFollowing(username);
+                        updateFollowButton(followButton, currentStatus);
+                    }
+                });
+            } catch (error) {
+                console.error('Error checking follow status:', error);
+                followButton.style.display = 'none';
             }
-
-            const userPosts = await fetchUserPostsByName(username);
-            displayUserPosts(userPosts);
         }
-    }
 
-    function updateFollowButton(button, isFollowing) {
-        button.disabled = false;
-        if (isFollowing) {
-            button.textContent = 'Following';
-            button.classList.add('following');
-        } else {
-            button.textContent = 'Follow';
-            button.classList.remove('following');
-        }
+        const userPosts = await fetchUserPostsByName(username);
+        displayUserPosts(userPosts);
     }
-});
+}
+
+function updateFollowButton(button, isFollowing) {
+    button.disabled = false;
+    if (isFollowing) {
+        button.textContent = 'Following';
+        button.classList.add('following');
+    } else {
+        button.textContent = 'Follow';
+        button.classList.remove('following');
+    }
+}
