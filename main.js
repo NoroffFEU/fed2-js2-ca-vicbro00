@@ -18,30 +18,26 @@ import { initRegisterForm } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/register.
 import { createPostHTML } from '/fed2-js2-ca-vicbro00/src/js/ui/post/display.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
-    // Feed page
-    if (window.location.pathname.endsWith('/feed.html')) {
-        try {
+    try {
+        // Feed page
+        if (window.location.pathname.endsWith('/feed.html')) {
             const posts = await fetchPostsWithAuthors();
             displayPosts(posts);
-        } catch (error) {
-            console.error('Error initializing feed:', error);
         }
-    }
-    
-    // Individual post page
-    if (window.location.pathname.endsWith('individual-post.html')) {
-        const postId = new URLSearchParams(window.location.search).get('id');
-        if (postId) {
-            try {
+        
+        // Individual post page
+        if (window.location.pathname.endsWith('individual-post.html')) {
+            const postId = new URLSearchParams(window.location.search).get('id');
+            if (postId) {
                 const post = await fetchPostById(postId);
                 const feedContainer = document.getElementById('feedContainer');
                 if (feedContainer) {
                     feedContainer.innerHTML = post ? createPostHTML(post) : '<p>Post not found</p>';
                 }
-            } catch (error) {
-                console.error('Error loading post:', error);
             }
         }
+    } catch (error) {
+        console.error('Error initializing page:', error);
     }
 });
 

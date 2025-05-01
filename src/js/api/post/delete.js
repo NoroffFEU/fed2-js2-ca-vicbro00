@@ -42,7 +42,7 @@ export function setupDeleteButtons() {
                 await deletePost(postId);
                 alert('Post deleted successfully!');
                 const username = localStorage.getItem('userName');
-                window.location.href = `/profile.html?username=${username}`;
+                window.location.href = `/fed2-js2-ca-vicbro00/profile.html?username=${username}`;
             } catch (error) {
                 alert('Failed to delete post: ' + error.message);
             }

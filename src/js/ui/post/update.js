@@ -82,23 +82,24 @@ function setupFormSubmission(postId) {
 }
 
 async function updatePost(postId, postData) {
+    const token = localStorage.getItem('JWT_TOKEN');
     const url = `${API_BASE}/social/posts/${postId}`;
-    const headers = {
-        "Content-Type": "application/json",
-        "X-Noroff-API-Key": API_KEY,
-        "Authorization": `Bearer ${localStorage.getItem('JWT_TOKEN')}`
-    };
-
+    
     try {
         const response = await fetch(url, {
             method: 'PUT',
-            headers,
+            headers: {
+                "Content-Type": "application/json",
+                "X-Noroff-API-Key": API_KEY,
+                "Authorization": `Bearer ${token}`
+            },
             body: JSON.stringify(postData)
         });
         
         if (!response.ok) {
             const error = await response.json();
-            throw new Error(error.message || "Failed to update post");
+            console.error("Response Error:", error);
+            throw new Error(error.errors || "Failed to update post");
         }
         
         return await response.json();
