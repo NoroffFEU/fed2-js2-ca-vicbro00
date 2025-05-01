@@ -2,22 +2,10 @@ import { API_BASE, API_KEY } from '../../api/constants.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
 
-    const isProfilePage = window.location.pathname.includes('/auth/profile');
-    const username = new URLSearchParams(window.location.search).get('username');
+    // Check if the logged-in user is the post's author and hide edit button if not
+    const postId = new URLSearchParams(window.location.search).get('id');
     const loggedInUser = localStorage.getItem('userName');
 
-    if (isProfilePage && username !== loggedInUser) {
-        // Hide edit buttons if it's not the current user's profile
-        const editButtons = document.querySelectorAll('.edit-button');
-        editButtons.forEach(button => {
-            button.style.display = 'none';
-        });
-    }
-
-    // Get postId from URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const postId = urlParams.get('id');
-    
     if (!postId) {
         alert('No post specified for editing');
         window.location.href = '/fed2-js2-ca-vicbro00/index.html';
@@ -25,17 +13,21 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     try {
-        // Fetch the post data
         const post = await fetchPostById(postId);
         
         if (!post) {
             throw new Error('Post not found');
         }
 
-        // Populate the form with post data
-        populateEditForm(post);
+        // Hide edit button if the post's author is not the logged-in user
+        if (post.author !== loggedInUser) {
+            const editButtons = document.querySelectorAll('.edit-button');
+            editButtons.forEach(button => {
+                button.style.display = 'none';
+            });
+        }
 
-        // Set up form submission handler
+        populateEditForm(post);
         setupFormSubmission(postId);
 
     } catch (error) {
