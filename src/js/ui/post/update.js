@@ -1,6 +1,15 @@
 import { API_BASE, API_KEY } from '../../api/constants.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
+
+    const isProfilePage = window.location.pathname.includes('/auth/profile');
+    if (!isProfilePage) {
+        const editButtons = document.querySelectorAll('.edit-button');
+        editButtons.forEach(button => {
+            button.style.display = 'none';
+        });
+    }
+
     // Get postId from URL
     const urlParams = new URLSearchParams(window.location.search);
     const postId = urlParams.get('id');

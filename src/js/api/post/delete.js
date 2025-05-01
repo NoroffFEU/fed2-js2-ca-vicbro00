@@ -27,7 +27,14 @@ export async function deletePost(postId) {
 }
 
 export function setupDeleteButtons() {
+    const isProfilePage = window.location.pathname.includes('/auth/profile');
+
     const deleteButtons = document.querySelectorAll('.delete-button');
+    if (!isProfilePage) {
+        deleteButtons.forEach(button => {
+            button.style.display = 'none';
+        });
+    }
 
     deleteButtons.forEach(button => {
         button.addEventListener('click', async (event) => {

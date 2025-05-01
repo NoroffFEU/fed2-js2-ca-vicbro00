@@ -53,7 +53,7 @@ export function createPostHTML(post) {
     const authorAvatar = author?.avatar?.url || 'default-avatar.jpg';
     const authorName = author?.name || "Unknown Author";
     const dateString = new Date(created).toLocaleString();
-    const profileUrl = `/fed2-js2-ca-vicbro00/auth/profile.html?username=${encodeURIComponent(authorName)}`;
+    const profileUrl = `/fed2-js2-ca-vicbro00/post/profile.html?username=${encodeURIComponent(authorName)}`;
 
     return `
     <div class="post">
