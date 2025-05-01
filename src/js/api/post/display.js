@@ -6,31 +6,18 @@ export async function fetchPostsWithAuthors() {
     const headers = {
         'Content-Type': 'application/json',
         'X-Noroff-API-Key': API_KEY
-    }
+    };
 
     if (token) {
         headers['Authorization'] = `Bearer ${token}`;
     }
 
     try {
-        const response = await fetch(`${API_BASE}/social/posts?_author=true`, {
-            headers,
-        });
+        const response = await fetch(`${API_BASE}/social/posts?_author=true`, { headers });
 
         if (response.status === 401 && !token) {
-            const publicResponse = await fetch(`${API_BASE}/public/posts?_author=true`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Noroff-API-Key': API_KEY
-                },
-            });
-
-            if (!publicResponse.ok) {
-                throw new Error(`HTTP error! status: ${publicResponse.status}`);
-            }
-
-            const publicResult = await publicResponse.json();
-            return publicResult.data || publicResult.posts || [];
+            console.error('User is not logged in. Please log in to view posts.');
+            return [];
         }
 
         if (!response.ok) {
