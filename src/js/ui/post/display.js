@@ -42,12 +42,7 @@ function loadMorePosts() {
 
 // Feed page link to individual post
 export function createPostHTML(post) {
-    if (!post || typeof post !== 'object') {
-        console.error('Invalid post data:', post);
-        return '<div class="post-error">Invalid post data</div>';
-    }
 
-    // Safely destructure with defaults
     const {
         id = '',
         media = {},
