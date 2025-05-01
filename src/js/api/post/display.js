@@ -1,4 +1,4 @@
-import { API_KEY, JWT_TOKEN, API_BASE } from '../constants.js';
+import { API_KEY, API_BASE } from '../constants.js';
 
 export async function fetchPostsWithAuthors() {
     try {

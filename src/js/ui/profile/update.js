@@ -95,15 +95,16 @@ async function updatePost(postId, postData) {
             },
             body: JSON.stringify(postData)
         });
-        
+    
         if (!response.ok) {
             const error = await response.json();
-            throw new Error(error.message || "Failed to update post");
+            console.error('Response Error:', error);
+            throw new Error(error.message || 'Failed to update post');
         }
-        
+    
         return await response.json();
     } catch (error) {
-        console.error("Error updating post:", error);
+        console.error('Error updating post:', error);
         throw error;
     }
 }
