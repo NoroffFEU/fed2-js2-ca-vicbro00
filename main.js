@@ -1,4 +1,3 @@
-console.log('Script loaded'); // Top of file
 import { JWT_TOKEN } from '/fed2-js2-ca-vicbro00/src/js/api/constants.js';
 import { fetchProfileByName } from '/fed2-js2-ca-vicbro00/src/js/ui/profile/profile.js';
 import { displayUserPosts } from '/fed2-js2-ca-vicbro00/src/js/router/views/profile.js';
@@ -17,6 +16,7 @@ import { initAuthLoginForm } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/login.js
 import { initRegisterForm } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/register.js';
 import { createPostHTML } from '/fed2-js2-ca-vicbro00/src/js/ui/post/display.js';
 
+/*
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         // Feed page
@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('Error initializing page:', error);
     }
 });
+*/
 
 const posts = await fetchPostsWithAuthors();
 displayPosts(posts);
