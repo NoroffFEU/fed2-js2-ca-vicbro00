@@ -46,8 +46,7 @@ function setupEditButtons() {
 }
 
 function createUserPostHTML(post, showButtons = false) {
-    const { media, title, body, tags, author } = post;
-    const loggedInUser = localStorage.getItem('userName');
+    const { media, title, body, tags } = post;
 
     const imageUrl = media?.url;
     const imageAlt = media?.alt || 'Post Image';
