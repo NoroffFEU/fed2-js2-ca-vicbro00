@@ -2,7 +2,7 @@ import { API_BASE, API_KEY } from '../../api/constants.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
 
-    const isProfilePage = window.location.pathname.includes('/post/profile');
+    const isProfilePage = window.location.pathname.includes('/auth/profile');
     const username = new URLSearchParams(window.location.search).get('username');
     const loggedInUser = localStorage.getItem('userName');
 
