@@ -42,8 +42,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 */
 
+/*
 const posts = await fetchPostsWithAuthors();
 displayPosts(posts);
+*/
 
 initSideMenu();
 
