@@ -69,8 +69,6 @@ initPostCreateView();
 
 const urlParams = new URLSearchParams(window.location.search);
 const username = urlParams.get('username');
-const loggedInUsername = localStorage.getItem('userName');
-const isOwnProfile = username === loggedInUsername;
 
 // Logs out the user
 const logoutButton = document.getElementById('logoutButton');
@@ -142,9 +140,8 @@ if (username) {
             }
         }
 
-        // Fetch posts and display with edit/delete buttons based on profile ownership
         const userPosts = await fetchUserPostsByName(username);
-        displayUserPosts(userPosts, isOwnProfile);
+        displayUserPosts(userPosts);
     }
 }
 
