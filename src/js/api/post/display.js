@@ -1,7 +1,7 @@
 import { JWT_TOKEN, API_BASE, API_KEY } from "/fed2-js2-ca-vicbro00/src/js/api/constants.js";
 
 export async function fetchPostsWithAuthors() {
-    const token = localStorage.getItem(JWT_TOKEN);
+    const token = localStorage.getItem('JWT_TOKEN');
     const headers = {
         'Content-Type': 'application/json',
         'X-Noroff-API-Key': API_KEY
