@@ -1,11 +1,10 @@
-// api/post/create.js
 export const createPost = async (title, content) => {
     try {
       const response = await fetch('YOUR_API_ENDPOINT', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}` // Add token if necessary
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         },
         body: JSON.stringify({
           title,

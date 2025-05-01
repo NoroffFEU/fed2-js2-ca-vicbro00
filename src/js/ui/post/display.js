@@ -42,6 +42,11 @@ function loadMorePosts() {
 
 // Feed page link to individual post
 export function createPostHTML(post) {
+    if (!post || typeof post !== "object" || !post.id) {
+        console.warn("Invalid post data:", post);
+        return '';
+    }
+
     const {
         id = '',
         media = {},
@@ -60,33 +65,24 @@ export function createPostHTML(post) {
     const dateString = new Date(created).toLocaleString();
     const profileUrl = `/fed2-js2-ca-vicbro00/auth/profile.html?username=${encodeURIComponent(authorName)}`;
 
-    const loggedInUsername = localStorage.getItem('userName');
-    const isOwner = loggedInUsername === authorName;
-
     return `
-        <div class="post">
-            <a href="${profileUrl}" class="profile-link">
-                <div class="post-header">
-                    <img src="${authorAvatar}" alt="Author Avatar" class="author-avatar">
-                    <p class="author-name">${authorName}</p>
-                    <span class="post-time">${dateString}</span>
-                </div>
+    <div class="post">
+        <a href="${profileUrl}" class="profile-link">
+            <div class="post-header">
+                <img src="${authorAvatar}" alt="Author Avatar" class="author-avatar">
+                <p class="author-name">${authorName}</p>
+                <span class="post-time">${dateString}</span>
+            </div>
+        </a>
+        <div class="post-content">
+            <a href="${postUrl}" class="post-link">
+                <h2>${title}</h2>
+                ${imageUrl ? `<img src="${imageUrl}" alt="${imageAlt}" class="post-image">` : ''}
             </a>
-            <div class="post-content">
-                <a href="${postUrl}" class="post-link">
-                    <h2>${title}</h2>
-                    ${imageUrl ? `<img src="${imageUrl}" alt="${imageAlt}" class="post-image">` : ''}
-                </a>
-                <p>${body}</p>
-            </div>
-            <div class="post-footer">
-                <div class="post-tags">${tags.length ? `Tags: ${tags.join(", ")}` : 'No tags'}</div>
-                ${isOwner ? `
-                    <div class="post-actions">
-                        <a href="/fed2-js2-ca-vicbro00/post/edit/edit-post.html?id=${id}" class="edit-post">Edit</a>
-                        <button class="delete-button" data-id="${id}">Delete</button>
-                    </div>
-                ` : ''}
-            </div>
-        </div>`;
+            <p>${body}</p>
+        </div>
+        <div class="post-footer">
+            <div class="post-tags">${tags.length ? `Tags: ${tags.join(", ")}` : 'No tags'}</div>
+        </div>
+    </div>`;
 }
