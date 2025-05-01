@@ -53,7 +53,7 @@ if (window.location.pathname.includes('/post/edit/')) {
 }
 
 // Fetch and display posts
-if (window.location.pathname.endsWith('/feed.html')) {
+if (window.location.pathname.endsWith('/feed/index.html')) {
     const posts = await fetchPostsWithAuthors();
     displayPosts(posts);
     initPostSearch(posts);
