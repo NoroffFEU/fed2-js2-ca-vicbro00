@@ -87,10 +87,12 @@ export async function displayUserProfile(username) {
         const userData = await getUserData(username);
         const followersCount = userData._count.followers;
 
+        // Set profile data in the DOM
         document.getElementById('profileUsername').textContent = userData.username;
         document.getElementById('profileImage').src = userData.profileImage;
         document.getElementById('profileFollowersCount').textContent = `${followersCount} Followers`;
 
+        // Initialize follow button if necessary
         initializeFollowButton(username);
     } catch (error) {
         console.error("Error displaying user profile:", error);
@@ -105,7 +107,7 @@ export function displayFollowers(followers) {
     const followersContainer = document.getElementById('followersContainer');
     if (!followersContainer) return;
 
-    followersContainer.innerHTML = '';
+    followersContainer.innerHTML = ''; // Clear existing content
 
     if (!followers || followers.length === 0) {
         followersContainer.innerHTML = '<p>No followers yet</p>';
@@ -132,17 +134,3 @@ export function displayFollowers(followers) {
 
     followersContainer.appendChild(followersList);
 }
-
-// Users profiles
-const urlParams = new URLSearchParams(window.location.search);
-const profileUsername = urlParams.get('username');
-const loggedInUsername = localStorage.getItem('userName');
-
-// Fetch posts for the profile
-const userPosts = await fetchUserPostsByName(profileUsername);
-
-// Determine if it's the logged-in user's profile
-const isOwnProfile = profileUsername === loggedInUsername;
-
-// Pass this flag to the function to control button visibility
-displayUserPosts(userPosts, isOwnProfile);
