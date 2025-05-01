@@ -46,7 +46,8 @@ function setupEditButtons() {
 }
 
 function createUserPostHTML(post, showButtons = false) {
-    const { media, title, body, tags } = post;
+    const { media, title, body, tags, author } = post;
+    const loggedInUser = localStorage.getItem('userName');
 
     const imageUrl = media?.url;
     const imageAlt = media?.alt || 'Post Image';
@@ -58,7 +59,7 @@ function createUserPostHTML(post, showButtons = false) {
             ${imageUrl ? `<img src='${imageUrl}' alt='${imageAlt}' class='post-image'>` : ''}
             <p>${body}</p>
         </div>
-        ${showButtons ? `
+        ${showButtons && author === loggedInUser ? `  <!-- Show edit button only if the post belongs to the logged-in user -->
         <div class='post-buttons'>
             <button class='edit-button' data-id='${post.id}'>Edit</button>
             <button class='delete-button' data-id='${post.id}'>Delete</button>
