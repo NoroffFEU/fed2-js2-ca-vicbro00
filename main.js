@@ -16,10 +16,10 @@ import { initAuthLoginForm } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/login.js
 import { initRegisterForm } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/register.js';
 import { createPostHTML } from '/fed2-js2-ca-vicbro00/src/js/ui/post/display.js';
 
+/*
 // Main function to link everything together
 export async function loadFeedPage() {
     const posts = await fetchPostsWithAuthors();
-    console.log("Fetched posts:", posts); // <- Add this
 
     displayPosts(posts);
 }
@@ -28,8 +28,8 @@ export async function loadFeedPage() {
 if (window.location.pathname.includes('post/feed.html')) {
     loadFeedPage();
 }
+*/
 
-/*
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         // Feed page
@@ -53,12 +53,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('Error initializing page:', error);
     }
 });
-*/
-
-/*
-const posts = await fetchPostsWithAuthors();
-displayPosts(posts);
-*/
 
 initSideMenu();
 
