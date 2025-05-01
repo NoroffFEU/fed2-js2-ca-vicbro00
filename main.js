@@ -1,16 +1,11 @@
-import { initLoginForm } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/login.js';
 import { initSideMenu } from '/fed2-js2-ca-vicbro00/src/js/ui/components/sideMenu.js';
-import { initRegisterForm } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/register.js';
 import { JWT_TOKEN } from '/fed2-js2-ca-vicbro00/src/js/api/constants.js';
 import { displayPosts } from '/fed2-js2-ca-vicbro00/src/js/ui/post/display.js';
-import { initPostCreateView } from '/fed2-js2-ca-vicbro00/src/js/router/views/postCreate.js';
 import { fetchPostsWithAuthors } from '/fed2-js2-ca-vicbro00/src/js/api/post/display.js';
-import { fetchPostById, displayPost } from '/fed2-js2-ca-vicbro00/src/js/router/views/post.js';
 import { fetchProfileByName } from '/fed2-js2-ca-vicbro00/src/js/ui/profile/profile.js';
 import { displayUserPosts } from '/fed2-js2-ca-vicbro00/src/js/router/views/profile.js';
 import { fetchUserPostsByName } from '/fed2-js2-ca-vicbro00/src/js/ui/profile/profile.js';
 import { followUser, checkIfFollowing, unfollowUser } from '/fed2-js2-ca-vicbro00/src/js/api/profile/follow.js';
-import { setupProfileSearch } from '/fed2-js2-ca-vicbro00/src/js/router/views/profileSearch.js';
 import { initEditPostPage } from '/fed2-js2-ca-vicbro00/src/js/ui/profile/update.js';
 import { initPostSearch } from '/fed2-js2-ca-vicbro00/src/js/ui/post/search.js';
 import { filterPosts } from '/fed2-js2-ca-vicbro00/src/js/ui/post/filter.js';
@@ -25,32 +20,16 @@ if (window.location.pathname.endsWith('/feed.html')) {
 
 // Initialize side menu and forms
 initSideMenu();
-initLoginForm();
-initRegisterForm();
-setupProfileSearch();
 
 if (window.location.pathname.includes('/post/edit/')) {
     initEditPostPage();
 }
 
-// Fetch and display posts
-const posts = await fetchPostsWithAuthors();
-displayPosts(posts);
-initPostSearch(posts);
-filterPosts(posts);
-
-// Initialize post creation view
-initPostCreateView();
-
-const urlParams = new URLSearchParams(window.location.search);
-const postId = urlParams.get('id');
-const username = urlParams.get('username');
-
-if (postId) {
-    const post = await fetchPostById(postId);
-    displayPost(post);
-} else {
-    console.error('No post ID found in URL.');
+if (window.location.pathname.endsWith('/feed.html')) {
+    const posts = await fetchPostsWithAuthors();
+    displayPosts(posts);
+    initPostSearch(posts);
+    filterPosts(posts);
 }
 
 // Logs out the user

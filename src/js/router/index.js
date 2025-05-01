@@ -13,13 +13,17 @@ export default async function router(pathname = window.location.pathname) {
 
     case '/auth/login/index.html':
       const { initLoginPage } = await import('/fed2-js2-ca-vicbro00/ui/auth/login.js');
+      const { initLoginForm } = await import('/fed2-js2-ca-vicbro00/ui/auth/login.js');
       initLoginPage();
+      initLoginForm();
       break;
     
     case '/auth/register/index.html':
       // Load the register page script
       const { initRegisterPage } = await import('/fed2-js2-ca-vicbro00/ui/register/index.js');
+      const { initRegisterForm } = await import('/fed2-js2-ca-vicbro00/ui/register/index.js');
       initRegisterPage();
+      initRegisterForm();
       break;
 
     case '/auth/profile.html':
@@ -31,7 +35,9 @@ export default async function router(pathname = window.location.pathname) {
     case '/post/create/index.html':
       // Load the post creation page script
       const { initPostCreatePage } = await import('/fed2-js2-ca-vicbro00/ui/post/create.js');
+      const { initPostCreateView } = await import('/fed2-js2-ca-vicbro00/ui/post/create.js');
       initPostCreatePage();
+      initPostCreateView();
       break;
 
     case '/post/edit/index.html':
@@ -44,14 +50,15 @@ export default async function router(pathname = window.location.pathname) {
       // Load the feed page script
       const { searchProfiles } = await import('/fed2-js2-ca-vicbro00/ui/profile/profile.js');
       const { initpostSearch } = await import('/fed2-js2-ca-vicbro00/ui/post/search.js');
+      const { setupProfileSearch  } = await import('/fed2-js2-ca-vicbro00/ui/profile/profile.js');
       await searchProfiles();
       await initpostSearch();
+      await setupProfileSearch();
       break;
 
     case '/post/individual-post.html':
-      // Load the individual post page script
       const { fetchPostById, displayPost } = await import('/fed2-js2-ca-vicbro00/router/views/post.js');
-    
+      
       const urlParams = new URLSearchParams(window.location.search);
       const postId = urlParams.get('id');
 
@@ -65,10 +72,12 @@ export default async function router(pathname = window.location.pathname) {
               feedContainer.innerHTML = '<p>Post not found.</p>';
           }
       }
-      break;
+    break;
 
-    default:
-      console.warn('No route match found for', pathname);
-      break;
+      default:
+        if (!pathname.endsWith('favicon.ico') && pathname !== '/') {
+            console.warn(`No route match found for ${pathname}`);
+        }
+        break;
   }
 }
