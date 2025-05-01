@@ -1,14 +1,11 @@
 
 import { JWT_TOKEN } from '/fed2-js2-ca-vicbro00/src/js/api/constants.js';
-
 import { fetchProfileByName } from '/fed2-js2-ca-vicbro00/src/js/ui/profile/profile.js';
 import { displayUserPosts } from '/fed2-js2-ca-vicbro00/src/js/router/views/profile.js';
 import { fetchUserPostsByName } from '/fed2-js2-ca-vicbro00/src/js/ui/profile/profile.js';
 import { followUser, checkIfFollowing, unfollowUser } from '/fed2-js2-ca-vicbro00/src/js/api/profile/follow.js';
 import { initSideMenu } from '/fed2-js2-ca-vicbro00/src/js/ui/components/sideMenu.js';
 import { fetchAndDisplayPosts } from '/fed2-js2-ca-vicbro00/src/js/ui/post/display.js';
-
-/*
 import { setupProfileSearch } from '/fed2-js2-ca-vicbro00/src/js/router/views/profileSearch.js';
 import { initEditPostPage } from '/fed2-js2-ca-vicbro00/src/js/ui/profile/update.js';
 import { initPostSearch } from '/fed2-js2-ca-vicbro00/src/js/ui/post/search.js';
@@ -19,14 +16,13 @@ import { fetchPostsWithAuthors } from '/fed2-js2-ca-vicbro00/src/js/api/post/dis
 import { fetchPostById, displayPost } from '/fed2-js2-ca-vicbro00/src/js/router/views/post.js';
 import { initLoginForm } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/login.js';
 import { initRegisterForm } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/register.js';
-*/
 
 initSideMenu();
 
 if (window.location.pathname.endsWith('/feed.html')) {
     fetchAndDisplayPosts();
 }
-/*
+
 // Initialize side menu and forms
 initLoginForm();
 initRegisterForm();
@@ -55,7 +51,6 @@ if (postId) {
 } else {
     console.error('No post ID found in URL.');
 }
-*/
 
 // Logs out the user
 const logoutButton = document.getElementById('logoutButton');
@@ -65,8 +60,6 @@ if (logoutButton) {
         window.location.href = '/fed2-js2-ca-vicbro00/index.html';
     });
 }
-
-const username = localStorage.getItem('userName') || localStorage.getItem('username') || localStorage.getItem('user_name');
 
 if (username) {
     const profile = await fetchProfileByName(username);
