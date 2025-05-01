@@ -5,7 +5,7 @@ import { fetchProfileByName } from '/fed2-js2-ca-vicbro00/src/js/ui/profile/prof
 import { displayUserPosts } from '/fed2-js2-ca-vicbro00/src/js/router/views/profile.js';
 import { fetchUserPostsByName } from '/fed2-js2-ca-vicbro00/src/js/ui/profile/profile.js';
 import { followUser, checkIfFollowing, unfollowUser } from '/fed2-js2-ca-vicbro00/src/js/api/profile/follow.js';
-
+import { initSideMenu } from '/fed2-js2-ca-vicbro00/src/js/ui/components/sideMenu.js';
 import { fetchAndDisplayPosts } from '/fed2-js2-ca-vicbro00/src/js/ui/post/display.js';
 
 /*
@@ -18,7 +18,6 @@ import { initPostCreateView } from '/fed2-js2-ca-vicbro00/src/js/router/views/po
 import { fetchPostsWithAuthors } from '/fed2-js2-ca-vicbro00/src/js/api/post/display.js';
 import { fetchPostById, displayPost } from '/fed2-js2-ca-vicbro00/src/js/router/views/post.js';
 import { initLoginForm } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/login.js';
-import { initSideMenu } from '/fed2-js2-ca-vicbro00/src/js/ui/components/sideMenu.js';
 import { initRegisterForm } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/register.js';
 */
 
