@@ -52,13 +52,10 @@ if (window.location.pathname.includes('/post/edit/')) {
     initEditPostPage();
 }
 
-// Fetch and display posts
-if (window.location.pathname.includes('/feed')) {
-    const posts = await fetchPostsWithAuthors();
-    displayPosts(posts);
-    initPostSearch(posts);
-    filterPosts(posts);
-}
+displayPosts(posts);
+initPostSearch(posts);
+filterPosts(posts);
+fetchPostsWithAuthors();
 
 // Initialize post creation view
 initPostCreateView();

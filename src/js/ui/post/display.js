@@ -2,6 +2,8 @@ let displayedPostsCount = 20;
 let allPosts = [];
 
 export function displayPosts(posts) {
+    allPosts = posts;
+
     const feedContainer = document.getElementById("feedContainer");
     
     if (!feedContainer) return;
