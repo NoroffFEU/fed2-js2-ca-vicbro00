@@ -36,6 +36,32 @@ if (window.location.pathname.includes('post/feed.html')) {
     loadFeedPage();
 }
 
+/*
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        // Feed page
+        if (window.location.pathname.endsWith('/feed/index.html')) {
+            initPostSearch(posts);
+            filterPosts(posts);
+        }
+        
+        // Individual post page
+        if (window.location.pathname.endsWith('individual-post.html')) {
+            const postId = new URLSearchParams(window.location.search).get('id');
+            if (postId) {
+                const post = await fetchPostById(postId);
+                const feedContainer = document.getElementById('feedContainer');
+                if (feedContainer) {
+                    feedContainer.innerHTML = post ? createPostHTML(post) : '<p>Post not found</p>';
+                }
+            }
+        }
+    } catch (error) {
+        console.error('Error initializing page:', error);
+    }
+});
+*/
+
 initSideMenu();
 
 // Initialize side menu and forms
