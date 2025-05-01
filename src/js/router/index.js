@@ -7,75 +7,54 @@ export default async function router(pathname = window.location.pathname) {
 
     case '/index.html':
     case '/index':
-      const home = await import('/fed2-js2-ca-vicbro00/views/home.js');
+      const home = await import('../views/home.js');
       home.init();
       break;
 
     case '/auth/login/index.html':
-      const { initAuthLoginForm } = await import('/fed2-js2-ca-vicbro00/ui/auth/login.js');
-      initAuthLoginForm();
+      // Load the login page script
+      const { initLoginPage } = await import('../ui/login/index.js');
+      initLoginPage();
       break;
     
     case '/auth/register/index.html':
       // Load the register page script
-      const { initRegisterPage } = await import('/fed2-js2-ca-vicbro00/ui/register/index.js');
-      const { initRegisterForm } = await import('/fed2-js2-ca-vicbro00/ui/register/index.js');
+      const { initRegisterPage } = await import('../ui/register/index.js');
       initRegisterPage();
-      initRegisterForm();
       break;
 
     case '/auth/profile.html':
       // Load the profile page script
-      const { initProfilePage } = await import('/fed2-js2-ca-vicbro00/ui/profile/index.js');
+      const { initProfilePage } = await import('../ui/profile/index.js');
       initProfilePage();
       break;
 
     case '/post/create/index.html':
       // Load the post creation page script
-      const { initPostCreatePage } = await import('/fed2-js2-ca-vicbro00/ui/post/create.js');
-      const { initPostCreateView } = await import('/fed2-js2-ca-vicbro00/ui/post/create.js');
+      const { initPostCreatePage } = await import('../ui/post/create.js');
       initPostCreatePage();
-      initPostCreateView();
       break;
 
     case '/post/edit/index.html':
       // Load the post edit page script
-      const { initPostEditPage } = await import('/fed2-js2-ca-vicbro00/ui/post/edit.js');
+      const { initPostEditPage } = await import('../ui/post/edit.js');
       initPostEditPage();
       break;
 
     case '/post/feed.html':
       // Load the feed page script
-      const { searchProfiles } = await import('/fed2-js2-ca-vicbro00/ui/profile/profile.js');
-      const { initpostSearch } = await import('/fed2-js2-ca-vicbro00/ui/post/search.js');
-      const { setupProfileSearch  } = await import('/fed2-js2-ca-vicbro00/ui/profile/profile.js');
-      await searchProfiles();
-      await initpostSearch();
-      await setupProfileSearch();
+      const { initFeedPage } = await import('../ui/post/feed.js');
+      initFeedPage();
       break;
 
     case '/post/individual-post.html':
-      const { fetchPostById, displayPost } = await import('/fed2-js2-ca-vicbro00/router/views/post.js');
-      
-      const urlParams = new URLSearchParams(window.location.search);
-      const postId = urlParams.get('id');
+      // Load the individual post page script
+      const { initIndividualPostPage } = await import('../ui/post/individualPost.js');
+      initIndividualPostPage();
+      break;
 
-      if (postId) {
-          const post = await fetchPostById(postId);
-          displayPost(post);
-      } else {
-          console.error('No post ID found in URL.');
-          const feedContainer = document.getElementById('feedContainer');
-          if (feedContainer) {
-              feedContainer.innerHTML = '<p>Post not found.</p>';
-          }
-      }
-    break;
-
-      default:
-        if (!pathname.endsWith('favicon.ico') && pathname !== '/') {
-            console.warn(`No route match found for ${pathname}`);
-        }
-        break;
+    default:
+      console.warn('No route match found for', pathname);
+      break;
   }
 }
