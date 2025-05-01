@@ -1,4 +1,4 @@
-import { JWT_TOKEN, API_BASE } from "/fed2-js2-ca-vicbro00/src/js/api/constants.js";
+import { JWT_TOKEN, API_BASE, API_KEY } from "/fed2-js2-ca-vicbro00/src/js/api/constants.js";
 
 export async function fetchPostsWithAuthors() {
     const token = localStorage.getItem(JWT_TOKEN);
