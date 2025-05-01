@@ -1,101 +1,60 @@
 // This function controls which JavaScript file is loaded on which page
 // In order to add additional pages, you will need to implement them below
 // You may change the behaviour or approach of this file if you choose
-export default async function router() {
-  const path = window.location.pathname.split('/').pop() || 'index.html';
-  const urlParams = new URLSearchParams(window.location.search);
-  const postId = urlParams.get('id');
-  const username = urlParams.get('username');
+export default async function router(pathname = window.location.pathname) {
+  switch (pathname) {
+    case '/':
 
-  switch (path) {
-    case 'index.html':
-      await import('/fed2-js2-ca-vicbro00/src/js/ui/auth/login.js')
-        .then(module => module.initLoginForm());
-      await import('/fed2-js2-ca-vicbro00/src/js/ui/auth/register.js')
-        .then(module => module.initRegisterForm());
+    case '/index.html':
+    case '/index':
+      const home = await import('../views/home.js');
+      home.init();
       break;
 
-    case 'feed.html':
-      try {
-        const { fetchPostsWithAuthors, displayPosts, initPostSearch, filterPosts } =
-          await import('/fed2-js2-ca-vicbro00/src/js/ui/post/display.js');
-      
-        const posts = await fetchPostsWithAuthors();
-        displayPosts(posts);
-        initPostSearch(posts);
-        filterPosts(posts);
-      } catch (error) {
-        console.error('Error loading or executing feed page logic:', error);
-      }
+    case '/auth/login/index.html':
+      // Load the login page script
+      const { initLoginPage } = await import('../ui/login/index.js');
+      initLoginPage();
+      break;
+    
+    case '/auth/register/index.html':
+      // Load the register page script
+      const { initRegisterPage } = await import('../ui/register/index.js');
+      initRegisterPage();
       break;
 
-    case 'create.html':
-      await import('/fed2-js2-ca-vicbro00/src/js/router/views/postCreate.js')
-        .then(module => module.initPostCreateView());
+    case '/auth/profile.html':
+      // Load the profile page script
+      const { initProfilePage } = await import('../ui/profile/index.js');
+      initProfilePage();
       break;
 
-    case 'edit.html':
-      await import('/fed2-js2-ca-vicbro00/src/js/ui/profile/update.js')
-        .then(module => module.initEditPostPage());
+    case '/post/create/index.html':
+      // Load the post creation page script
+      const { initPostCreatePage } = await import('../ui/post/create.js');
+      initPostCreatePage();
       break;
 
-    case 'post.html':
-      if (postId) {
-        const { fetchPostById, displayPost } = 
-          await import('/fed2-js2-ca-vicbro00/src/js/router/views/post.js');
-        const post = await fetchPostById(postId);
-        displayPost(post);
-      } else {
-        console.warn('Post ID not found in URL');
-      }
+    case '/post/edit/index.html':
+      // Load the post edit page script
+      const { initPostEditPage } = await import('../ui/post/edit.js');
+      initPostEditPage();
       break;
 
-    case 'profile.html':
-      if (username) {
-        const { fetchProfileByName, fetchUserPostsByName } = 
-          await import('/fed2-js2-ca-vicbro00/src/js/ui/profile/profile.js');
-        
-        const profile = await fetchProfileByName(username);
-        if (profile) {
-          const profileName = document.getElementById('profileName');
-          if (profileName) profileName.textContent = profile.name || 'Unknown User';
+    case '/post/feed.html':
+      // Load the feed page script
+      const { initFeedPage } = await import('../ui/post/feed.js');
+      initFeedPage();
+      break;
 
-          const followButton = document.getElementById('followButton');
-          if (followButton) {
-            const { checkIfFollowing, followUser, unfollowUser } = 
-              await import('/fed2-js2-ca-vicbro00/src/js/api/profile/follow.js');
-            
-            const isFollowing = await checkIfFollowing(username);
-            updateFollowButton(followButton, isFollowing);
+    case '/post/individual-post.html':
+      // Load the individual post page script
+      const { initIndividualPostPage } = await import('../ui/post/individualPost.js');
+      initIndividualPostPage();
+      break;
 
-            followButton.addEventListener('click', async () => {
-              try {
-                followButton.disabled = true;
-                if (isFollowing) {
-                  await unfollowUser(username);
-                  updateFollowButton(followButton, false);
-                } else {
-                  await followUser(username);
-                  updateFollowButton(followButton, true);
-                }
-              } catch (error) {
-                console.error('Follow error:', error);
-              } finally {
-                followButton.disabled = false;
-              }
-            });
-          }
-
-          const posts = await fetchUserPostsByName(username);
-          const { displayUserPosts } = await import('/fed2-js2-ca-vicbro00/src/js/router/views/profile.js');
-          displayUserPosts(posts);
-        }
-      }
+    default:
+      console.warn('No route match found for', pathname);
       break;
   }
-}
-
-function updateFollowButton(button, isFollowing) {
-  button.textContent = isFollowing ? 'Following' : 'Follow';
-  button.classList.toggle('following', isFollowing);
 }

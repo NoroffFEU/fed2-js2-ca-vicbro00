@@ -2,15 +2,13 @@ import { API_AUTH, JWT_TOKEN } from '../constants.js';
 import { checkLoginState } from '../auth/auth.js';
 import { authGuard } from '../../utilities/authGuard.js';
 
-export function initProtectedPage() {
-    authGuard();
-
-    // Example API request for generating an API key
-    getKey()
-        .then((apiKeyData) => {
-            console.log('API Key Generated:', apiKeyData.key);
-        })
-        .catch(console.error);
+export async function initProtectedPage() {
+    try {
+        const apiKeyData = await getKey();
+        console.log('API Key Generated:', apiKeyData.key);
+    } catch (error) {
+        console.error('Error creating API key:', error);
+    }
 }
 
 export function authGuard() {
