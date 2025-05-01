@@ -4,11 +4,10 @@ export async function fetchPostsWithAuthors() {
     const token = localStorage.getItem(JWT_TOKEN);
     const headers = {
         'Content-Type': 'application/json',
+        'X-Noroff-API-Key': API_KEY
     };
 
-    if (token) {
-        headers['Authorization'] = `Bearer ${token}`;
-    }
+    if (token) headers['Authorization'] = `Bearer ${token}`;
 
     try {
         const response = await fetch(`${API_BASE}/social/posts?_author=true&_reactions=true`, {
@@ -16,11 +15,14 @@ export async function fetchPostsWithAuthors() {
         });
 
         if (!response.ok) {
-            throw new Error('Failed to fetch posts');
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const { data } = await response.json();
-        return data;
+        const result = await response.json();
+        console.log('API Response:', result); // Debug log
+        
+        // Handle both response formats
+        return result.data || result.posts || [];
     } catch (error) {
         console.error('Error fetching posts:', error);
         return [];
