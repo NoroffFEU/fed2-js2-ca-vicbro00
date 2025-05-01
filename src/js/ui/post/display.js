@@ -4,6 +4,7 @@ let displayedPostsCount = 20;
 let allPosts = [];
 
 export function displayPosts(posts) {
+    console.log(posts);
     const feedContainer = document.getElementById("feedContainer");
     
     if (!feedContainer) return;
@@ -31,13 +32,25 @@ function loadMorePosts() {
     displayPosts(allPosts);
 }
 
-export async function fetchAndDisplayPosts() {
-    allPosts = await fetchPostsWithAuthors();
-    displayPosts(allPosts);
+export async function fetchPostsWithAuthors() {
+    try {
+        const response = await fetch(`${API_BASE}/social/posts?_author=true`);
+        const data = await response.json();
+        console.log(data);
+        return data.posts || [];
+    } catch (error) {
+        console.error('Error fetching posts:', error);
+        return [];
+    }
 }
 
 // Feed page link to individual post
 export function createPostHTML(post) {
+    if (!post || !post.id) {
+        console.error("Invalid post object:", post);
+        return '';
+    }
+
     if (!window.location.pathname.endsWith('/feed.html')) {
         return '';
     }
