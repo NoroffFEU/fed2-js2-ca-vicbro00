@@ -17,7 +17,7 @@ export async function initEditPostPage() {
 
         const currentUser = localStorage.getItem('userName');
         if (post.author !== currentUser) {
-            const editButton = document.getElementById('editButton');
+            const editButton = document.querySelectorAll('.edit-button');
             if (editButton) {
                 editButton.style.display = 'none';
             }
