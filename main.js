@@ -66,6 +66,8 @@ if (logoutButton) {
     });
 }
 
+const username = localStorage.getItem('userName') || localStorage.getItem('username') || localStorage.getItem('user_name');
+
 if (username) {
     const profile = await fetchProfileByName(username);
 
