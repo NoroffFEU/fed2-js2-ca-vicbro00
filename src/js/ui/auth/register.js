@@ -1,7 +1,10 @@
 import { registerUser } from '../../api/auth/register.js';
 
-// Register new user
-export function initRegisterForm() {
+export function initRegisterPage() {
+  initRegisterForm();
+}
+
+function initRegisterForm() {
   const registerForm = document.getElementById('registerForm');
 
   if (registerForm) {
@@ -33,7 +36,6 @@ export function initRegisterForm() {
   }
 }
 
-// Validates the registration form and inputs
 function validateRegistration({ name, email, password }, confirmPassword) {
   if (!name || !email || !password || !confirmPassword) {
     showMessage('All fields are required', 'error');
@@ -58,7 +60,6 @@ function validateRegistration({ name, email, password }, confirmPassword) {
   return true;
 }
 
-// Shows message when registering
 function showMessage(message, type) {
   const messageDiv = document.getElementById('message');
   messageDiv.textContent = message;

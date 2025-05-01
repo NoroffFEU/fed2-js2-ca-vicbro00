@@ -1,5 +1,9 @@
 import { loginUser } from '../../api/auth/login.js';
 
+export function initLoginPage() {
+    initLoginForm();
+}
+
 export function initLoginForm() {
     const form = document.getElementById('loginForm');
     if (!form) return;
