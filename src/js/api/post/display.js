@@ -17,17 +17,27 @@ export async function fetchPostsWithAuthors() {
             headers,
         });
 
+        if (response.status === 401 && !token) {
+            const publicResponse = await fetch(`${API_BASE}/public/posts?_author=true`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Noroff-API-Key': API_KEY
+                },
+            });
+
+            if (!publicResponse.ok) {
+                throw new Error(`HTTP error! status: ${publicResponse.status}`);
+            }
+
+            const publicResult = await publicResponse.json();
+            return publicResult.data || publicResult.posts || [];
+        }
+
         if (!response.ok) {
-            console.error(`HTTP error! status: ${response.status}`);
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         const result = await response.json();
-
-        if (!result.data && !result.posts) {
-            console.error('No posts data received from API');
-        }
-
         return result.data || result.posts || [];
     } catch (error) {
         console.error('Error fetching posts:', error);
