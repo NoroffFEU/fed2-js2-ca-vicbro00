@@ -132,3 +132,17 @@ export function displayFollowers(followers) {
 
     followersContainer.appendChild(followersList);
 }
+
+// Users profiles
+const urlParams = new URLSearchParams(window.location.search);
+const profileUsername = urlParams.get('username');
+const loggedInUsername = localStorage.getItem('userName');
+
+// Fetch posts for the profile
+const userPosts = await fetchUserPostsByName(profileUsername);
+
+// Determine if it's the logged-in user's profile
+const isOwnProfile = profileUsername === loggedInUsername;
+
+// Pass this flag to the function to control button visibility
+displayUserPosts(userPosts, isOwnProfile);

@@ -1,5 +1,4 @@
 import { API_BASE, API_KEY, JWT_TOKEN } from '../../api/constants.js';
-import { setupDeleteButtons } from '../../api/post/delete.js';
 
 export async function fetchUserPostsByName(name) {
     const url = `${API_BASE}/social/profiles/${name}/posts`;
@@ -20,51 +19,39 @@ export async function fetchUserPostsByName(name) {
 }
 
 // Displays user profile and posts
-export function displayUserPosts(posts) {
-    const container = document.getElementById('userPostsContainer');
-    if (!container) return;
+export function displayUserPosts(posts, isOwnProfile) {
+    const postsContainer = document.getElementById('postsContainer');
+    postsContainer.innerHTML = ''; // Clear any existing posts
 
-    container.innerHTML = posts.length > 0 
-        ? posts.map(post => createUserPostHTML(post, true)).join('')
-        : '<p>This user has no posts yet.</p>';
-
-    setupEditButtons();
-    setupDeleteButtons();
-}
-
-function setupEditButtons() {
-    const editButtons = document.querySelectorAll('.edit-button');
-
-    editButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            const postId = event.target.dataset.id;
-            if (postId) {
-                window.location.href = `/fed2-js2-ca-vicbro00/post/edit/index.html?id=${postId}`;
-            }
-        });
+    posts.forEach(post => {
+        const postHTML = createPostHTML(post, isOwnProfile);
+        postsContainer.innerHTML += postHTML;
     });
 }
 
-function createUserPostHTML(post, showButtons = false) {
-    const { media, title, body, tags } = post;
-
-    const imageUrl = media?.url;
-    const imageAlt = media?.alt || 'Post Image';
+function createPostHTML(post, isOwnProfile) {
+    const { id, title, body, author } = post;
+    
+    let editDeleteButtons = '';
+    if (isOwnProfile) {
+        editDeleteButtons = `
+            <button class="edit-button" data-id="${id}">Edit</button>
+            <button class="delete-button" data-id="${id}">Delete</button>
+        `;
+    }
 
     return `
-    <div class='post'>
-        <div class='post-content'>
-            <h2>${title}</h2>
-            ${imageUrl ? `<img src='${imageUrl}' alt='${imageAlt}' class='post-image'>` : ''}
-            <p>${body}</p>
+        <div class="post">
+            <div class="post-header">
+                <a href="/post/profile.html?username=${encodeURIComponent(author.name)}">${author.name}</a>
+            </div>
+            <div class="post-content">
+                <h3>${title}</h3>
+                <p>${body}</p>
+            </div>
+            <div class="post-footer">
+                ${editDeleteButtons}
+            </div>
         </div>
-        ${showButtons ? `
-        <div class='post-buttons'>
-            <button class='edit-button' data-id='${post.id}'>Edit</button>
-            <button class='delete-button' data-id='${post.id}'>Delete</button>
-        </div>` : ''}
-        <div class='post-footer'>
-            <div class='post-tags'>Tags: ${tags?.join(', ') || 'No tags'}</div>
-        </div>
-    </div>`;
+    `;
 }
