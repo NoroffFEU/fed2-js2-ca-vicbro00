@@ -15,6 +15,14 @@ export async function initEditPostPage() {
             throw new Error('Post not found');
         }
 
+        const currentUser = localStorage.getItem('userName');
+        if (post.author !== currentUser) {
+            const editButton = document.getElementById('editButton');
+            if (editButton) {
+                editButton.style.display = 'none';
+            }
+        }
+
         populateEditForm(post);
         setupFormSubmission(postId);
     } catch (error) {
