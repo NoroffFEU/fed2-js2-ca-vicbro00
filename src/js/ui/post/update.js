@@ -2,8 +2,12 @@ import { API_BASE, API_KEY } from '../../api/constants.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
 
-    const isProfilePage = window.location.pathname.includes('/auth/profile');
-    if (!isProfilePage) {
+    const isProfilePage = window.location.pathname.includes('/post/profile');
+    const username = new URLSearchParams(window.location.search).get('username');
+    const loggedInUser = localStorage.getItem('userName');
+
+    if (isProfilePage && username !== loggedInUser) {
+        // Hide edit buttons if it's not the current user's profile
         const editButtons = document.querySelectorAll('.edit-button');
         editButtons.forEach(button => {
             button.style.display = 'none';
