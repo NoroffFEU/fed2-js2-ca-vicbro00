@@ -14,6 +14,10 @@ import { fetchPostsWithAuthors } from '/fed2-js2-ca-vicbro00/src/js/api/post/dis
 import { initAuthLoginForm } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/login.js';
 import { initRegisterForm } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/register.js';
 
+if (!localStorage.getItem('JWT_TOKEN')) {
+    window.location.href = "/fed2-js2-ca-vicbro00/auth/login/index.html";
+}
+
 // Main function to link everything together
 export async function loadFeedPage() {
     const posts = await fetchPostsWithAuthors();
