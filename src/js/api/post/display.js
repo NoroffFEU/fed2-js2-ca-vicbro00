@@ -4,37 +4,27 @@ export async function fetchPostsWithAuthors() {
     const token = localStorage.getItem(JWT_TOKEN);
     const headers = {
         'Content-Type': 'application/json',
-        'X-Noroff-API-Key': API_KEY,
+        'X-Noroff-API-Key': API_KEY
     };
 
-    // Add Authorization header ONLY if token exists
-    if (token) {
-        headers['Authorization'] = `Bearer ${token}`;
-    } else {
-        console.error('JWT token not found in localStorage');
-    }
-
-    const url = `${API_BASE}/social/posts?_author=true&_reactions=true`;
-    console.log('Fetching posts from:', url);
-    console.log('Headers:', headers);
+    if (token) headers['Authorization'] = `Bearer ${token}`;
 
     try {
-        const response = await fetch(url, {
+        const response = await fetch(`${API_BASE}/social/posts?_author=true&_reactions=true`, {
             headers,
         });
 
         if (!response.ok) {
-            // More detailed error message
-            const errorData = await response.json().catch(() => ({}));
-            throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         const result = await response.json();
-        return result.data || result.posts || []; // Handle different response formats
-
+        console.log('API Response:', result); // Debug log
+        
+        // Handle both response formats
+        return result.data || result.posts || [];
     } catch (error) {
         console.error('Error fetching posts:', error);
-        alert('Failed to load posts. ' + (error.message || 'Please try again later.'));
         return [];
     }
 }
