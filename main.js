@@ -42,14 +42,18 @@ filterPosts(posts);
 initPostCreateView();
 
 const urlParams = new URLSearchParams(window.location.search);
-const postId = urlParams.get('id');
 const username = urlParams.get('username');
 
-if (postId) {
-    const post = await fetchPostById(postId);
-    displayPost(post);
-} else {
-    console.error('No post ID found in URL.');
+if (window.location.pathname.includes('/individual-post/')) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const postId = urlParams.get('id');
+    
+    if (postId) {
+        const post = await fetchPostById(postId);
+        displayPost(post);
+    } else {
+        console.error('No post ID found in URL.');
+    }
 }
 
 // Logs out the user

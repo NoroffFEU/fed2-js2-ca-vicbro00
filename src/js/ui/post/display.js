@@ -51,7 +51,7 @@ export function createPostHTML(post) {
     const authorName = author?.name || "Unknown";
     const dateString = new Date(created).toLocaleString();
 
-    const profileUrl = `/auth/profile.html?username=${encodeURIComponent(authorName)}`;
+    const profileUrl = `/fed2-js2-ca-vicbro00/auth/profile.html?username=${encodeURIComponent(authorName)}`;
 
     return `
     <div class="post">

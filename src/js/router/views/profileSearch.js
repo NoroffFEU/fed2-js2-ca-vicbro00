@@ -50,7 +50,7 @@ export async function setupProfileSearch() {
         if (card || image) {
             const username = card ? card.dataset.username : image.dataset.username;
             if (username) {
-                window.location.href = `/auth/profile.html?username=${encodeURIComponent(username)}`;
+                window.location.href = `/fed2-js2-ca-vicbro00/auth/profile.html?username=${encodeURIComponent(username)}`;
             }
         }
     });

@@ -3,7 +3,7 @@ import { createPostHeader, createPostFooter } from '../../ui/components/posts.js
 
 // Fetch individual post by ID
 export async function fetchPostById(id) {
-    const url = `${API_BASE}/social/posts/${id}?_author=true`;
+    const url = `${API_BASE}/fed2-js2-ca-vicbro00/social/posts/${id}?_author=true`;
     const headers = {
         'X-Noroff-API-Key': API_KEY,    
         'Authorization': `Bearer ${JWT_TOKEN}`
