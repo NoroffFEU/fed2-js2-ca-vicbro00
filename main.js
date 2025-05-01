@@ -20,7 +20,7 @@ import { createPostHTML } from '/fed2-js2-ca-vicbro00/src/js/ui/post/display.js'
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         // Feed page
-        if (window.location.pathname.endsWith('/feed.html')) {
+        if (window.location.pathname.endsWith('/feed/index.html')) {
             const posts = await fetchPostsWithAuthors();
             displayPosts(posts);
         }
