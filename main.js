@@ -18,15 +18,14 @@ import { createPostHTML } from '/fed2-js2-ca-vicbro00/src/js/ui/post/display.js'
 
 // Main function to link everything together
 export async function loadFeedPage() {
-    // Fetch posts from API
     const posts = await fetchPostsWithAuthors();
+    console.log("Fetched posts:", posts); // <- Add this
 
-    // Display posts on the feed page
     displayPosts(posts);
 }
 
 // Only execute the function if on the feed page
-if (window.location.pathname.includes('feed/index.html')) {
+if (window.location.pathname.includes('post/feed.html')) {
     loadFeedPage();
 }
 
