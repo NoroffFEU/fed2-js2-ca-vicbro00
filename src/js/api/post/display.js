@@ -6,7 +6,6 @@ export async function fetchPostsWithAuthors() {
         'Content-Type': 'application/json',
     };
 
-    // Only set Authorization header if token exists
     if (token) {
         headers['Authorization'] = `Bearer ${token}`;
     }
