@@ -15,16 +15,6 @@ export async function initEditPostPage() {
             throw new Error('Post not found');
         }
 
-        const currentUser = localStorage.getItem('userName');
-        const isProfilePage = window.location.pathname.includes('/auth/profile.html');
-
-        if (post.author !== currentUser || !isProfilePage) {
-            const editButtons = document.querySelectorAll('.edit-button');
-            editButtons.forEach(button => {
-                button.style.display = 'none';
-            });
-        }
-
         populateEditForm(post);
         setupFormSubmission(postId);
     } catch (error) {
