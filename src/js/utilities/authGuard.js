@@ -2,7 +2,7 @@ export function authGuard(silent = false) {
   if (!isLoggedIn()) {
     if (!silent) {
       alert("You must be logged in to view this page");
-      window.location.href = "/login.html";
+      window.location.href = "/fed2-js2-ca-vicbro00/auth/login/index.html";
     }
     return false;
   }

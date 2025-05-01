@@ -11,10 +11,8 @@ import { filterPosts } from '/fed2-js2-ca-vicbro00/src/js/ui/post/filter.js';
 import { displayPosts } from '/fed2-js2-ca-vicbro00/src/js/ui/post/display.js';
 import { initPostCreateView } from '/fed2-js2-ca-vicbro00/src/js/router/views/postCreate.js';
 import { fetchPostsWithAuthors } from '/fed2-js2-ca-vicbro00/src/js/api/post/display.js';
-import { fetchPostById } from '/fed2-js2-ca-vicbro00/src/js/router/views/post.js';
 import { initAuthLoginForm } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/login.js';
 import { initRegisterForm } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/register.js';
-import { createPostHTML } from '/fed2-js2-ca-vicbro00/src/js/ui/post/display.js';
 
 // Main function to link everything together
 export async function loadFeedPage() {
@@ -37,32 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
 if (window.location.pathname.includes('post/feed.html')) {
     loadFeedPage();
 }
-
-/*
-document.addEventListener('DOMContentLoaded', async () => {
-    try {
-        // Feed page
-        if (window.location.pathname.endsWith('/feed/index.html')) {
-            initPostSearch(posts);
-            filterPosts(posts);
-        }
-        
-        // Individual post page
-        if (window.location.pathname.endsWith('individual-post.html')) {
-            const postId = new URLSearchParams(window.location.search).get('id');
-            if (postId) {
-                const post = await fetchPostById(postId);
-                const feedContainer = document.getElementById('feedContainer');
-                if (feedContainer) {
-                    feedContainer.innerHTML = post ? createPostHTML(post) : '<p>Post not found</p>';
-                }
-            }
-        }
-    } catch (error) {
-        console.error('Error initializing page:', error);
-    }
-});
-*/
 
 initSideMenu();
 
