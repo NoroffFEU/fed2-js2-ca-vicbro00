@@ -14,7 +14,7 @@ import { displayPosts } from '/fed2-js2-ca-vicbro00/src/js/ui/post/display.js';
 import { initPostCreateView } from '/fed2-js2-ca-vicbro00/src/js/router/views/postCreate.js';
 import { fetchPostsWithAuthors } from '/fed2-js2-ca-vicbro00/src/js/api/post/display.js';
 import { fetchPostById, displayPost } from '/fed2-js2-ca-vicbro00/src/js/router/views/post.js';
-import { initLoginForm } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/login.js';
+import { initAuthLoginForm } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/login.js';
 import { initRegisterForm } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/register.js';
 
 initSideMenu();
@@ -24,7 +24,7 @@ if (window.location.pathname.endsWith('/feed.html')) {
 }
 
 // Initialize side menu and forms
-initLoginForm();
+initAuthLoginForm();
 initRegisterForm();
 setupProfileSearch();
 
