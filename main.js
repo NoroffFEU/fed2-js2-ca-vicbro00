@@ -45,9 +45,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-// Fetches individual post
-createPostHTML();
-
 initSideMenu();
 
 // Initialize side menu and forms
