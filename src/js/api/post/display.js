@@ -13,7 +13,7 @@ export async function fetchPostsWithAuthors() {
     }
 
     try {
-        const response = await fetch(`${API_BASE}/social/posts?_author=true&_reactions=true`, {
+        const response = await fetch(`${API_BASE}/social/posts?_author=true`, {
             headers,
         });
 
