@@ -1,5 +1,27 @@
 import { API_BASE, API_KEY } from '../../api/constants.js';
 
+export async function initEditPostPage() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const postId = urlParams.get('id');
+
+    if (!postId) {
+        console.error('No post ID found in URL');
+        return;
+    }
+
+    try {
+        const post = await fetchPostById(postId);
+        if (!post) {
+            throw new Error('Post not found');
+        }
+
+        populateEditForm(post);
+        setupFormSubmission(postId);
+    } catch (error) {
+        console.error('Error initializing edit page:', error);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
     const postId = new URLSearchParams(window.location.search).get('id');
 
@@ -53,10 +75,12 @@ function populateEditForm(post) {
 }
 
 function setupFormSubmission(postId) {
-    document.getElementById('editPostForm').addEventListener('submit', async (e) => {
+    const form = document.getElementById('editPostForm');
+    if (!form) return;
+
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
-        // Get updated values from form
+
         const updatedPost = {
             title: document.getElementById('title').value,
             body: document.getElementById('body').value,
@@ -64,19 +88,19 @@ function setupFormSubmission(postId) {
                 .split(',')
                 .map(tag => tag.trim())
                 .filter(tag => tag.length > 0),
-            media: {
-                url: document.getElementById('media').value || undefined
-            }
+            media: document.getElementById('media').value ? { url: document.getElementById('media').value } : undefined
         };
 
+        console.log('Updated Post Data:', updatedPost);
+
         try {
-            // Call API to update post
             await updatePost(postId, updatedPost);
             alert('Post updated successfully!');
-            window.location.href = `/fed2-js2-ca-vicbro00/profile.html?username=${localStorage.getItem('userName')}`;
+            const username = localStorage.getItem('userName');
+            window.location.href = `/fed2-js2-ca-vicbro00/profile.html?username=${username}`;
         } catch (error) {
             console.error('Error updating post:', error);
-            alert('Update failed: ' + error.message);
+            alert('Failed to update post: ' + error.message);
         }
     });
 }
@@ -84,7 +108,7 @@ function setupFormSubmission(postId) {
 async function updatePost(postId, postData) {
     const token = localStorage.getItem('JWT_TOKEN');
     const url = `${API_BASE}/social/posts/${postId}`;
-    
+
     try {
         const response = await fetch(url, {
             method: 'PUT',
@@ -95,16 +119,16 @@ async function updatePost(postId, postData) {
             },
             body: JSON.stringify(postData)
         });
-        
+
         if (!response.ok) {
             const error = await response.json();
-            console.error("Response Error:", error);
-            throw new Error(error.errors || "Failed to update post");
+            console.error('Response Error:', error);
+            throw new Error(error.errors?.[0] || error.message || 'Failed to update post');
         }
-        
+
         return await response.json();
     } catch (error) {
-        console.error("Error updating post:", error);
+        console.error('Error updating post:', error);
         throw error;
     }
 }

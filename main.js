@@ -6,7 +6,7 @@ import { fetchUserPostsByName } from '/fed2-js2-ca-vicbro00/src/js/ui/profile/pr
 import { followUser, checkIfFollowing, unfollowUser } from '/fed2-js2-ca-vicbro00/src/js/api/profile/follow.js';
 import { initSideMenu } from '/fed2-js2-ca-vicbro00/src/js/ui/components/sideMenu.js';
 import { setupProfileSearch } from '/fed2-js2-ca-vicbro00/src/js/router/views/profileSearch.js';
-import { initEditPostPage } from '/fed2-js2-ca-vicbro00/src/js/ui/profile/update.js';
+import { initEditPostPage } from '/fed2-js2-ca-vicbro00/src/js/ui/post/update.js';
 import { initPostSearch } from '/fed2-js2-ca-vicbro00/src/js/ui/post/search.js';
 import { filterPosts } from '/fed2-js2-ca-vicbro00/src/js/ui/post/filter.js';
 import { displayPosts } from '/fed2-js2-ca-vicbro00/src/js/ui/post/display.js';
