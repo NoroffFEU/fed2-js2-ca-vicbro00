@@ -16,7 +16,7 @@ import { fetchPostsWithAuthors } from '/fed2-js2-ca-vicbro00/src/js/api/post/dis
 import { fetchPostById, displayPost } from '/fed2-js2-ca-vicbro00/src/js/router/views/post.js';
 import { initAuthLoginForm } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/login.js';
 import { initRegisterForm } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/register.js';
-import { createPostHTML } from '/fed2-js2-ca-vicbro00/src/js/ui/post/display';
+import { createPostHTML } from '/fed2-js2-ca-vicbro00/src/js/ui/post/display.js';
 
 // Fetches individual post
 createPostHTML();
