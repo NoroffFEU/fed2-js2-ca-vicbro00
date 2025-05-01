@@ -2,7 +2,6 @@ let displayedPostsCount = 20;
 let allPosts = [];
 
 export function displayPosts(posts) {
-    console.log(posts);
     const feedContainer = document.getElementById("feedContainer");
     
     if (!feedContainer) return;
@@ -32,10 +31,6 @@ function loadMorePosts() {
 
 // Feed page link to individual post
 export function createPostHTML(post) {
-    if (!post || !post.id) {
-        console.error("Invalid post object:", post);
-        return '';
-    }
 
     if (!window.location.pathname.endsWith('/feed.html')) {
         return '';
