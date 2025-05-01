@@ -1,10 +1,10 @@
 import { loginUser } from '../../api/auth/login.js';
 
 export function initLoginPage() {
-    initLoginForm();
+    initAuthLoginForm();
 }
 
-export function initLoginForm() {
+export function initAuthLoginForm() {
     const form = document.getElementById('loginForm');
     if (!form) return;
 
@@ -20,21 +20,21 @@ async function handleLoginSubmit(e) {
 
     try {
         validateInputs(email.value.trim(), password.value);
-        
+
         submitButton.disabled = true;
         messageDiv.textContent = 'Logging in...';
         messageDiv.className = 'message-loading';
 
         const userData = await loginUser(email.value.trim(), password.value);
         await new Promise(resolve => setTimeout(resolve, 100));
-        
+
         if (!localStorage.getItem('JWT_TOKEN')) {
             throw new Error('Login session could not be established');
         }
-        
+
         showSuccess(messageDiv, userData.name);
         setTimeout(() => window.location.href = '/fed2-js2-ca-vicbro00/index.html', 2000);
-        
+
     } catch (error) {
         handleLoginError(error, messageDiv, email);
     } finally {

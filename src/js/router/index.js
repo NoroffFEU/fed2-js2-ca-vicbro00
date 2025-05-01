@@ -12,10 +12,8 @@ export default async function router(pathname = window.location.pathname) {
       break;
 
     case '/auth/login/index.html':
-      const { initLoginPage } = await import('/fed2-js2-ca-vicbro00/ui/auth/login.js');
-      const { initLoginForm } = await import('/fed2-js2-ca-vicbro00/ui/auth/login.js');
-      initLoginPage();
-      initLoginForm();
+      const { initAuthLoginForm } = await import('/fed2-js2-ca-vicbro00/ui/auth/login.js');
+      initAuthLoginForm();
       break;
     
     case '/auth/register/index.html':
