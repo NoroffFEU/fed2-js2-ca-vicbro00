@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             throw new Error('Post not found');
         }
 
-        // Hide the edit button if the post's author is not the logged-in user
-        if (post.author !== loggedInUser) {
+        const isProfilePage = window.location.pathname.includes('/auth/profile.html');
+        if (post.author !== loggedInUser || !isProfilePage) {
             const editButtons = document.querySelectorAll('.edit-button');
             editButtons.forEach(button => {
                 button.style.display = 'none';
