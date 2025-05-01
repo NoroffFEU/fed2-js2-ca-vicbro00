@@ -1,8 +1,6 @@
 import { API_BASE, API_KEY } from '../../api/constants.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
-
-    // Check if the logged-in user is the post's author and hide edit button if not
     const postId = new URLSearchParams(window.location.search).get('id');
     const loggedInUser = localStorage.getItem('userName');
 
@@ -14,12 +12,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     try {
         const post = await fetchPostById(postId);
-        
+
         if (!post) {
             throw new Error('Post not found');
         }
 
-        // Hide edit button if the post's author is not the logged-in user
+        // Hide the edit button if the post's author is not the logged-in user
         if (post.author !== loggedInUser) {
             const editButtons = document.querySelectorAll('.edit-button');
             editButtons.forEach(button => {

@@ -35,7 +35,9 @@ export function initPostCreateView() {
             try {
                 const result = await createPost(postData);
                 alert('Post created successfully!');
-                form.reset();
+                
+                // Redirect to the feed page after creation
+                window.location.href = '/fed2-js2-ca-vicbro00/post/feed.html';
             } catch (error) {
                 alert(`Error: ${error.message}`);
             }
