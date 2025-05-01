@@ -45,9 +45,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-// Fetches individual post
-createPostHTML();
-
 initSideMenu();
 
 // Initialize side menu and forms
@@ -60,10 +57,12 @@ if (window.location.pathname.includes('/post/edit/')) {
 }
 
 // Fetch and display posts
-const posts = await fetchPostsWithAuthors();
-displayPosts(posts);
-initPostSearch(posts);
-filterPosts(posts);
+if (window.location.pathname.endsWith('/feed.html')) {
+    const posts = await fetchPostsWithAuthors();
+    displayPosts(posts);
+    initPostSearch(posts);
+    filterPosts(posts);
+}
 
 // Initialize post creation view
 initPostCreateView();
