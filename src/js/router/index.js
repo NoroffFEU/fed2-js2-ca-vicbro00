@@ -50,7 +50,21 @@ export default async function router(pathname = window.location.pathname) {
 
     case '/post/individual-post.html':
       // Load the individual post page script
-      
+      const { fetchPostById, displayPost } = await import('/fed2-js2-ca-vicbro00/router/views/post.js');
+    
+      const urlParams = new URLSearchParams(window.location.search);
+      const postId = urlParams.get('id');
+
+      if (postId) {
+          const post = await fetchPostById(postId);
+          displayPost(post);
+      } else {
+          console.error('No post ID found in URL.');
+          const feedContainer = document.getElementById('feedContainer');
+          if (feedContainer) {
+              feedContainer.innerHTML = '<p>Post not found.</p>';
+          }
+      }
       break;
 
     default:
