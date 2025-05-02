@@ -57,10 +57,6 @@ if (logoutButton) {
 }
 
 if (username) {
-    loadProfileView(username);
-}
-
-if (username) {
     const profile = await fetchProfileByName(username);
 
     if (profile) {
