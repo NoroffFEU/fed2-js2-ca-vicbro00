@@ -6,7 +6,7 @@ import { API_BASE } from '../constants.js';
  */
 export async function followUser(username) {
     const token = localStorage.getItem('JWT_TOKEN');
-    const loggedInUser = localStorage.getItem('userName'); // Assuming 'userName' is stored in localStorage
+    const loggedInUser = localStorage.getItem('userName');
 
     if (!token) throw new Error('You need to be logged in to follow users');
     if (username === loggedInUser) throw new Error('You cannot follow yourself');
@@ -23,7 +23,9 @@ export async function followUser(username) {
 
         if (!response.ok) {
             const error = await response.json();
-            throw new Error(error.message || 'Failed to follow user');
+            const errorMessage = error.message || 'Failed to follow user';
+            console.error('Follow request failed:', errorMessage);
+            throw new Error(errorMessage);
         }
 
         const result = await response.json();
@@ -36,8 +38,13 @@ export async function followUser(username) {
 
         return result;
     } catch (error) {
-        console.error('Follow error:', error);
-        throw error;
+        console.error('Error during follow action:', error);
+        if (error instanceof TypeError) {
+            // Handles potential network or fetch-related errors
+            throw new Error('Network error. Please check your connection.');
+        } else {
+            throw new Error(`Failed to follow user: ${error.message}`);
+        }
     }
 }
 
@@ -61,7 +68,9 @@ export async function unfollowUser(username) {
 
         if (!response.ok) {
             const error = await response.json();
-            throw new Error(error.message || 'Failed to unfollow user');
+            const errorMessage = error.message || 'Failed to unfollow user';
+            console.error('Unfollow request failed:', errorMessage);
+            throw new Error(errorMessage);
         }
 
         const result = await response.json();
@@ -72,8 +81,13 @@ export async function unfollowUser(username) {
 
         return result;
     } catch (error) {
-        console.error('Unfollow error:', error);
-        throw error;
+        console.error('Error during unfollow action:', error);
+        if (error instanceof TypeError) {
+            // Handles potential network or fetch-related errors
+            throw new Error('Network error. Please check your connection.');
+        } else {
+            throw new Error(`Failed to unfollow user: ${error.message}`);
+        }
     }
 }
 
@@ -84,7 +98,10 @@ export async function unfollowUser(username) {
  */
 export async function checkIfFollowing(username) {
     const token = localStorage.getItem('JWT_TOKEN');
-    if (!token) return false;
+    if (!token) {
+        console.warn('No JWT token found, unable to check follow status');
+        return false;
+    }
 
     const followingList = JSON.parse(localStorage.getItem('followingList')) || [];
     if (followingList.includes(username)) {
@@ -100,13 +117,21 @@ export async function checkIfFollowing(username) {
         });
 
         if (!response.ok) {
-            throw new Error('Failed to check follow status');
+            const error = await response.json();
+            const errorMessage = error.message || 'Failed to fetch user profile';
+            console.error('Failed to check follow status:', errorMessage);
+            throw new Error(errorMessage);
         }
 
         const profile = await response.json();
         return profile.following || false;
     } catch (error) {
         console.error('Error checking follow status:', error);
-        throw error;
+        if (error instanceof TypeError) {
+            // Handles potential network or fetch-related errors
+            throw new Error('Network error. Please check your connection.');
+        } else {
+            throw new Error(`Failed to check follow status: ${error.message}`);
+        }
     }
 }
