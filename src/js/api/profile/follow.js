@@ -6,7 +6,10 @@ import { API_BASE } from '../constants.js';
  */
 export async function followUser(username) {
     const token = localStorage.getItem('JWT_TOKEN');
+    const loggedInUser = localStorage.getItem('userName'); // Assuming 'userName' is stored in localStorage
+
     if (!token) throw new Error('You need to be logged in to follow users');
+    if (username === loggedInUser) throw new Error('You cannot follow yourself');
 
     try {
         const response = await fetch(`${API_BASE}/social/profiles/${username}/follow`, {
