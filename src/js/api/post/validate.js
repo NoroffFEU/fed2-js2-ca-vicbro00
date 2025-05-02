@@ -5,4 +5,3 @@ export const validatePost = (title, content) => {
     }
     return true;
 };
-  

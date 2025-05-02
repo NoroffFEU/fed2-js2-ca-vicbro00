@@ -1,5 +1,12 @@
 import { API_BASE, API_KEY } from "/fed2-js2-ca-vicbro00/src/js/api/constants.js";
 
+/**
+ * Fetches all posts with their authors from the API.
+ *
+ * @async
+ * @function fetchPostsWithAuthors
+ * @returns {Promise<Array>} A promise that resolves to an array of post objects.
+ */
 export async function fetchPostsWithAuthors() {
     const token = localStorage.getItem('JWT_TOKEN');
 

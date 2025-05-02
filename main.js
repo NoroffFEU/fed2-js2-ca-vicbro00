@@ -1,8 +1,5 @@
 import { JWT_TOKEN } from '/fed2-js2-ca-vicbro00/src/js/api/constants.js';
-import { fetchProfileByName } from '/fed2-js2-ca-vicbro00/src/js/ui/profile/profile.js';
-import { displayUserPosts } from '/fed2-js2-ca-vicbro00/src/js/router/views/profile.js';
-import { fetchUserPostsByName } from '/fed2-js2-ca-vicbro00/src/js/ui/profile/profile.js';
-import { followUser, checkIfFollowing, unfollowUser } from '/fed2-js2-ca-vicbro00/src/js/api/profile/follow.js';
+
 import { initSideMenu } from '/fed2-js2-ca-vicbro00/src/js/ui/components/sideMenu.js';
 import { setupProfileSearch } from '/fed2-js2-ca-vicbro00/src/js/router/views/profileSearch.js';
 import { initEditPostPage } from '/fed2-js2-ca-vicbro00/src/js/ui/post/update.js';
@@ -13,6 +10,13 @@ import { initPostCreateView } from '/fed2-js2-ca-vicbro00/src/js/router/views/po
 import { fetchPostsWithAuthors } from '/fed2-js2-ca-vicbro00/src/js/api/post/display.js';
 import { initAuthLoginForm } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/login.js';
 import { initRegisterForm } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/register.js';
+import { loadProfileView } from '/fed2-js2-ca-vicbro00/src/js/router/views/profileView.js';
+/*
+import { fetchProfileByName } from '/fed2-js2-ca-vicbro00/src/js/ui/profile/profile.js';
+import { displayUserPosts } from '/fed2-js2-ca-vicbro00/src/js/router/views/profile.js';
+import { fetchUserPostsByName } from '/fed2-js2-ca-vicbro00/src/js/ui/profile/profile.js';
+import { followUser, checkIfFollowing, unfollowUser } from '/fed2-js2-ca-vicbro00/src/js/api/profile/follow.js';
+*/
 
 // Main function to link everything together
 export async function loadFeedPage() {
@@ -56,6 +60,11 @@ if (logoutButton) {
     });
 }
 
+if (username) {
+    loadProfileView(username);
+}
+
+/*
 if (username) {
     const profile = await fetchProfileByName(username);
 
@@ -121,7 +130,9 @@ if (username) {
         displayUserPosts(userPosts);
     }
 }
+*/
 
+/*
 function updateFollowButton(button, isFollowing) {
     button.disabled = false;
     if (isFollowing) {
@@ -132,3 +143,4 @@ function updateFollowButton(button, isFollowing) {
         button.classList.remove('following');
     }
 }
+*/

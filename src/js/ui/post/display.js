@@ -1,6 +1,11 @@
 let displayedPostsCount = 20;
 let allPosts = [];
 
+/**
+ * Displays a limited number of posts on the feed page and adds a "Load More" button if needed.
+ *
+ * @param {Array} posts - An array of post objects to display.
+ */
 export function displayPosts(posts) {
     allPosts = posts;
 
