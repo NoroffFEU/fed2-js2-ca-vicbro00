@@ -11,12 +11,10 @@ import { fetchPostsWithAuthors } from '/fed2-js2-ca-vicbro00/src/js/api/post/dis
 import { initAuthLoginForm } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/login.js';
 import { initRegisterForm } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/register.js';
 import { loadProfileView } from '/fed2-js2-ca-vicbro00/src/js/router/views/profileView.js';
-/*
 import { fetchProfileByName } from '/fed2-js2-ca-vicbro00/src/js/ui/profile/profile.js';
 import { displayUserPosts } from '/fed2-js2-ca-vicbro00/src/js/router/views/profile.js';
 import { fetchUserPostsByName } from '/fed2-js2-ca-vicbro00/src/js/ui/profile/profile.js';
 import { followUser, checkIfFollowing, unfollowUser } from '/fed2-js2-ca-vicbro00/src/js/api/profile/follow.js';
-*/
 
 // Main function to link everything together
 export async function loadFeedPage() {
@@ -64,7 +62,6 @@ if (username) {
     loadProfileView(username);
 }
 
-/*
 if (username) {
     const profile = await fetchProfileByName(username);
 
@@ -130,9 +127,7 @@ if (username) {
         displayUserPosts(userPosts);
     }
 }
-*/
 
-/*
 function updateFollowButton(button, isFollowing) {
     button.disabled = false;
     if (isFollowing) {
@@ -143,4 +138,3 @@ function updateFollowButton(button, isFollowing) {
         button.classList.remove('following');
     }
 }
-*/
