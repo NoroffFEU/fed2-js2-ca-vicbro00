@@ -22,34 +22,6 @@ export async function editPostPage() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', async () => {
-    if (window.location.pathname.includes('/post/edit/')) {
-        const postId = new URLSearchParams(window.location.search).get('id');
-
-        if (!postId) {
-            alert('No post specified for editing');
-            window.location.href = '/fed2-js2-ca-vicbro00/index.html';
-            return;
-        }
-
-        try {
-            const post = await fetchPostById(postId);
-
-            if (!post) {
-                throw new Error('Post not found');
-            }
-
-            populateEditForm(post);
-            setupFormSubmission(postId);
-
-        } catch (error) {
-            console.error('Error loading post for editing:', error);
-            alert('Error: ' + error.message);
-            window.location.href = '/fed2-js2-ca-vicbro00/index.html';
-        }
-    }
-});
-
 async function fetchPostById(postId) {
     const url = `${API_BASE}/social/posts/${postId}`;
     const headers = {
