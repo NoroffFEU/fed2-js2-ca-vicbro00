@@ -1,6 +1,6 @@
 import { createPost } from '../../ui/post/create.js';
 
-export function initPostCreateView() {
+export function postCreateView() {
     const form = document.getElementById('formContainer');
     
     if (form) {

@@ -1,5 +1,5 @@
 import { authGuard } from '../../utilities/authGuard.js';
 
-export function initProtectedPage() {
+export function protectPage() {
     authGuard();
 }

@@ -4,7 +4,7 @@ import { refreshSideMenu } from '../../ui/components/sideMenu.js';
  * Handles user logout by clearing session data and resetting application state
  * @returns {Promise<void>} Resolves after completing logout process
  */
-export function initLogout() {
+export function logout() {
     // Log user info
     const { JWT_TOKEN, userName, userEmail } = Object.fromEntries(
         ['JWT_TOKEN', 'userName', 'userEmail'].map(key => [key, localStorage.getItem(key)])

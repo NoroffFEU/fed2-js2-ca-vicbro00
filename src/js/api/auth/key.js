@@ -2,7 +2,7 @@ import { API_AUTH, JWT_TOKEN } from '../constants.js';
 import { checkLoginState } from '../auth/auth.js';
 import { authGuard } from '../../utilities/authGuard.js';
 
-export async function initProtectedPage() {
+export async function protectPage() {
     try {
         const apiKeyData = await getKey();
     } catch (error) {

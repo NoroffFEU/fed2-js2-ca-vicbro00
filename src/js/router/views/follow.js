@@ -4,7 +4,7 @@ import { followUser, unfollowUser, checkIfFollowing } from '../../api/profile/fo
  * Initializes the follow/unfollow button on the profile page.
  * @param {string} username - The username of the user being followed/unfollowed.
  */
-export async function initializeFollowButton(username) {
+export async function followButton(username) {
     const isFollowing = await checkIfFollowing(username);
 
     const followButton = document.getElementById('followButton');

@@ -84,5 +84,5 @@ function handleLogout() {
     window.location.href = '/fed2-js2-ca-vicbro00/index.html';
 }
 
-export const initSideMenu = createSideMenu;
+export const sideMenu = createSideMenu;
 export const refreshSideMenu = createSideMenu;

@@ -2,7 +2,7 @@ import { displayPosts } from '../../ui/post/display.js';
 
 let allPosts = [];
 
-export function initPostSearch(posts) {
+export function postSearch(posts) {
     allPosts = posts;
 
     const postSearchInput = document.getElementById('postSearchInput');

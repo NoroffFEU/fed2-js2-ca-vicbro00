@@ -1,6 +1,6 @@
 import { API_BASE, API_KEY } from '../../api/constants.js';
 
-export async function initEditPostPage() {
+export async function editPostPage() {
     const urlParams = new URLSearchParams(window.location.search);
     const postId = urlParams.get('id');
 
@@ -18,7 +18,7 @@ export async function initEditPostPage() {
         populateEditForm(post);
         setupFormSubmission(postId);
     } catch (error) {
-        console.error('Error initializing edit page:', error);
+        console.error('Error fetching edit page:', error);
     }
 }
 

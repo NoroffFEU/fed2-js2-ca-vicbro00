@@ -76,10 +76,10 @@ export async function fetchUserPostsByName(name) {
     }
 }
 
-import { initializeFollowButton } from "../../router/views/follow.js";
+import { followButton } from "../../router/views/follow.js";
 
 /**
- * Renders the user profile and initializes the follow button.
+ * Renders the user profile and activates the follow button.
  * @param {string} username - The username to display.
  */
 export async function displayUserProfile(username) {
@@ -92,8 +92,8 @@ export async function displayUserProfile(username) {
         document.getElementById('profileImage').src = userData.profileImage;
         document.getElementById('profileFollowersCount').textContent = `${followersCount} Followers`;
 
-        // Initialize follow button if necessary
-        initializeFollowButton(username);
+        // Functions the follow button if neccessary
+        followButton(username);
     } catch (error) {
         console.error("Error displaying user profile:", error);
     }

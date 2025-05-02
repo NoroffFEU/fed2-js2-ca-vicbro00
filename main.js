@@ -1,15 +1,15 @@
 import { JWT_TOKEN } from '/fed2-js2-ca-vicbro00/src/js/api/constants.js';
 
-import { initSideMenu } from '/fed2-js2-ca-vicbro00/src/js/ui/components/sideMenu.js';
+import { sideMenu } from '/fed2-js2-ca-vicbro00/src/js/ui/components/sideMenu.js';
 import { setupProfileSearch } from '/fed2-js2-ca-vicbro00/src/js/router/views/profileSearch.js';
-import { initEditPostPage } from '/fed2-js2-ca-vicbro00/src/js/ui/post/update.js';
-import { initPostSearch } from '/fed2-js2-ca-vicbro00/src/js/ui/post/search.js';
+import { editPostPage } from '/fed2-js2-ca-vicbro00/src/js/ui/post/update.js';
+import { postSearch } from '/fed2-js2-ca-vicbro00/src/js/ui/post/search.js';
 import { filterPosts } from '/fed2-js2-ca-vicbro00/src/js/ui/post/filter.js';
 import { displayPosts } from '/fed2-js2-ca-vicbro00/src/js/ui/post/display.js';
-import { initPostCreateView } from '/fed2-js2-ca-vicbro00/src/js/router/views/postCreate.js';
+import { postCreateView } from '/fed2-js2-ca-vicbro00/src/js/router/views/postCreate.js';
 import { fetchPostsWithAuthors } from '/fed2-js2-ca-vicbro00/src/js/api/post/display.js';
-import { initAuthLoginForm } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/login.js';
-import { initRegisterForm } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/register.js';
+import { authLoginForm } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/login.js';
+import { registerPage } from '/fed2-js2-ca-vicbro00/src/js/ui/auth/register.js';
 import { fetchProfileByName } from '/fed2-js2-ca-vicbro00/src/js/ui/profile/profile.js';
 import { displayUserPosts } from '/fed2-js2-ca-vicbro00/src/js/router/views/profile.js';
 import { fetchUserPostsByName } from '/fed2-js2-ca-vicbro00/src/js/ui/profile/profile.js';
@@ -21,8 +21,8 @@ export async function loadFeedPage() {
 
     displayPosts(posts);
 
-    // Initialize search and filter AFTER posts are displayed
-    initPostSearch(posts);
+    // Makes the user search or filter posts
+    postSearch(posts);
     filterPosts(posts);
 }
 
@@ -31,19 +31,19 @@ if (window.location.pathname.includes('post/feed')) {
     loadFeedPage();
 }
 
-initSideMenu();
+sideMenu();
 
-// Initialize side menu and forms
-initAuthLoginForm();
-initRegisterForm();
+// Shows the side menu and forms
+authLoginForm();
+registerPage();
 setupProfileSearch();
 
 if (window.location.pathname.includes('/post/edit/')) {
-    initEditPostPage();
+    editPostPage();
 }
 
-// Initialize post creation view
-initPostCreateView();
+// Views the creation for posts
+postCreateView();
 
 const urlParams = new URLSearchParams(window.location.search);
 const username = urlParams.get('username');

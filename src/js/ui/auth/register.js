@@ -1,10 +1,10 @@
 import { registerUser } from '../../api/auth/register.js';
 
-export function initRegisterPage() {
-  initRegisterForm();
+export function registerPage() {
+  registerPage();
 }
 
-export function initRegisterForm() {
+export function registerPage() {
   const registerForm = document.getElementById('registerForm');
 
   if (registerForm) {
