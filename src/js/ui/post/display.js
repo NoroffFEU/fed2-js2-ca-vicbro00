@@ -25,6 +25,7 @@ export function displayPosts(posts) {
             const button = document.createElement("button");
             button.id = "loadMoreButton";
             button.textContent = "Load More";
+            button.classList.add("secondary-button");
             button.addEventListener("click", loadMorePosts);
             feedContainer.appendChild(button);
         }

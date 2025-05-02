@@ -85,10 +85,13 @@ body {
 /*Button*/
 .primary-button,
 .secondary-button {
-    background-color: rgb(227, 170, 236);
     border-radius: 25px;
     border-style: none;
     padding: 1em 2em;
+}
+
+.primary-button {
+    background-color: rgb(227, 170, 236);
 }
 
 .secondary-button {
@@ -96,8 +99,18 @@ body {
 }
 
 .primary-button:hover,
-.secondary-button:hover {
+.secondary-button:hover,
+.edit-button:hover,
+.delete-button:hover {
     cursor: pointer;
+}
+
+.edit-button,
+.delete-button {
+    background-color: rgb(227, 170, 236);
+    border-radius: 25px;
+    border-style: none;
+    padding: 1em 2em;
 }
 
 .border {
