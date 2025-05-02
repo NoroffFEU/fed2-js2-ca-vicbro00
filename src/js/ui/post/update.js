@@ -93,8 +93,6 @@ function setupFormSubmission(postId) {
             media: document.getElementById('media').value ? { url: document.getElementById('media').value } : undefined
         };
 
-        console.log('Updated Post Data:', updatedPost);
-
         try {
             await updatePost(postId, updatedPost);
             alert('Post updated successfully!');

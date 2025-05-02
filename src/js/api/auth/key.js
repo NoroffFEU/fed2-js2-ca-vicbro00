@@ -5,7 +5,6 @@ import { authGuard } from '../../utilities/authGuard.js';
 export async function initProtectedPage() {
     try {
         const apiKeyData = await getKey();
-        console.log('API Key Generated:', apiKeyData.key);
     } catch (error) {
         console.error('Error creating API key:', error);
     }
@@ -50,6 +49,5 @@ export async function getKey() {
 
 getKey()
     .then((apiKeyData) => {
-        console.log('API Key Generated:', apiKeyData.key);
     })
     .catch(console.error);

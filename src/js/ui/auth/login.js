@@ -10,8 +10,6 @@ export function initAuthLoginForm() {
 
     form.removeEventListener('submit', handleLoginSubmit); 
     form.addEventListener('submit', handleLoginSubmit);
-    
-    console.log('Login form handler attached');
 }
 
 async function handleLoginSubmit(e) {

@@ -11,8 +11,6 @@ export function createSideMenu() {
     const token = localStorage.getItem('JWT_TOKEN');
     const isLoggedIn = !!username;
 
-    console.log('Is Logged In:', isLoggedIn ? 'Yes' : 'No');
-
     // Create menu element
     const sideMenu = document.createElement('div');
     sideMenu.id = 'sideMenu';

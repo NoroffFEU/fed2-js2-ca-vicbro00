@@ -23,7 +23,6 @@ export async function fetchPostById(id) {
 
 // Display the post on the page
 export function displayPost(post) {
-    console.log(post);
     const feedContainer = document.getElementById('feedContainer');
     
     if (!feedContainer) return;

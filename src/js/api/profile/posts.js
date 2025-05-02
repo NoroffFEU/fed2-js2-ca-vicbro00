@@ -21,7 +21,6 @@ export async function fetchUserPosts(username, options = {}) {
         }
 
         const url = `${API_BASE}/social/profiles/${username}/posts?${queryParams.toString()}`;
-        console.log('Fetching posts from:', url);
 
         const response = await fetch(url, {
             headers: {
@@ -37,7 +36,6 @@ export async function fetchUserPosts(username, options = {}) {
         }
 
         const data = await response.json();
-        console.log('Posts data:', data);
         return data.data || [];
     } catch (error) {
         console.error('Error in fetchUserPosts:', error);
