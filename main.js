@@ -1,5 +1,4 @@
-import { JWT_TOKEN } from '/fed2-js2-ca-vicbro00/src/js/api/constants.js';
-
+// Importing necessary modules and functions
 import { sideMenu } from '/fed2-js2-ca-vicbro00/src/js/ui/components/sideMenu.js';
 import { setupProfileSearch } from '/fed2-js2-ca-vicbro00/src/js/router/views/profileSearch.js';
 import { editPostPage } from '/fed2-js2-ca-vicbro00/src/js/ui/post/update.js';
@@ -14,6 +13,7 @@ import { fetchProfileByName } from '/fed2-js2-ca-vicbro00/src/js/ui/profile/prof
 import { displayUserPosts } from '/fed2-js2-ca-vicbro00/src/js/router/views/profile.js';
 import { fetchUserPostsByName } from '/fed2-js2-ca-vicbro00/src/js/ui/profile/profile.js';
 import { checkIfFollowing, followUser, unfollowUser } from '/fed2-js2-ca-vicbro00/src/js/api/profile/follow.js';
+import { JWT_TOKEN } from '/fed2-js2-ca-vicbro00/src/js/api/constants.js';
 
 // Main function to link everything together
 export async function loadFeedPage() {

@@ -5,14 +5,13 @@ import { refreshSideMenu } from '../../ui/components/sideMenu.js';
  * @returns {Promise<void>} Resolves after completing logout process
  */
 export function logout() {
-    // Log user info
-    const { JWT_TOKEN, userName, userEmail } = Object.fromEntries(
-        ['JWT_TOKEN', 'userName', 'userEmail'].map(key => [key, localStorage.getItem(key)])
-    );
+    const JWT_TOKEN = localStorage.getItem('JWT_TOKEN');
+    const userName = localStorage.getItem('userName');
+    const userEmail = localStorage.getItem('userEmail');
+
 
     ['JWT_TOKEN', 'userName', 'userEmail'].forEach(key => localStorage.removeItem(key));
 
-    // Update UI and redirect
     refreshSideMenu();
     window.location.href = '/fed2-js2-ca-vicbro00/index.html';
 }

@@ -1,4 +1,4 @@
-import { API_KEY, JWT_TOKEN, API_BASE } from '../../api/constants.js';
+import { API_KEY, API_BASE } from '../../api/constants.js';
 import { authGuard } from '../../utilities/authGuard.js';
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -14,12 +14,14 @@ document.addEventListener("DOMContentLoaded", () => {
  */
 export async function createPost(postData) {
     try {
+        const token = localStorage.getItem('JWT_TOKEN');
+
         const response = await fetch(`${API_BASE}/social/posts`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'X-Noroff-API-Key': API_KEY,
-                'Authorization': `Bearer ${JWT_TOKEN}`
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(postData)
         });

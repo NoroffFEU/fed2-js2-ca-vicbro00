@@ -1,11 +1,17 @@
-import { API_BASE, API_KEY, JWT_TOKEN } from '../../api/constants.js';
+import { API_BASE, API_KEY } from '../../api/constants.js';
 import { setupDeleteButtons } from '../../api/post/delete.js';
 
 export async function fetchUserPostsByName(name) {
+    const token = localStorage.getItem('JWT_TOKEN');
+
+    if (!token) {
+        throw new Error('User is not logged in (no token found)');
+    }
+
     const url = `${API_BASE}/social/profiles/${name}/posts`;
     const headers = {
         'X-Noroff-API-Key': API_KEY,
-        'Authorization': `Bearer ${JWT_TOKEN}`
+        'Authorization': `Bearer ${token}`
     };
 
     try {

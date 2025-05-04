@@ -14,6 +14,7 @@ export const API_KEY = 'b3c2f687-f212-4a96-a8bd-06309ffbc1bb';
  */
 export const API_BASE = 'https://v2.api.noroff.dev';
 
+export const JWT_TOKEN = localStorage.getItem('JWT_TOKEN');
 
 /**
  * Endpoints for various API functionalities.
@@ -34,24 +35,3 @@ export const API_SOCIAL = `${API_BASE}/social`;
 export const API_SOCIAL_POSTS = `${API_BASE}/social/posts`;
 
 export const API_SOCIAL_PROFILES = `${API_SOCIAL}/profiles`;
-
-/**
- * JWT token for authentication.
- * WARNING: Storing tokens in frontend code is not secure.
- * @constant {string}
- */
-export const JWT_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVmljQiIsImVtYWlsIjoidmljYnJvMDI0NThAc3R1ZC5ub3JvZmYubm8iLCJpYXQiOjE3NDI5MDk3MzJ9.Rf4U51uSUrfT6pu6W0ehHOB-cjnuQ9FXsMDHB_9AWag';
-
-/**
- * Default request options for API calls.
- * Includes authentication headers.
- * @constant {Object}
- */
-const options = {
-    method: 'POST',
-    headers: {
-        'Authorization': `Bearer ${JWT_TOKEN}`,
-        'X-Noroff-API-Key': `${API_KEY}`,
-        'Content-Type': 'application/json'
-    }
-};

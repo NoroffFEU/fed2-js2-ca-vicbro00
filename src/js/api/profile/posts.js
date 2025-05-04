@@ -1,4 +1,4 @@
-import { API_BASE, API_KEY, JWT_TOKEN } from '../constants.js';
+import { API_BASE, API_KEY } from '../constants.js';
 
 /**
  * Fetches all posts by a specific user
@@ -22,10 +22,12 @@ export async function fetchUserPosts(username, options = {}) {
 
         const url = `${API_BASE}/social/profiles/${username}/posts?${queryParams.toString()}`;
 
+        const token = localStorage.getItem('JWT_TOKEN');
+
         const response = await fetch(url, {
             headers: {
                 'X-Noroff-API-Key': API_KEY,
-                'Authorization': `Bearer ${JWT_TOKEN}`
+                'Authorization': `Bearer ${token}`
             }
         });
 

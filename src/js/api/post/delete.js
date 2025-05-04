@@ -1,7 +1,6 @@
-import { API_BASE, API_KEY } from '../constants.js';
+import { API_BASE, API_KEY, JWT_TOKEN } from '../constants.js';
 
 export async function deletePost(postId) {
-    const token = localStorage.getItem('JWT_TOKEN');
     const url = `${API_BASE}/social/posts/${postId}`;
 
     try {
@@ -9,7 +8,7 @@ export async function deletePost(postId) {
             method: 'DELETE',
             headers: {
                 'X-Noroff-API-Key': API_KEY,
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${JWT_TOKEN}`
             }
         });
 

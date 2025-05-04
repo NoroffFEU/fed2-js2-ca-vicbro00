@@ -1,7 +1,9 @@
-import { API_BASE, API_KEY, JWT_TOKEN } from '../../api/constants.js';
+import { API_BASE, API_KEY } from '../../api/constants.js';
 
 export async function searchProfilesAPI(query) {
-    if (!JWT_TOKEN) {
+    const token = localStorage.getItem('JWT_TOKEN');
+
+    if (!token) {
         throw new Error('User is not logged in (no token found)');
     }
 
@@ -11,7 +13,7 @@ export async function searchProfilesAPI(query) {
         const response = await fetch(url, {
             headers: {
                 'X-Noroff-API-Key': API_KEY,
-                'Authorization': `Bearer ${JWT_TOKEN}`,
+                'Authorization': `Bearer ${token}`,
             }
         });
 

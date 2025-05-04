@@ -1,6 +1,7 @@
-import { API_BASE, API_KEY, JWT_TOKEN } from '../../api/constants.js';
+import { API_BASE, API_KEY } from '../../api/constants.js';
 
 export async function fetchAllProfiles() {
+    const JWT_TOKEN = localStorage.getItem('JWT_TOKEN');
     const url = `${API_BASE}/social/profiles`;
     const headers = {
         "X-Noroff-API-Key": API_KEY,
@@ -19,6 +20,7 @@ export async function fetchAllProfiles() {
 }
 
 export async function fetchProfileByName(name) {
+    const JWT_TOKEN = localStorage.getItem('JWT_TOKEN');
     const url = `${API_BASE}/social/profiles/${name}?_count=true&_followers=true`;
     const headers = {
         "X-Noroff-API-Key": API_KEY,
@@ -37,6 +39,7 @@ export async function fetchProfileByName(name) {
 }
 
 export async function searchProfiles(queryParams = {}) {
+    const JWT_TOKEN = localStorage.getItem('JWT_TOKEN');
     const url = new URL(`${API_BASE}/social/profiles/search`);
     Object.entries(queryParams).forEach(([key, value]) => {
         url.searchParams.append(key, value);
@@ -59,6 +62,7 @@ export async function searchProfiles(queryParams = {}) {
 }
 
 export async function fetchUserPostsByName(name) {
+    const JWT_TOKEN = localStorage.getItem('JWT_TOKEN');
     const url = `${API_BASE}/social/profiles/${name}/posts`;
     const headers = {
         "X-Noroff-API-Key": API_KEY,
