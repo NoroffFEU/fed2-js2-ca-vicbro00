@@ -1,0 +1,5 @@
+Github Repo Link:
+-https://github.com/NoroffFEU/fed2-js2-ca-vicbro00
+
+Deployed Website Link:
+-https://norofffeu.github.io/fed2-js2-ca-vicbro00/index.html
